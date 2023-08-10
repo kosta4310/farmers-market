@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const NavCategories: FC = () => {
   return (
-    <ul className="flex items-center justify-center gap-20 my-3">
+    <ul className="flex items-center justify-center gap-20 my-3 font-semibold">
       <li>М'ясо</li>
       <li>Молочна продукція</li>
       <li>Сири</li>
