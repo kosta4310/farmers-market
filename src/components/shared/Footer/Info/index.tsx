@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const Info: FC = () => {
   return (
-    <div className="flex flex-col gap-y-2 ">
+    <div className="flex flex-col gap-y-5 ">
     <div>
       <h2 className="font-semibold text-xl">Інформація</h2>
     </div>

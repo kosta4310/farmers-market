@@ -6,26 +6,26 @@ import logoTelegram from '../../../../assets/icons/social/Telegram_white.svg'
 
 const Contact: FC = () => {
   return (
-    <div className="flex flex-col  gap-y-2">
+    <div className="flex flex-col  gap-y-5">
       <div>
         <h2 className="font-semibold text-xl">Контакти</h2>
       </div>
       <div className="flex flex-col items-start justify-start gap-y-0.5">
-        <div>0991122333</div>
-        <div>challenge@gmail.com</div>
+        <a href="tel:0991122333">0991122333</a>
+        <a href="mailto:challenge@gmail.com">challenge@gmail.com</a>
         <div className="flex gap-x-1 py-2">
-          <span>
+          <a href="https://www.youtube.com/">
             <img src={logoYoutube} alt="logoYoutube" />
-          </span>
-          <span>
+          </a>
+          <a>
             <img src={logoFacebook} alt="logoFacebook" />
-          </span>
-          <span>
+          </a>
+          <a>
             <img src={logoInstagram} alt="logoInstagram" />
-          </span>
-          <span>
+          </a>
+          <a>
             <img src={logoTelegram} alt="logoTelegram" />
-          </span>
+          </a>
          </div>
         
       </div>
