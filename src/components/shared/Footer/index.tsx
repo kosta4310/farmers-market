@@ -1,11 +1,12 @@
 import { FC } from "react";
 import Categories from "./Categories";
 import Contact from "./Contact";
-import logo from "../../../assets/img/user-panel-logo.svg";
 import Info from "./Info";
+import logo from "../../../assets/img/user-panel-logo.svg";
+
 
 const Footer: FC = () => {
-  return <div className="flex justify-between bg-default px-10 py-10 text-white">
+  return <div className="flex justify-between bg-default px-10 py-8 text-white">
             <div>
                 <img src={logo} alt="logo" width={'240px'} height={'180px'}/>
             </div>

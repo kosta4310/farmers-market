@@ -17,13 +17,13 @@ const Contact: FC = () => {
           <a href="https://www.youtube.com/">
             <img src={logoYoutube} alt="logoYoutube" />
           </a>
-          <a>
+          <a href="https://uk-ua.facebook.com/">
             <img src={logoFacebook} alt="logoFacebook" />
           </a>
-          <a>
+          <a href="https://www.instagram.com/">
             <img src={logoInstagram} alt="logoInstagram" />
           </a>
-          <a>
+          <a href="https://web.telegram.org/">
             <img src={logoTelegram} alt="logoTelegram" />
           </a>
          </div>
