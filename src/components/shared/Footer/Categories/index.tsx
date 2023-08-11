@@ -1,22 +1,22 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 const Categories: FC = () => {
   return (
     <div className="flex flex-col gap-y-5">
-      <div><h2 className="font-semibold text-xl">Категорії</h2></div>
-      <div className="flex gap-x-10">
-        <div className="flex flex-col gap-y-0.5 items-start justify-start">
-          <div>М'ясо</div>
-          <div>Молочна продукція</div>
-          <div>Сири</div>
-          <div>Фрукти та овочі</div>
-        </div>
-        <div className="flex flex-col gap-y-0.5 items-start justify-start">
-          <div>Яйця</div>
-          <div>Бакалія</div>
-          <div>Напої</div>
-          <div>Крафтові продукти</div>
-        </div>
+      <h2 className="text-2xl font-semibold">Категорії</h2>
+      <div className="flex gap-20">
+        <ul className="flex flex-col gap-1">
+          <li>М'ясо</li>
+          <li>Молочна продукція</li>
+          <li>Сири</li>
+          <li>Фрукти та овочі</li>
+        </ul>
+        <ul className="flex flex-col gap-1">
+          <li>Яйця</li>
+          <li>Бакалія</li>
+          <li>Напої</li>
+          <li>Крафтова продукція</li>
+        </ul>
       </div>
     </div>
   );

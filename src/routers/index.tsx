@@ -8,29 +8,29 @@ import PaymentPage from '../components/pages/Payment';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <MainPage />,
       },
+      {
+        path: '/about',
+        element: <AboutPage />,
+      },
+      {
+        path: '/rules',
+        element: <RulesPage />,
+      },
+      {
+        path: '/delivery',
+        element: <DeliveryPage />,
+      },
+      {
+        path: '/payment',
+        element: <PaymentPage />,
+      },
     ],
-  },
-  {
-    path: '/about',
-    element: <AboutPage />
-  },
-  {
-    path: '/rules',
-    element: <RulesPage />
-  },
-  {
-    path: '/delivery',
-    element: <DeliveryPage />
-  },
-  {
-    path: '/payment',
-    element: <PaymentPage />
   },
 ]);

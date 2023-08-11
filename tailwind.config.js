@@ -1,16 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  textColor: {
-    default: "#00A919",
-  },
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        default: ["Rubik", "sans"],
+        default: ['Rubik', 'sans'],
       },
       backgroundColor: {
-        default: "#00A919",
+        default: '#00A919',
+      },
+      textColor: {
+        default: '#00A919',
       },
     },
   },
