@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Categories from './Categories';
-import Contact from './Contact';
+import Contact from './Contacts';
 import Info from './Info';
 import logo from '../../../assets/img/user-panel-logo.svg';
 

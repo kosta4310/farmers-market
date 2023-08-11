@@ -1,9 +1,10 @@
 import { FC } from 'react';
+import banner from '../../../assets/img/banner.svg';
 
 const MainPage: FC = () => {
   return (
     <>
-      <h1>Main Page</h1>
+      <img className="w-full h-auto" src={banner} alt="banner" />
     </>
   );
 };
