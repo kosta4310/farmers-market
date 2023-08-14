@@ -3,7 +3,7 @@ import { categories } from '../../../../constants/categories.ts';
 
 const NavCategories: FC = () => {
   return (
-    <ul className="flex items-center justify-center gap-20 my-3 font-semibold">
+    <ul className="flex items-center justify-center gap-20 py-3 font-semibold shadow-md">
       {categories.map((item) => (
         <li
           key={item.id}
