@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import RegField from '../../../common/RegistrationField';
 import Button from '../../../common/Button';
 import RadioChoice from '../../../common/RadioChoice';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../../hooks/redux.ts';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux.ts';
 import { registrationSlice } from '../../../../store/reducers/registrationSlice.ts';
 
 interface RegistrationFormProps {
@@ -15,22 +15,22 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
   isModalOpen,
   setIsModalOpen,
 }) => {
-  const [selectedOption, setSelectedOption] = useState('buyer');
-  const [inputValue, setInputValue] = useState('');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { setTemplate } = registrationSlice.actions;
+  const { login, template } = useAppSelector((state) => state.registration);
+  const { setTemplate, setLogin } = registrationSlice.actions;
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(e.target.value);
     dispatch(setTemplate(e.target.value));
   };
 
   const handleInputChange = (value: string) => {
-    setInputValue(value);
+    dispatch(setLogin(value));
   };
 
   const handleButtonRegistration = () => {
+    if (login.trim() === '') return;
+
     navigate('/registration');
     setIsModalOpen(!isModalOpen);
   };
@@ -44,20 +44,20 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
           inputType="text"
           inputId="reg"
           placeholder="Введіть номер або електронну пошту"
-          value={inputValue}
+          value={login}
           onChange={handleInputChange}
         />
         <div className="flex gap-28 mb-4">
           <RadioChoice
             label="Як покупець"
             value="buyer"
-            selectedOption={selectedOption}
+            selectedOption={template}
             handleOptionChange={handleOptionChange}
           />
           <RadioChoice
             label="Як продавець"
             value="seller"
-            selectedOption={selectedOption}
+            selectedOption={template}
             handleOptionChange={handleOptionChange}
           />
         </div>
