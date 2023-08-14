@@ -16,7 +16,8 @@ const SearchBar: FC = () => {
       <img src={search} alt="search" />
       <input
         id="search"
-        className="rounded-md w-1/3 focus:outline-none focus:shadow-outline text-opacity-50 border-opacity-50"
+        className="rounded-md focus:outline-none
+        focus:shadow-outline text-opacity-50 border-opacity-50 w-full"
         type="text"
         value={searchText}
         onChange={handleSearchChange}
