@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import RegField from '../../../common/RegistrationField';
 import Button from '../../../common/Button';
 import RadioChoice from '../../../common/RadioChoice';
@@ -15,21 +15,34 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
   isModalOpen,
   setIsModalOpen,
 }) => {
+  const [login, setLogin] = useState('');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { login, template } = useAppSelector((state) => state.registration);
-  const { setTemplate, setLogin } = registrationSlice.actions;
+  const { template } = useAppSelector((state) => state.registration);
+  const { setTemplate, setEmail, setNumber } = registrationSlice.actions;
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setTemplate(e.target.value));
   };
 
   const handleInputChange = (value: string) => {
-    dispatch(setLogin(value));
+    setLogin(value);
   };
 
   const handleButtonRegistration = () => {
     if (login.trim() === '') return;
+
+    if (/^\+?38\d+$/.test(login)) {
+      if (login.startsWith('+38')) {
+        dispatch(setNumber(login.slice(3)));
+      } else {
+        dispatch(setNumber(login));
+      }
+    }
+
+    if (login.includes('@')) {
+      dispatch(setEmail(login));
+    }
 
     navigate('/registration');
     setIsModalOpen(!isModalOpen);
