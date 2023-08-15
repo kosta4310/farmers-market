@@ -4,6 +4,7 @@ export interface ButtonProps {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   children: ReactNode;
   color: string;
+  size?: string;
 }
 
 enum Colors {
@@ -11,7 +12,7 @@ enum Colors {
   BLACK = 'bg-black hover:bg-zinc-700 text-white',
 }
 
-const Button: FC<ButtonProps> = ({ onClick, children, color }) => {
+const Button: FC<ButtonProps> = ({ onClick, children, color, size }) => {
   const GREEN_COLOR = 'green';
   const BLACK_COLOR = 'black';
 
@@ -28,7 +29,7 @@ const Button: FC<ButtonProps> = ({ onClick, children, color }) => {
 
   return (
     <button
-      className={`flex items-center justify-center gap-1 font-normal ${getColor(
+      className={`flex items-center justify-center gap-1 ${size} font-normal ${getColor(
         color
       )} py-3 px-5 rounded-md shadow-2xl transition duration-300 ease-in-out mb-3`}
       onClick={onClick}
