@@ -1,12 +1,28 @@
 import { FC } from 'react';
-import { useAppSelector } from '../../../hooks/redux.ts';
+import { Link } from 'react-router-dom';
 import RegistrationField from '../../common/RegistrationField';
 import Checkbox from '../../common/Checkbox';
-import { Link } from 'react-router-dom';
 import Button from '../../common/Button';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux.ts';
+import { registrationSlice } from '../../../store/reducers/registrationSlice.ts';
 
 const BuyerRegistration: FC = () => {
-  const login = useAppSelector((state) => state.registration.login);
+  const { email, number } = useAppSelector((state) => state.registration);
+  const { setEmail, setNumber } = registrationSlice.actions;
+  const dispatch = useAppDispatch();
+
+  const handleChangeLogin = (value: string) => {
+    dispatch(setEmail(value));
+  };
+
+  const handleChangeNumber = (value: string) => {
+    dispatch(setNumber(value));
+  };
+
+  const handleRegistration = () => {
+    console.log(email, number);
+  };
+
   const checkboxLabel = (
     <span className="text-xs">
       Продовжуючи, я погоджуюсь з{' '}
@@ -36,15 +52,18 @@ const BuyerRegistration: FC = () => {
           label="Номер телефону"
           inputType="number"
           inputId="number"
+          value={number !== '' ? number : ''}
           hint="Ваш номер будет використано тільки для підтвердження"
           placeholder="Будь-ласка введіть вірний номер"
+          onChange={handleChangeNumber}
         />
         <RegistrationField
           label="Електрона пошта"
           inputType="text"
           inputId="email"
-          value={login}
+          value={email.trim() !== '' ? email : ''}
           placeholder="Будь-ласка введіть дійсну адресу"
+          onChange={handleChangeLogin}
         />
         <RegistrationField
           label="Пароль"
@@ -67,7 +86,7 @@ const BuyerRegistration: FC = () => {
         </span>
       </div>
       <span className="flex justify-center mb-7">
-        <Button color="green" size="w-9/12">
+        <Button color="green" size="w-9/12" onClick={handleRegistration}>
           Створити аккаунт
         </Button>
       </span>
