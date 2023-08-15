@@ -9,14 +9,12 @@ const AuthForm: FC = () => {
       <div className="flex flex-col gap-8">
         <RegistrationField
           label="Номер телефону або електронна пошта"
-          labelPosition="left"
           inputType="text"
           inputId="auth"
           placeholder="Введіть номер телефону або електронну пошту"
         />
         <RegistrationField
           label="Пароль"
-          labelPosition="left"
           inputType="text"
           inputId="password"
           placeholder="Введіть пароль"

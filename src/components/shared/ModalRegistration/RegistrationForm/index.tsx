@@ -40,7 +40,6 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
       <div className="flex flex-col gap-8">
         <RegField
           label="Номер телефону або електронна пошта"
-          labelPosition="left"
           inputType="text"
           inputId="reg"
           placeholder="Введіть номер або електронну пошту"
