@@ -71,9 +71,11 @@ const RegistrationField: FC<RegistrationFieldProps> = ({
       <label className="flex gap-1 flex-col" htmlFor={inputId}>
         {label}
         <div className="flex items-center">
-          <span className="border border-gray-200 p-3 text-gray-400">+38</span>
+          <span className="border border-gray-200 rounded-tl rounded-bl p-3 text-gray-400">
+            +38
+          </span>
           <input
-            className="border border-gray-200 p-3 outline-none focus:bg-none focus:ring-0 w-full"
+            className="border border-gray-200 rounded-tr rounded-br p-3 outline-none focus:bg-none focus:ring-0 w-full"
             id={inputId}
             type={inputType}
             placeholder={placeholder}
