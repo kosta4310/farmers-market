@@ -7,7 +7,7 @@ interface RegistrationFieldProps {
   inputType: string;
   inputId: string;
   placeholder?: string;
-  value?: string;
+  value?: string | number;
   onChange?: (value: string) => void;
   hint?: string;
 }
