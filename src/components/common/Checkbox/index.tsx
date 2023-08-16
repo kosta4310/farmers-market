@@ -16,7 +16,7 @@ const Checkbox: FC<CheckboxProps> = ({
   return (
     <label className="flex items-center gap-2" htmlFor={inputId}>
       <input
-        className="h-5 w-5 accent-[#00A919]"
+        className="cursor-pointer h-5 w-5 accent-[#00A919]"
         id={inputId}
         type="checkbox"
         placeholder={placeholder}
