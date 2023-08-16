@@ -4,9 +4,15 @@ interface CheckboxProps {
   label: string | React.ReactElement;
   inputId: string;
   placeholder?: string;
+  onChange?: () => void;
 }
 
-const Checkbox: FC<CheckboxProps> = ({ label, inputId, placeholder }) => {
+const Checkbox: FC<CheckboxProps> = ({
+  label,
+  inputId,
+  placeholder,
+  onChange,
+}) => {
   return (
     <label className="flex items-center gap-2" htmlFor={inputId}>
       <input
@@ -14,6 +20,7 @@ const Checkbox: FC<CheckboxProps> = ({ label, inputId, placeholder }) => {
         id={inputId}
         type="checkbox"
         placeholder={placeholder}
+        onChange={onChange}
       />
       {label}
     </label>
