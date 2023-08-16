@@ -4,12 +4,22 @@ interface RegistrationSliceState {
   template: string;
   email: string;
   number: string;
+  name: string;
+  surname: string;
+  password: string;
+  repeatPassword: string;
+  isCheckRules: boolean;
 }
 
 const initialState: RegistrationSliceState = {
   template: 'buyer',
   email: '',
   number: '',
+  name: '',
+  surname: '',
+  password: '',
+  repeatPassword: '',
+  isCheckRules: false,
 };
 
 export const registrationSlice = createSlice({
@@ -24,6 +34,21 @@ export const registrationSlice = createSlice({
     },
     setNumber: (state, action: PayloadAction<string>) => {
       state.number = action.payload;
+    },
+    setName: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
+    },
+    setSurname: (state, action: PayloadAction<string>) => {
+      state.surname = action.payload;
+    },
+    setPassword: (state, action: PayloadAction<string>) => {
+      state.password = action.payload;
+    },
+    setRepeatPassword: (state, action: PayloadAction<string>) => {
+      state.repeatPassword = action.payload;
+    },
+    setIsCheckRules: (state, action: PayloadAction<boolean>) => {
+      state.isCheckRules = action.payload;
     },
   },
 });
