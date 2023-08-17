@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface RegistrationSliceState {
   template: string;
   email: string;
-  number: string;
+  numberPhone: string;
   name: string;
   surname: string;
   password: string;
@@ -14,7 +14,7 @@ interface RegistrationSliceState {
 const initialState: RegistrationSliceState = {
   template: 'buyer',
   email: '',
-  number: '',
+  numberPhone: '',
   name: '',
   surname: '',
   password: '',
@@ -32,8 +32,8 @@ export const registrationSlice = createSlice({
     setEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
     },
-    setNumber: (state, action: PayloadAction<string>) => {
-      state.number = action.payload;
+    setNumberPhone: (state, action: PayloadAction<string>) => {
+      state.numberPhone = action.payload;
     },
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
