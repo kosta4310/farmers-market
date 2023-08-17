@@ -1,11 +1,11 @@
 export function checkFields(
   name: string,
   surname: string,
-  number: string,
+  numberPhone: string,
   email: string,
   password: string,
   repeatPassword: string,
-  isCheckRules: boolean
+  isCheckRules: boolean,
 ) {
   if (name.trim() === '') {
     return alert(`Введіть ім'я`);
@@ -15,7 +15,7 @@ export function checkFields(
     return alert('Введіть прізвище');
   }
 
-  if (number.trim() === '') {
+  if (numberPhone.trim() === '') {
     return alert('Введіть номер телефону');
   }
 
@@ -38,7 +38,7 @@ export function checkFields(
   console.log({
     name,
     surname,
-    number,
+    numberPhone,
     email,
     password,
   });

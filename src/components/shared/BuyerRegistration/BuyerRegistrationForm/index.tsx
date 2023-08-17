@@ -11,7 +11,7 @@ import { checkFields } from '../checkFields.ts';
 const BuyerRegistrationForm: FC = () => {
   const {
     email,
-    number,
+    numberPhone,
     name,
     surname,
     password,
@@ -20,7 +20,7 @@ const BuyerRegistrationForm: FC = () => {
   } = useAppSelector((state) => state.registration);
   const {
     setEmail,
-    setNumber,
+    setNumberPhone,
     setSurname,
     setName,
     setPassword,
@@ -31,7 +31,7 @@ const BuyerRegistrationForm: FC = () => {
 
   const handleChange = (
     action: (value: string) => AnyAction,
-    value: string
+    value: string,
   ) => {
     dispatch(action(value));
   };
@@ -40,11 +40,11 @@ const BuyerRegistrationForm: FC = () => {
     checkFields(
       name,
       surname,
-      number,
+      numberPhone,
       email,
       password,
       repeatPassword,
-      isCheckRules
+      isCheckRules,
     );
   };
 
@@ -80,11 +80,11 @@ const BuyerRegistrationForm: FC = () => {
         <RegistrationField
           label="Номер телефону"
           inputType="number"
-          inputId="number"
-          value={number !== '' ? number : ''}
+          inputId="numberPhone"
+          value={numberPhone !== '' ? numberPhone : ''}
           hint="Ваш номер будет використано тільки для підтвердження"
           placeholder="Будь-ласка введіть вірний номер"
-          onChange={(value) => handleChange(setNumber, value)}
+          onChange={(value) => handleChange(setNumberPhone, value)}
         />
         <RegistrationField
           label="Електрона пошта"
