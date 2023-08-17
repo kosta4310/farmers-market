@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import inputImage from '../../../assets/img/input.svg';
 
 interface FileUploaddProps {
@@ -12,8 +12,6 @@ interface FileUploaddProps {
 const UploadAndDisplayImage: FC<FileUploaddProps> = ({
   label,
   inputId,
-  placeholder,
-  onChange,
   hint,
 }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
