@@ -3,6 +3,12 @@ export function checkFields(
   surname: string,
   numberPhone: string,
   email: string,
+  businessName: string,
+  sellerType: string,
+  factoryAddress: string,
+  workSchedule: string,
+  aboutUs: string,
+  contactPerson: string,
   password: string,
   repeatPassword: string,
   isCheckRules: boolean,
@@ -31,15 +37,26 @@ export function checkFields(
     return alert('Паролі не співпадають');
   }
 
+  if (businessName.trim() === '') {
+    return alert('Введіть назву підприємства');
+  }
+
   if (!isCheckRules) {
     return alert('Підтвердіть умови використання');
   }
 
   console.log({
+    email,
+    numberPhone,
     name,
     surname,
-    numberPhone,
-    email,
+    businessName,
+    sellerType,
+    factoryAddress,
+    workSchedule,
+    aboutUs,
+    contactPerson,
     password,
+    repeatPassword,
   });
 }

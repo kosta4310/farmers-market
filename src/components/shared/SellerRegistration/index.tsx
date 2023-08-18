@@ -1,10 +1,12 @@
 import { FC } from 'react';
-import { useAppSelector } from '../../../hooks/redux.ts';
+import SellerRegistrationForm from './SellerRegistrationForm';
 
 const SellerRegistration: FC = () => {
-  const email = useAppSelector((state) => state.registration.email);
-
-  return <div className="mt-20">Seller registration. Login: {email}</div>;
+  return (
+    <div className="w-[558px] mt-20 mx-auto">
+      <SellerRegistrationForm />
+    </div>
+  );
 };
 
 export default SellerRegistration;
