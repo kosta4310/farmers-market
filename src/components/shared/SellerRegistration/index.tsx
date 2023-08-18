@@ -1,13 +1,13 @@
 import { FC } from 'react';
-import BuyerRegistrationForm from './BuyerRegistrationForm';
+import SellerRegistrationForm from './SellerRegistrationForm';
 import RegistrationLayout from '../../../layouts/RegistrationLayout';
 
-const BuyerRegistration: FC = () => {
+const SellerRegistration: FC = () => {
   return (
     <RegistrationLayout>
-      <BuyerRegistrationForm />
+      <SellerRegistrationForm />
     </RegistrationLayout>
   );
 };
 
-export default BuyerRegistration;
+export default SellerRegistration;
