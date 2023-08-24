@@ -27,7 +27,7 @@ const initialState: RegistrationSliceState = {
   repeatPassword: '',
   isCheckRules: false,
   businessName: '',
-  sellerType: '',
+  sellerType: 'business',
   factoryAddress: '',
   workSchedule: '',
   aboutUs: '',

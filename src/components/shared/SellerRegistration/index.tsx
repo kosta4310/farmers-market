@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import SellerRegistrationForm from './SellerRegistrationForm';
+import SellerForm from './SellerForm';
 
 const SellerRegistration: FC = () => {
   return (
     <div className="w-[558px] mt-20 mx-auto">
-      <SellerRegistrationForm />
+      <SellerForm />
     </div>
   );
 };
