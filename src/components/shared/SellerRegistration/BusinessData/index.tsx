@@ -7,6 +7,29 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { registrationSlice } from '../../../../store/reducers/registrationSlice';
 import RadioChoice from '../../../common/RadioChoice';
 
+const getHoursList = (from: number, to: number) => {
+  const minutes = ['00', '30'];
+  const res: Array<string> = [];
+  for (let index = from; index < to; index++) {
+    minutes.forEach((minute) => res.push(index + ':' + minute));
+  }
+  res.push(to + ':' + '00');
+  return res;
+};
+
+const getSelectOption = () =>
+  getHoursList(6, 21).map((hours, idx) => {
+    return (
+      <option
+        key={idx}
+        className="bg-red-300 hover:text-red-500 hover:bg-slate-100"
+        value={hours}
+      >
+        {hours}
+      </option>
+    );
+  });
+
 const BusinessData: FC = () => {
   const {
     setBusinessName,
@@ -15,6 +38,8 @@ const BusinessData: FC = () => {
     setWorkSchedule,
     setAboutUs,
     setContactPerson,
+    setWorkHoursFrom,
+    setWorkHoursTo,
   } = registrationSlice.actions;
 
   const {
@@ -24,6 +49,8 @@ const BusinessData: FC = () => {
     workSchedule,
     aboutUs,
     contactPerson,
+    workHoursFrom,
+    workHoursTo,
   } = useAppSelector((state) => state.registration);
 
   const dispatch = useAppDispatch();
@@ -123,6 +150,45 @@ const BusinessData: FC = () => {
           placeholder="Будь-ласка напішіть дійсні часи роботи"
           onChange={(value) => handleChange(setWorkSchedule, value)}
         />
+        <label className="flex gap-1 flex-col">
+          Часи роботи підприємства для самовивізу продуктів та товарів
+          <div className="flex gap-3">
+            <label htmlFor="fromHours" className="flex-auto">
+              З
+              <select
+                className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0 ml-2 pr-20 "
+                id="fromHours"
+                placeholder="Вибиріть час"
+                value={workHoursFrom}
+                onChange={({ target }) =>
+                  handleChange(setWorkHoursFrom, target.value)
+                }
+              >
+                {getSelectOption()}
+                {/* <option className="bg-red-300 hover:text-red-500" value="test">
+                  test
+                </option> */}
+              </select>
+            </label>
+            <label htmlFor="toHours" className="flex-auto">
+              До
+              <select
+                className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0 ml-2 pr-20"
+                id="toHours"
+                placeholder="Вибиріть час"
+                value={workHoursTo}
+                onChange={({ target }) =>
+                  handleChange(setWorkHoursTo, target.value)
+                }
+              >
+                {getSelectOption()}
+                {/* <option className="bg-red-300 hover:text-red-500 " value="test">
+                  test
+                </option> */}
+              </select>
+            </label>
+          </div>
+        </label>
       </div>
     </div>
   );

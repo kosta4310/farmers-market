@@ -15,6 +15,8 @@ interface RegistrationSliceState {
   workSchedule: string;
   aboutUs: string;
   contactPerson: string;
+  workHoursFrom: string;
+  workHoursTo: string;
 }
 
 const initialState: RegistrationSliceState = {
@@ -32,6 +34,8 @@ const initialState: RegistrationSliceState = {
   workSchedule: '',
   aboutUs: '',
   contactPerson: '',
+  workHoursFrom: '',
+  workHoursTo: '',
 };
 
 export const registrationSlice = createSlice({
@@ -79,6 +83,12 @@ export const registrationSlice = createSlice({
     },
     setContactPerson: (state, action: PayloadAction<string>) => {
       state.contactPerson = action.payload;
+    },
+    setWorkHoursFrom: (state, action: PayloadAction<string>) => {
+      state.workHoursFrom = action.payload;
+    },
+    setWorkHoursTo: (state, action: PayloadAction<string>) => {
+      state.workHoursTo = action.payload;
     },
   },
 });
