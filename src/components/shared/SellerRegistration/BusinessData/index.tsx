@@ -3,9 +3,9 @@ import { AnyAction } from '@reduxjs/toolkit';
 import RegistrationField from '../../../common/RegistrationField';
 import UploadAndDisplayImage from '../../../common/FileUpload';
 import RegistrationFieldArea from '../../../common/RegistrationFieldArea';
+import RadioChoice from '../../../common/RadioChoice';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { registrationSlice } from '../../../../store/reducers/registrationSlice';
-import RadioChoice from '../../../common/RadioChoice';
 
 const getHoursList = (from: number, to: number) => {
   const minutes = ['00', '30'];
