@@ -1,4 +1,4 @@
-import { FC, ReactNode, MouseEvent } from 'react';
+import { FC, ReactNode, MouseEvent, Fragment } from 'react';
 import ArrowLeft from '../../../assets/icons/arrow/ArrowLeft.svg';
 import ArrowRight from '../../../assets/icons/arrow/ArrowRight.svg';
 
@@ -22,14 +22,21 @@ const ButtonArrow: FC<ButtonProps> = ({
       } flex items-center justify-center gap-2  font-normal  py-3 text-2xl transition duration-300 ease-in-out `}
       onClick={onClick}
     >
-      <span>
-        {direction === 'left' ? (
-          <img src={ArrowLeft} alt="arrow left"></img>
-        ) : (
-          <img src={ArrowRight} alt="arrow right"></img>
-        )}
-      </span>
-      {children}
+      {direction === 'left' ? (
+        <Fragment>
+          <span>
+            <img src={ArrowLeft} alt="arrow left"></img>
+          </span>
+          {children}
+        </Fragment>
+      ) : (
+        <Fragment>
+          {children}
+          <span>
+            <img src={ArrowRight} alt="arrow right"></img>
+          </span>
+        </Fragment>
+      )}
     </button>
   );
 };
