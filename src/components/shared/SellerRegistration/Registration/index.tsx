@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { AnyAction } from '@reduxjs/toolkit';
+import Button from '../../../common/Button';
 import Checkbox from '../../../common/Checkbox';
 import RegistrationField from '../../../common/RegistrationField';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
@@ -64,6 +65,12 @@ const Registration: FC = () => {
           Реєструючись, ви погоджуєтеся на зберігання і використання наданих
           вами особистих даних відповідно до чинного законодавства України про
           недоторканність особистої інформації.
+        </span>
+
+        <span className="flex justify-center mb-7">
+          <Button color="green" size="w-9/12">
+            Створити аккаунт
+          </Button>
         </span>
       </div>
     </div>
