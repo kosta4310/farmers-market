@@ -1,9 +1,7 @@
 import { FC } from 'react';
 import HeadPageContent from '../HeadPageContent';
-// import { Link } from 'react-router-dom';
-import Checkbox from '../../../common/Checkbox';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import ButtonArrow from '../../../common/ButtonArrow';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { registrationSlice } from '../../../../store/reducers/registrationSlice';
 
 const HeadPage: FC = () => {

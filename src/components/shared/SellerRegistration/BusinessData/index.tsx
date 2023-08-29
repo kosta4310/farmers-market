@@ -165,9 +165,6 @@ const BusinessData: FC = () => {
                 }
               >
                 {getSelectOption()}
-                {/* <option className="bg-red-300 hover:text-red-500" value="test">
-                  test
-                </option> */}
               </select>
             </label>
             <label htmlFor="toHours" className="flex-auto">
@@ -182,49 +179,68 @@ const BusinessData: FC = () => {
                 }
               >
                 {getSelectOption()}
-                {/* <option className="bg-red-300 hover:text-red-500 " value="test">
-                  test
-                </option> */}
               </select>
             </label>
           </div>
         </label>
         {/* Банковські реквизити* */}
-        <label className="flex gap-1 flex-col">
-          {'Банковські реквизити *'}
-          <input
-            className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
-            id={'iban'}
-            type={'text'}
-            placeholder={'Введіть номер розрахункового рахунку у форматі IBAN'}
-          />
-          <input
-            className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
-            id={'bankName'}
-            type={'text'}
-            placeholder={'Введіть назву банка'}
-          />
-          <div className="flex gap-x-3">
+        {sellerType === 'business' ? (
+          <label className="flex gap-1 flex-col">
+            {'Банковські реквизити *'}
             <input
-              className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0 "
-              id={'mfo'}
+              className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
+              id={'iban'}
               type={'text'}
-              placeholder={'Введіть МФО банку '}
+              placeholder={
+                'Введіть номер розрахункового рахунку у форматі IBAN'
+              }
             />
             <input
-              className="grow border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
-              id={'erdpou'}
+              className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
+              id={'bankName'}
               type={'text'}
-              placeholder={'Введіть код ЄДРПОУ/ІПН вашого підприємства '}
+              placeholder={'Введіть назву банка'}
             />
-          </div>
-          <input
-            className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
-            id={'fullBusinessName'}
-            type={'text'}
-            placeholder={'Введіть повну юридичну назву підприємства'}
-          />
-        </label>
+            <div className="flex gap-x-3">
+              <input
+                className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0 "
+                id={'mfo'}
+                type={'text'}
+                placeholder={'Введіть МФО банку '}
+              />
+              <input
+                className="grow border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
+                id={'erdpou'}
+                type={'text'}
+                placeholder={'Введіть код ЄДРПОУ/ІПН вашого підприємства '}
+              />
+            </div>
+            <input
+              className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
+              id={'fullBusinessName'}
+              type={'text'}
+              placeholder={'Введіть повну юридичну назву підприємства'}
+            />
+          </label>
+        ) : (
+          <label className="flex gap-1 flex-col">
+            {'Банковські реквизити *'}
+            <div className="flex gap-x-3">
+              <input
+                className="grow border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
+                id={'numberCard'}
+                type={'text'}
+                placeholder={'Введіть номер банковської карти'}
+              />
+              <input
+                className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
+                id={'cardExpiryDate'}
+                type={'text'}
+                placeholder={'Введіть термін дії картки'}
+              />
+            </div>
+          </label>
+        )}
       </div>
     </div>
   );

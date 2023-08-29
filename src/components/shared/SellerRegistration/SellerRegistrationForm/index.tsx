@@ -10,6 +10,7 @@ import { registrationSlice } from '../../../../store/reducers/registrationSlice.
 import { checkFields } from '../checkFields.ts';
 import { AnyAction } from '@reduxjs/toolkit';
 
+// this is old code
 const SellerRegistrationForm: FC = () => {
   const {
     setEmail,
@@ -227,4 +228,4 @@ const SellerRegistrationForm: FC = () => {
   );
 };
 
-export default SellerRegistrationForm;
+// export default SellerRegistrationForm;
