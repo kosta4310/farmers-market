@@ -189,6 +189,42 @@ const BusinessData: FC = () => {
             </label>
           </div>
         </label>
+        {/* Банковські реквизити* */}
+        <label className="flex gap-1 flex-col">
+          {'Банковські реквизити *'}
+          <input
+            className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
+            id={'iban'}
+            type={'text'}
+            placeholder={'Введіть номер розрахункового рахунку у форматі IBAN'}
+          />
+          <input
+            className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
+            id={'bankName'}
+            type={'text'}
+            placeholder={'Введіть назву банка'}
+          />
+          <div className="flex gap-x-3">
+            <input
+              className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0 "
+              id={'mfo'}
+              type={'text'}
+              placeholder={'Введіть МФО банку '}
+            />
+            <input
+              className="grow border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
+              id={'erdpou'}
+              type={'text'}
+              placeholder={'Введіть код ЄДРПОУ/ІПН вашого підприємства '}
+            />
+          </div>
+          <input
+            className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
+            id={'fullBusinessName'}
+            type={'text'}
+            placeholder={'Введіть повну юридичну назву підприємства'}
+          />
+        </label>
       </div>
     </div>
   );
