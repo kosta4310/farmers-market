@@ -27,11 +27,13 @@ const HeadPage: FC = () => {
           children="Назад"
           direction={'left'}
           onClick={handlerLeftButton}
+          hide={registrationPage === 1}
         ></ButtonArrow>
         <ButtonArrow
           children="Далі"
           direction={'right'}
           onClick={handlerRightButton}
+          hide={registrationPage === 3}
         ></ButtonArrow>
       </div>
     </div>
