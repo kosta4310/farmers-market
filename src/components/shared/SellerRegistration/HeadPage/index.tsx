@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import FormInputs from '../FormInputs';
+import HeadPageContent from '../HeadPageContent';
 // import { Link } from 'react-router-dom';
 import Checkbox from '../../../common/Checkbox';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
@@ -21,7 +21,7 @@ const HeadPage: FC = () => {
 
   return (
     <div className="flex flex-col gap-6 mb-7">
-      <FormInputs />
+      <HeadPageContent />
       <div className="flex items-center justify-between">
         <ButtonArrow
           children="Назад"
