@@ -24,7 +24,6 @@ export function checkFieldsFirstPage(
     return false;
   }
 
-  console.log({ email, numberPhone, name, surname });
   return true;
 }
 
