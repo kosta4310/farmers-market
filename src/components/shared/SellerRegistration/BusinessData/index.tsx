@@ -40,6 +40,13 @@ const BusinessData: FC = () => {
     setContactPerson,
     setWorkHoursFrom,
     setWorkHoursTo,
+    setIban,
+    setBankName,
+    setMfo,
+    setErdpou,
+    setFullBusinessName,
+    setNumberCard,
+    setCardExpiryDate,
   } = registrationSlice.actions;
 
   const {
@@ -51,6 +58,13 @@ const BusinessData: FC = () => {
     contactPerson,
     workHoursFrom,
     workHoursTo,
+    iban,
+    bankName,
+    mfo,
+    erdpou,
+    fullBusinessName,
+    numberCard,
+    cardExpiryDate,
   } = useAppSelector((state) => state.registration);
 
   const dispatch = useAppDispatch();
@@ -191,6 +205,8 @@ const BusinessData: FC = () => {
               className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
               id={'iban'}
               type={'text'}
+              value={iban}
+              onChange={(e) => setIban(e.target.value)}
               placeholder={
                 'Введіть номер розрахункового рахунку у форматі IBAN'
               }
@@ -199,6 +215,8 @@ const BusinessData: FC = () => {
               className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
               id={'bankName'}
               type={'text'}
+              value={bankName}
+              onChange={(e) => setBankName(e.target.value)}
               placeholder={'Введіть назву банка'}
             />
             <div className="flex gap-x-3">
@@ -206,12 +224,16 @@ const BusinessData: FC = () => {
                 className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0 "
                 id={'mfo'}
                 type={'text'}
+                value={mfo}
+                onChange={(e) => setMfo(e.target.value)}
                 placeholder={'Введіть МФО банку '}
               />
               <input
                 className="grow border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
                 id={'erdpou'}
                 type={'text'}
+                value={erdpou}
+                onChange={(e) => setErdpou(e.target.value)}
                 placeholder={'Введіть код ЄДРПОУ/ІПН вашого підприємства '}
               />
             </div>
@@ -219,6 +241,8 @@ const BusinessData: FC = () => {
               className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
               id={'fullBusinessName'}
               type={'text'}
+              value={fullBusinessName}
+              onChange={(e) => setFullBusinessName(e.target.value)}
               placeholder={'Введіть повну юридичну назву підприємства'}
             />
           </label>
@@ -230,12 +254,16 @@ const BusinessData: FC = () => {
                 className="grow border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
                 id={'numberCard'}
                 type={'text'}
+                value={numberCard}
+                onChange={(e) => setNumberCard(e.target.value)}
                 placeholder={'Введіть номер банковської карти'}
               />
               <input
                 className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
                 id={'cardExpiryDate'}
                 type={'text'}
+                value={cardExpiryDate}
+                onChange={(e) => setCardExpiryDate(e.target.value)}
                 placeholder={'Введіть термін дії картки'}
               />
             </div>
