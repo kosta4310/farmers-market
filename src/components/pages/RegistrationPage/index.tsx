@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import BuyerRegistration from '../../shared/BuyerRegistration';
-import SellerRegistration from '../../shared/SellerRegistration/SellerRegistrationForm';
+import SellerRegistration from '../../shared/SellerRegistration';
 
 interface RegistrationPageProps {
   template: string;

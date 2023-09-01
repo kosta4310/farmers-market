@@ -1,13 +1,12 @@
 import { FC } from 'react';
-import SellerRegistrationForm from './SellerRegistrationForm';
+import HeadPage from './HeadPage';
 import RegistrationLayout from '../../../layouts/RegistrationLayout';
 
 const SellerRegistration: FC = () => {
   return (
     <RegistrationLayout>
-      <SellerRegistrationForm />
+      <HeadPage />
     </RegistrationLayout>
   );
 };
-
 export default SellerRegistration;

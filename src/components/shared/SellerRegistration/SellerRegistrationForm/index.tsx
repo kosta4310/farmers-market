@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux.ts';
 import { registrationSlice } from '../../../../store/reducers/registrationSlice.ts';
 import { checkFields } from '../../../../utils/registration.util.ts';
 
+// this is old code
 const SellerRegistrationForm: FC = () => {
   const {
     setEmail,
@@ -196,4 +197,4 @@ const SellerRegistrationForm: FC = () => {
   );
 };
 
-export default SellerRegistrationForm;
+// export default SellerRegistrationForm;
