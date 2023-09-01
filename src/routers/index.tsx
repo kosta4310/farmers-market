@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import MainPage from '../components/pages/MainPage';
 import AboutPage from '../components/pages/AboutPage';
-import Layout from '../components/common/Layout';
+import ScreenLayout from '../layouts/ScreenLayout';
 import RulesPage from '../components/pages/RulesPage';
 import DeliveryPage from '../components/pages/DeliveryPage';
 import PaymentPage from '../components/pages/PaymentPage';
@@ -11,7 +11,7 @@ export const router = (template: string) =>
   createBrowserRouter([
     {
       path: '/',
-      element: <Layout />,
+      element: <ScreenLayout />,
       children: [
         {
           path: '/',

@@ -8,5 +8,4 @@ const SellerRegistration: FC = () => {
     </div>
   );
 };
-
 export default SellerRegistration;

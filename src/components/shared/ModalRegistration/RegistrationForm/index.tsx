@@ -32,7 +32,7 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
   const handleButtonRegistration = () => {
     if (login.trim() === '') return;
 
-    if (/^\+?38\d+$/.test(login)) {
+    if (/^\+?\d+$/.test(login)) {
       if (login.startsWith('+38')) {
         dispatch(setNumberPhone(login.slice(3)));
       } else {

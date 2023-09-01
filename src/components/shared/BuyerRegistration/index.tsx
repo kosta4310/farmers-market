@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import BuyerRegistrationForm from './BuyerRegistrationForm';
+import RegistrationLayout from '../../../layouts/RegistrationLayout';
 
 const BuyerRegistration: FC = () => {
   return (
-    <div className="w-[558px] mt-20 mx-auto">
+    <RegistrationLayout>
       <BuyerRegistrationForm />
-    </div>
+    </RegistrationLayout>
   );
 };
 

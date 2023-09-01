@@ -1,15 +1,17 @@
 import { FC } from 'react';
-import { AnyAction } from '@reduxjs/toolkit';
-import { Link } from 'react-router-dom';
 import RegistrationField from '../../../common/RegistrationField';
 import Checkbox from '../../../common/Checkbox';
 import Button from '../../../common/Button';
+import CheckboxLabel from '../../../common/CheckboxLabel';
+import ConsentProcessPersonalData from '../../../common/ConsentProcessPersonalData';
+import useHandleChange from '../../../../hooks/useHandleChange.ts';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux.ts';
 import { registrationSlice } from '../../../../store/reducers/registrationSlice.ts';
-import { checkFields } from '../checkFields.ts';
+import { checkFields } from '../../../../utils/registration.util.ts';
 
 const BuyerRegistrationForm: FC = () => {
   const {
+    template,
     email,
     numberPhone,
     name,
@@ -17,7 +19,7 @@ const BuyerRegistrationForm: FC = () => {
     password,
     repeatPassword,
     isCheckRules,
-  } = useAppSelector((state) => state.registration);
+  } = useAppSelector(state => state.registration);
   const {
     setEmail,
     setNumberPhone,
@@ -27,17 +29,13 @@ const BuyerRegistrationForm: FC = () => {
     setRepeatPassword,
     setIsCheckRules,
   } = registrationSlice.actions;
+
+  const handleChange = useHandleChange();
   const dispatch = useAppDispatch();
 
-  const handleChange = (
-    action: (value: string) => AnyAction,
-    value: string,
-  ) => {
-    dispatch(action(value));
-  };
-
   const handleRegistration = () => {
-    checkFields(
+    checkFields({
+      template,
       name,
       surname,
       numberPhone,
@@ -45,17 +43,8 @@ const BuyerRegistrationForm: FC = () => {
       password,
       repeatPassword,
       isCheckRules,
-    );
+    });
   };
-
-  const checkboxLabel = (
-    <span className="text-xs">
-      Продовжуючи, я погоджуюсь з{' '}
-      <Link className="text-default font-semibold" to="/rules">
-        умовами використання
-      </Link>
-    </span>
-  );
 
   return (
     <>
@@ -67,7 +56,7 @@ const BuyerRegistrationForm: FC = () => {
           inputId="name"
           value={name}
           placeholder="Введіть ім'я використовуючи українську або латинську абетку"
-          onChange={(value) => handleChange(setName, value)}
+          onChange={value => handleChange(setName, value)}
         />
         <RegistrationField
           label="Прізвище"
@@ -75,7 +64,7 @@ const BuyerRegistrationForm: FC = () => {
           inputId="surname"
           value={surname}
           placeholder="Введіть прізвище використовуючи українську або латинську абетку"
-          onChange={(value) => handleChange(setSurname, value)}
+          onChange={value => handleChange(setSurname, value)}
         />
         <RegistrationField
           label="Номер телефону"
@@ -84,7 +73,7 @@ const BuyerRegistrationForm: FC = () => {
           value={numberPhone !== '' ? numberPhone : ''}
           hint="Ваш номер будет використано тільки для підтвердження"
           placeholder="Будь-ласка введіть вірний номер"
-          onChange={(value) => handleChange(setNumberPhone, value)}
+          onChange={value => handleChange(setNumberPhone, value)}
         />
         <RegistrationField
           label="Електрона пошта"
@@ -92,7 +81,7 @@ const BuyerRegistrationForm: FC = () => {
           inputId="email"
           value={email.trim() !== '' ? email : ''}
           placeholder="Будь-ласка введіть дійсну адресу"
-          onChange={(value) => handleChange(setEmail, value)}
+          onChange={value => handleChange(setEmail, value)}
         />
         <RegistrationField
           label="Пароль"
@@ -101,7 +90,7 @@ const BuyerRegistrationForm: FC = () => {
           value={password}
           placeholder="Будь-ласка введіть дійсні значення"
           hint="Пароль має містити мінімум 8 символів, одну маленьку літеру та одну велику літеру"
-          onChange={(value) => handleChange(setPassword, value)}
+          onChange={value => handleChange(setPassword, value)}
         />
         <RegistrationField
           label="Пароль"
@@ -109,18 +98,14 @@ const BuyerRegistrationForm: FC = () => {
           inputId="passwordRepeat"
           value={repeatPassword}
           placeholder="Підтвердіть пароль"
-          onChange={(value) => handleChange(setRepeatPassword, value)}
+          onChange={value => handleChange(setRepeatPassword, value)}
         />
         <Checkbox
-          label={checkboxLabel}
+          label={<CheckboxLabel />}
           inputId="rulesCheckbox"
           onChange={() => dispatch(setIsCheckRules(!isCheckRules))}
         />
-        <span className="text-xs text-gray-500">
-          Реєструючись, ви погоджуєтеся на зберігання і використання наданих
-          вами особистих даних відповідно до чинного законодавства України про
-          недоторканність особистої інформації.
-        </span>
+        <ConsentProcessPersonalData />
       </div>
       <span className="flex justify-center mb-7">
         <Button color="green" size="w-9/12" onClick={handleRegistration}>
