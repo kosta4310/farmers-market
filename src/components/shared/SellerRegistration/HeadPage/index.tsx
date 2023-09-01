@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import HeadPageContent from '../HeadPageContent';
 import ButtonArrow from '../../../common/ButtonArrow';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { registrationSlice } from '../../../../store/reducers/registrationSlice';
 import PageNavigation from '../PageNavigation';
 import { checkFieldsFirstPage, checkFieldsSecondPage } from '../checkFields';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { registrationSlice } from '../../../../store/reducers/registrationSlice';
 
 const HeadPage: FC = () => {
   const {
@@ -22,7 +22,7 @@ const HeadPage: FC = () => {
     fullBusinessName,
     numberCard,
     cardExpiryDate,
-  } = useAppSelector((state) => state.registration);
+  } = useAppSelector(state => state.registration);
 
   const arrayFieldsByPages: { [key: string]: () => boolean | void } = {
     1: () => checkFieldsFirstPage(name, surname, numberPhone, email),
@@ -42,7 +42,7 @@ const HeadPage: FC = () => {
   };
 
   const dispatch = useAppDispatch();
-  const { registrationPage } = useAppSelector((state) => state.registration);
+  const { registrationPage } = useAppSelector(state => state.registration);
   const { setRegistrationPage } = registrationSlice.actions;
 
   const handlerRightButton = () => {
@@ -63,17 +63,19 @@ const HeadPage: FC = () => {
       {registrationPage !== 3 && (
         <div className="flex items-center justify-between">
           <ButtonArrow
-            children="Назад"
             direction={'left'}
             onClick={handlerLeftButton}
             hide={registrationPage === 1}
-          ></ButtonArrow>
+          >
+            Назад
+          </ButtonArrow>
           <ButtonArrow
-            children="Далі"
             direction={'right'}
             onClick={handlerRightButton}
             hide={registrationPage === 3}
-          ></ButtonArrow>
+          >
+            Далі
+          </ButtonArrow>
         </div>
       )}
     </div>

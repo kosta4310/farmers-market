@@ -11,7 +11,7 @@ const getHoursList = (from: number, to: number) => {
   const minutes = ['00', '30'];
   const res: Array<string> = [];
   for (let index = from; index < to; index++) {
-    minutes.forEach((minute) => res.push(index + ':' + minute));
+    minutes.forEach(minute => res.push(index + ':' + minute));
   }
   res.push(to + ':' + '00');
   return res;
@@ -20,11 +20,7 @@ const getHoursList = (from: number, to: number) => {
 const getSelectOption = () =>
   getHoursList(6, 21).map((hours, idx) => {
     return (
-      <option
-        key={idx}
-        className="bg-red-300 hover:text-red-500 hover:bg-slate-100"
-        value={hours}
-      >
+      <option key={idx} value={hours}>
         {hours}
       </option>
     );
@@ -65,7 +61,7 @@ const BusinessData: FC = () => {
     fullBusinessName,
     numberCard,
     cardExpiryDate,
-  } = useAppSelector((state) => state.registration);
+  } = useAppSelector(state => state.registration);
 
   const dispatch = useAppDispatch();
 
@@ -76,7 +72,7 @@ const BusinessData: FC = () => {
     dispatch(action(value));
   };
 
-  const content = (
+  return (
     <div className="flex flex-col w-[558px] mt-20 mx-auto">
       <div className="flex flex-col gap-6 mb-7">
         <div>
@@ -86,7 +82,7 @@ const BusinessData: FC = () => {
               label="Юридична особа"
               value="business"
               selectedOption={sellerType}
-              handleOptionChange={(e) =>
+              handleOptionChange={e =>
                 handleChange(setSellerType, e.target.value)
               }
             />
@@ -94,7 +90,7 @@ const BusinessData: FC = () => {
               label="Приватна особа"
               value="private"
               selectedOption={sellerType}
-              handleOptionChange={(e) =>
+              handleOptionChange={e =>
                 handleChange(setSellerType, e.target.value)
               }
             />
@@ -107,7 +103,7 @@ const BusinessData: FC = () => {
             inputId="factoryName"
             value={businessName}
             placeholder="Будь-ласка введіть дійсну назву"
-            onChange={(value) => handleChange(setBusinessName, value)}
+            onChange={value => handleChange(setBusinessName, value)}
           />
         )}
         {sellerType === 'business' ? (
@@ -138,7 +134,7 @@ const BusinessData: FC = () => {
           fieldId="aboutUs"
           value={aboutUs}
           placeholder="Розкажіть будь ласка про себе"
-          onChange={(value) => handleChange(setAboutUs, value)}
+          onChange={value => handleChange(setAboutUs, value)}
         />
         <RegistrationField
           label="Ім’я та прізвище контактної особи"
@@ -146,7 +142,7 @@ const BusinessData: FC = () => {
           inputId="contactPerson"
           value={contactPerson}
           placeholder="Будь-ласка наешіть ім’я та прізвище контактної особи"
-          onChange={(value) => handleChange(setContactPerson, value)}
+          onChange={value => handleChange(setContactPerson, value)}
         />
         <RegistrationField
           label="Локація для самовивозу"
@@ -154,7 +150,7 @@ const BusinessData: FC = () => {
           inputId="factoryAddress"
           value={factoryAddress}
           placeholder="Будь-ласка введіть дійсну адресу"
-          onChange={(value) => handleChange(setFactoryAddress, value)}
+          onChange={value => handleChange(setFactoryAddress, value)}
         />
         <RegistrationField
           label="Часи роботи підприємства для самовивізу продуктів та товарів"
@@ -162,7 +158,7 @@ const BusinessData: FC = () => {
           inputId="workSchedule"
           value={workSchedule}
           placeholder="Будь-ласка напішіть дійсні часи роботи"
-          onChange={(value) => handleChange(setWorkSchedule, value)}
+          onChange={value => handleChange(setWorkSchedule, value)}
         />
         <label className="flex gap-1 flex-col">
           Часи роботи підприємства для самовивізу продуктів та товарів
@@ -206,7 +202,7 @@ const BusinessData: FC = () => {
               id={'iban'}
               type={'text'}
               value={iban}
-              onChange={(e) => handleChange(setIban, e.target.value)}
+              onChange={e => handleChange(setIban, e.target.value)}
               placeholder={
                 'Введіть номер розрахункового рахунку у форматі IBAN'
               }
@@ -216,7 +212,7 @@ const BusinessData: FC = () => {
               id={'bankName'}
               type={'text'}
               value={bankName}
-              onChange={(e) => handleChange(setBankName, e.target.value)}
+              onChange={e => handleChange(setBankName, e.target.value)}
               placeholder={'Введіть назву банка'}
             />
             <div className="flex gap-x-3">
@@ -225,7 +221,7 @@ const BusinessData: FC = () => {
                 id={'mfo'}
                 type={'text'}
                 value={mfo}
-                onChange={(e) => handleChange(setMfo, e.target.value)}
+                onChange={e => handleChange(setMfo, e.target.value)}
                 placeholder={'Введіть МФО банку '}
               />
               <input
@@ -233,7 +229,7 @@ const BusinessData: FC = () => {
                 id={'erdpou'}
                 type={'text'}
                 value={erdpou}
-                onChange={(e) => handleChange(setErdpou, e.target.value)}
+                onChange={e => handleChange(setErdpou, e.target.value)}
                 placeholder={'Введіть код ЄДРПОУ/ІПН вашого підприємства '}
               />
             </div>
@@ -242,9 +238,7 @@ const BusinessData: FC = () => {
               id={'fullBusinessName'}
               type={'text'}
               value={fullBusinessName}
-              onChange={(e) =>
-                handleChange(setFullBusinessName, e.target.value)
-              }
+              onChange={e => handleChange(setFullBusinessName, e.target.value)}
               placeholder={'Введіть повну юридичну назву підприємства'}
             />
           </label>
@@ -257,7 +251,7 @@ const BusinessData: FC = () => {
                 id={'numberCard'}
                 type={'text'}
                 value={numberCard}
-                onChange={(e) => handleChange(setNumberCard, e.target.value)}
+                onChange={e => handleChange(setNumberCard, e.target.value)}
                 placeholder={'Введіть номер банковської карти'}
               />
               <input
@@ -265,9 +259,7 @@ const BusinessData: FC = () => {
                 id={'cardExpiryDate'}
                 type={'text'}
                 value={cardExpiryDate}
-                onChange={(e) =>
-                  handleChange(setCardExpiryDate, e.target.value)
-                }
+                onChange={e => handleChange(setCardExpiryDate, e.target.value)}
                 placeholder={'Введіть термін дії картки'}
               />
             </div>
@@ -276,8 +268,6 @@ const BusinessData: FC = () => {
       </div>
     </div>
   );
-
-  return content;
 };
 
 export default BusinessData;

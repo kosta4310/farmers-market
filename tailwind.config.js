@@ -8,6 +8,7 @@ export default {
       },
       backgroundColor: {
         default: '#00A919',
+        'green-basic': '#00A919',
       },
       textColor: {
         default: '#00A919',
