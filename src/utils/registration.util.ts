@@ -57,7 +57,7 @@ export function checkFields(fields: RegistrationFields) {
     return alert('Паролі не співпадають');
   }
 
-  if (businessName && businessName.trim() === '') {
+  if (!businessName || businessName.trim() === '') {
     return alert('Введіть назву підприємства');
   }
 

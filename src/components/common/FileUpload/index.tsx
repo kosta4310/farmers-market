@@ -22,7 +22,7 @@ const UploadAndDisplayImage: FC<FileUploaddProps> = ({
     <div>
       <label className="flex gap-1 flex-col" htmlFor={inputId}>
         {label}
-        <div className="border border-gray-200 rounded-tl rounded-bl p-3 text-gray-400 ">
+        <div className="rounded-tl rounded-bl p-3 text-gray-400 ">
           {selectedImage ? (
             <div>
               <img
@@ -41,7 +41,7 @@ const UploadAndDisplayImage: FC<FileUploaddProps> = ({
         <input
           type="file"
           id={inputId}
-          onChange={(event) => {
+          onChange={event => {
             console.log(event.target.files ? event.target.files[0] : 'nothing');
             event.target.files && setSelectedImage(event.target.files[0]);
           }}
