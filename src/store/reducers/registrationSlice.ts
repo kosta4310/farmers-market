@@ -15,6 +15,16 @@ interface RegistrationSliceState {
   workSchedule: string;
   aboutUs: string;
   contactPerson: string;
+  workHoursFrom: string;
+  workHoursTo: string;
+  registrationPage: number;
+  iban: string;
+  bankName: string;
+  mfo: string;
+  erdpou: string;
+  fullBusinessName: string;
+  numberCard: string;
+  cardExpiryDate: string;
 }
 
 const initialState: RegistrationSliceState = {
@@ -27,11 +37,21 @@ const initialState: RegistrationSliceState = {
   repeatPassword: '',
   isCheckRules: false,
   businessName: '',
-  sellerType: '',
+  sellerType: 'business',
   factoryAddress: '',
   workSchedule: '',
   aboutUs: '',
   contactPerson: '',
+  workHoursFrom: '',
+  workHoursTo: '',
+  registrationPage: 1,
+  iban: '',
+  bankName: '',
+  mfo: '',
+  erdpou: '',
+  fullBusinessName: '',
+  numberCard: '',
+  cardExpiryDate: '',
 };
 
 export const registrationSlice = createSlice({
@@ -79,6 +99,36 @@ export const registrationSlice = createSlice({
     },
     setContactPerson: (state, action: PayloadAction<string>) => {
       state.contactPerson = action.payload;
+    },
+    setWorkHoursFrom: (state, action: PayloadAction<string>) => {
+      state.workHoursFrom = action.payload;
+    },
+    setWorkHoursTo: (state, action: PayloadAction<string>) => {
+      state.workHoursTo = action.payload;
+    },
+    setRegistrationPage: (state, action: PayloadAction<number>) => {
+      state.registrationPage = action.payload;
+    },
+    setIban: (state, action: PayloadAction<string>) => {
+      state.iban = action.payload;
+    },
+    setBankName: (state, action: PayloadAction<string>) => {
+      state.bankName = action.payload;
+    },
+    setMfo: (state, action: PayloadAction<string>) => {
+      state.mfo = action.payload;
+    },
+    setErdpou: (state, action: PayloadAction<string>) => {
+      state.erdpou = action.payload;
+    },
+    setFullBusinessName: (state, action: PayloadAction<string>) => {
+      state.fullBusinessName = action.payload;
+    },
+    setNumberCard: (state, action: PayloadAction<string>) => {
+      state.numberCard = action.payload;
+    },
+    setCardExpiryDate: (state, action: PayloadAction<string>) => {
+      state.cardExpiryDate = action.payload;
     },
   },
 });
