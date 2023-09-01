@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import HeadPage from './HeadPage';
+import RegistrationLayout from '../../../layouts/RegistrationLayout';
 
 const SellerRegistration: FC = () => {
   return (
-    <div className="w-[558px] mt-20 mx-auto">
+    <RegistrationLayout>
       <HeadPage />
-    </div>
+    </RegistrationLayout>
   );
 };
 export default SellerRegistration;
