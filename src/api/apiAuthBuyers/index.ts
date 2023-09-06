@@ -24,17 +24,7 @@ export async function fetchBuyersSignUp(options: {
       'Content-Type': 'application/json',
       accept: 'application/json',
     },
-    body: JSON.stringify({
-      buyer: {
-        name: 'Inna',
-        lastName: 'Roo',
-        role: 'seller',
-        phoneNumber: '0912983665',
-        address: 'asdf4ghjkl12',
-        email: 'ghdпfhgd12@gmail.com',
-        password: 'sdf5ghjkуTgh12',
-      },
-    }),
+    body: JSON.stringify(options),
   });
   return response;
 }
