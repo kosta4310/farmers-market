@@ -85,23 +85,25 @@ export async function checkFields(fields: RegistrationFields) {
   }
 
   // return
-  // const res = await fetchBuyersSignUp({
-  //   name,
-  //   surname,
-  //   numberPhone: Number(numberPhone),
-  //   email,
-  //   password,
-  // });
   const res = await fetchBuyersSignUp({
     buyer: {
-      name: 'Inna',
-      lastName: 'Roo',
-      role: 'seller',
-      phoneNumber: '0912983665',
-      address: 'asdf4ghjkl12',
-      email: 'ghdпfhgd12@gmail.com',
-      password: 'sdf5ghjkуTgh12',
+      name,
+      lastName: surname,
+      phoneNumber: numberPhone,
+      email,
+      password,
     },
   });
+  // const res = await fetchBuyersSignUp({
+  //   buyer: {
+  //     name: 'Inna',
+  //     lastName: 'Roo',
+  //     role: 'seller',
+  //     phoneNumber: '0912983665',
+  //     address: 'asdf4ghjkl12',
+  //     email: 'ghdпfhgd12@gmail.com',
+  //     password: 'sdf5ghjkуTgh12',
+  //   },
+  // });
   console.log(res);
 }

@@ -4,8 +4,8 @@ export type BuyersSignup = {
   phoneNumber: string;
   email: string;
   password: string;
-  role: string;
-  address: string;
+  // role: string;
+  // address: string;
 };
 
 export type BuyersSignin = {
