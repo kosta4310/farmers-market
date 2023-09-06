@@ -25,7 +25,15 @@ export async function fetchBuyersSignUp(options: {
       accept: 'application/json',
     },
     body: JSON.stringify({
-      buyer: options,
+      buyer: {
+        name: 'Inna',
+        lastName: 'Roo',
+        role: 'seller',
+        phoneNumber: '0912983665',
+        address: 'asdf4ghjkl12',
+        email: 'ghdпfhgd12@gmail.com',
+        password: 'sdf5ghjkуTgh12',
+      },
     }),
   });
   return response;
