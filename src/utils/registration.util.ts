@@ -84,7 +84,6 @@ export async function checkFields(fields: RegistrationFields) {
     });
   }
 
-  // return
   const res = await fetchBuyersSignUp({
     buyer: {
       name,
@@ -106,4 +105,5 @@ export async function checkFields(fields: RegistrationFields) {
   //   },
   // });
   console.log(res);
+  return res;
 }
