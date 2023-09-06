@@ -42,7 +42,7 @@ const UploadAndDisplayImage: FC<FileUploaddProps> = ({
           type="file"
           id={inputId}
           onChange={event => {
-            console.log(event.target.files ? event.target.files[0] : 'nothing');
+            console.log(event.target.files ? event.target.files : 'nothing');
             event.target.files && setSelectedImage(event.target.files[0]);
           }}
         />

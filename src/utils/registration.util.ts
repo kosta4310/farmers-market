@@ -1,3 +1,5 @@
+import { fetchBuyersSignUp } from '../api/apiAuthBuyers';
+
 interface RegistrationFields {
   template: string;
   name: string;
@@ -15,7 +17,7 @@ interface RegistrationFields {
   contactPerson?: string;
 }
 
-export function checkFields(fields: RegistrationFields) {
+export async function checkFields(fields: RegistrationFields) {
   const {
     template,
     name,
@@ -41,7 +43,7 @@ export function checkFields(fields: RegistrationFields) {
     return alert('Введіть прізвище');
   }
 
-  if (numberPhone.trim() === '') {
+  if (numberPhone.trim() === '' || isNaN(Number(numberPhone))) {
     return alert('Введіть номер телефону');
   }
 
@@ -57,9 +59,9 @@ export function checkFields(fields: RegistrationFields) {
     return alert('Паролі не співпадають');
   }
 
-  if (!businessName || businessName.trim() === '') {
-    return alert('Введіть назву підприємства');
-  }
+  // if (!businessName || businessName.trim() === '') {
+  //   return alert('Введіть назву підприємства');
+  // }
 
   if (!isCheckRules) {
     return alert('Підтвердіть умови використання');
@@ -82,12 +84,24 @@ export function checkFields(fields: RegistrationFields) {
     });
   }
 
-  return console.log({
-    template,
-    name,
-    surname,
-    numberPhone,
-    email,
-    password,
+  // return
+  // const res = await fetchBuyersSignUp({
+  //   name,
+  //   surname,
+  //   numberPhone: Number(numberPhone),
+  //   email,
+  //   password,
+  // });
+  const res = await fetchBuyersSignUp({
+    buyer: {
+      name: 'Inna',
+      lastName: 'Roo',
+      role: 'seller',
+      phoneNumber: '0912983665',
+      address: 'asdf4ghjkl12',
+      email: 'ghdпfhgd12@gmail.com',
+      password: 'sdf5ghjkуTgh12',
+    },
   });
+  console.log(res);
 }
