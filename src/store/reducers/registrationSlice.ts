@@ -3,9 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface RegistrationSliceState {
   template: string;
   email: string;
-  numberPhone: string;
+  phoneNumber: string;
   name: string;
-  surname: string;
+  lastName: string;
   password: string;
   repeatPassword: string;
   isCheckRules: boolean;
@@ -30,9 +30,9 @@ interface RegistrationSliceState {
 const initialState: RegistrationSliceState = {
   template: 'buyer',
   email: '',
-  numberPhone: '',
+  phoneNumber: '',
   name: '',
-  surname: '',
+  lastName: '',
   password: '',
   repeatPassword: '',
   isCheckRules: false,
@@ -58,20 +58,20 @@ export const registrationSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
-    setTemplate: (state, action: PayloadAction<string>) => {
-      state.template = action.payload;
-    },
+    // setTemplate: (state, action: PayloadAction<string>) => {
+    //   state.template = action.payload;
+    // },
     setEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
     },
-    setNumberPhone: (state, action: PayloadAction<string>) => {
-      state.numberPhone = action.payload;
+    setPhoneNumber: (state, action: PayloadAction<string>) => {
+      state.phoneNumber = action.payload;
     },
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
-    setSurname: (state, action: PayloadAction<string>) => {
-      state.surname = action.payload;
+    setLastName: (state, action: PayloadAction<string>) => {
+      state.lastName = action.payload;
     },
     setPassword: (state, action: PayloadAction<string>) => {
       state.password = action.payload;

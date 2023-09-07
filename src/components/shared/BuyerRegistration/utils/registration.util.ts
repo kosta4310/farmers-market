@@ -1,49 +1,49 @@
-import { fetchBuyersSignUp } from '../api/apiAuthBuyers';
+import { fetchBuyersSignUp } from '../../../../api/apiAuthBuyers';
 
 interface RegistrationFields {
-  template: string;
+  // template: string;
   name: string;
-  surname: string;
-  numberPhone: string;
+  lastName: string;
+  phoneNumber: string;
   email: string;
   password: string;
   repeatPassword: string;
   isCheckRules: boolean;
-  businessName?: string;
-  sellerType?: string;
-  factoryAddress?: string;
-  workSchedule?: string;
-  aboutUs?: string;
-  contactPerson?: string;
+  // businessName?: string;
+  // sellerType?: string;
+  // factoryAddress?: string;
+  // workSchedule?: string;
+  // aboutUs?: string;
+  // contactPerson?: string;
 }
 
 export async function checkFields(fields: RegistrationFields) {
   const {
-    template,
+    // template,
     name,
-    surname,
-    numberPhone,
+    lastName,
+    phoneNumber,
     email,
     password,
     repeatPassword,
     isCheckRules,
-    businessName,
-    sellerType,
-    factoryAddress,
-    workSchedule,
-    aboutUs,
-    contactPerson,
+    // businessName,
+    // sellerType,
+    // factoryAddress,
+    // workSchedule,
+    // aboutUs,
+    // contactPerson,
   } = fields;
 
   if (name.trim() === '') {
     return alert(`Введіть ім'я`);
   }
 
-  if (surname.trim() === '') {
+  if (lastName.trim() === '') {
     return alert('Введіть прізвище');
   }
 
-  if (numberPhone.trim() === '' || isNaN(Number(numberPhone))) {
+  if (phoneNumber.trim() === '' || isNaN(Number(phoneNumber))) {
     return alert('Введіть номер телефону');
   }
 
@@ -67,28 +67,28 @@ export async function checkFields(fields: RegistrationFields) {
     return alert('Підтвердіть умови використання');
   }
 
-  if (template === 'seller') {
-    return console.log({
-      template,
-      name,
-      surname,
-      numberPhone,
-      email,
-      password,
-      businessName,
-      sellerType,
-      factoryAddress,
-      workSchedule,
-      aboutUs,
-      contactPerson,
-    });
-  }
+  // if (template === 'seller') {
+  //   return console.log({
+  //     template,
+  //     name,
+  //     surname,
+  //     numberPhone,
+  //     email,
+  //     password,
+  //     businessName,
+  //     sellerType,
+  //     factoryAddress,
+  //     workSchedule,
+  //     aboutUs,
+  //     contactPerson,
+  //   });
+  // }
 
   const res = await fetchBuyersSignUp({
     buyer: {
       name,
-      lastName: surname,
-      phoneNumber: numberPhone,
+      lastName,
+      phoneNumber,
       email,
       password,
     },

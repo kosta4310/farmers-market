@@ -7,23 +7,23 @@ import ConsentProcessPersonalData from '../../../common/ConsentProcessPersonalDa
 import useHandleChange from '../../../../hooks/useHandleChange.ts';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux.ts';
 import { registrationSlice } from '../../../../store/reducers/registrationSlice.ts';
-import { checkFields } from '../../../../utils/registration.util.ts';
+import { checkFields } from '../utils/registration.util.ts';
 
 const BuyerRegistrationForm: FC = () => {
   const {
-    template,
+    // template,
     email,
-    numberPhone,
+    phoneNumber,
     name,
-    surname,
+    lastName,
     password,
     repeatPassword,
     isCheckRules,
   } = useAppSelector(state => state.registration);
   const {
     setEmail,
-    setNumberPhone,
-    setSurname,
+    setPhoneNumber,
+    setLastName,
     setName,
     setPassword,
     setRepeatPassword,
@@ -35,10 +35,10 @@ const BuyerRegistrationForm: FC = () => {
 
   const handleRegistration = () => {
     checkFields({
-      template,
+      // template,
       name,
-      surname,
-      numberPhone,
+      lastName,
+      phoneNumber,
       email,
       password,
       repeatPassword,
@@ -62,18 +62,18 @@ const BuyerRegistrationForm: FC = () => {
           label="Прізвище"
           inputType="text"
           inputId="surname"
-          value={surname}
+          value={lastName}
           placeholder="Введіть прізвище використовуючи українську або латинську абетку"
-          onChange={value => handleChange(setSurname, value)}
+          onChange={value => handleChange(setLastName, value)}
         />
         <RegistrationField
           label="Номер телефону"
           inputType="number"
           inputId="numberPhone"
-          value={numberPhone !== '' ? numberPhone : ''}
+          value={phoneNumber !== '' ? phoneNumber : ''}
           hint="Ваш номер будет використано тільки для підтвердження"
           placeholder="Будь-ласка введіть вірний номер"
-          onChange={value => handleChange(setNumberPhone, value)}
+          onChange={value => handleChange(setPhoneNumber, value)}
         />
         <RegistrationField
           label="Електрона пошта"
