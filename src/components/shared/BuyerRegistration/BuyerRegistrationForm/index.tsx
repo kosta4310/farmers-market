@@ -6,12 +6,12 @@ import CheckboxLabel from '../../../common/CheckboxLabel';
 import ConsentProcessPersonalData from '../../../common/ConsentProcessPersonalData';
 import useHandleChange from '../../../../hooks/useHandleChange.ts';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux.ts';
-import { registrationSlice } from '../../../../store/reducers/registrationSlice.ts';
 import { checkFields } from '../utils/registration.util.ts';
+import { fetchBuyersSignUp } from '../../../../api/apiAuthBuyers/index.ts';
+import { registrationSlice } from '../../../../store/reducers/registrationSlice.ts';
 
 const BuyerRegistrationForm: FC = () => {
   const {
-    // template,
     email,
     phoneNumber,
     name,
@@ -19,7 +19,7 @@ const BuyerRegistrationForm: FC = () => {
     password,
     repeatPassword,
     isCheckRules,
-  } = useAppSelector(state => state.registration);
+  } = useAppSelector(state => state.buyersRegistration);
   const {
     setEmail,
     setPhoneNumber,
@@ -33,17 +33,17 @@ const BuyerRegistrationForm: FC = () => {
   const handleChange = useHandleChange();
   const dispatch = useAppDispatch();
 
-  const handleRegistration = () => {
-    checkFields({
-      // template,
+  const handleRegistration = async () => {
+    const userData = {
       name,
       lastName,
       phoneNumber,
       email,
       password,
-      repeatPassword,
-      isCheckRules,
-    });
+    };
+    if (checkFields({ ...userData, repeatPassword, isCheckRules })) {
+      const res = await fetchBuyersSignUp(userData);
+    }
   };
 
   return (

@@ -5,10 +5,10 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { registrationSlice } from '../../../../store/reducers/registrationSlice';
 
 const CommonData: FC = () => {
-  const { setEmail, setNumberPhone, setSurname, setName } =
+  const { setEmail, setPhoneNumber, setLastName, setName } =
     registrationSlice.actions;
 
-  const { email, numberPhone, name, surname } = useAppSelector(
+  const { email, phoneNumber, name, lastName } = useAppSelector(
     state => state.registration,
   );
 
@@ -37,18 +37,18 @@ const CommonData: FC = () => {
           label="Прізвище *"
           inputType="text"
           inputId="surname"
-          value={surname}
+          value={lastName}
           placeholder="Введіть прізвище використовуючи українську або латинську абетку"
-          onChange={value => handleChange(setSurname, value)}
+          onChange={value => handleChange(setLastName, value)}
         />
         <RegistrationField
           label="Номер телефону *"
           inputType="number"
           inputId="numberPhone"
-          value={numberPhone !== '' ? numberPhone : ''}
+          value={phoneNumber !== '' ? phoneNumber : ''}
           hint="Ваш номер будет використано тільки для підтвердження"
           placeholder="Будь-ласка введіть вірний номер"
-          onChange={value => handleChange(setNumberPhone, value)}
+          onChange={value => handleChange(setPhoneNumber, value)}
         />
         <RegistrationField
           label="Електрона пошта *"

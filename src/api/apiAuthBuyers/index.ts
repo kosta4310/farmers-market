@@ -15,9 +15,9 @@ export async function fetchBuyersSignIn(
   return response;
 }
 
-export async function fetchBuyersSignUp(options: {
-  buyer: BuyersSignup;
-}): Promise<Response> {
+export async function fetchBuyersSignUp(
+  options: BuyersSignup,
+): Promise<Response> {
   const response = await fetch(BUYERS_SIGNUP, {
     method: 'POST',
     headers: {

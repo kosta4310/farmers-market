@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import registrationReducer from './reducers/registrationSlice.ts';
+import registrationReducer from './reducers/registrationSlice';
+import buyerRegistrationReducer from './reducers/buyersSlice';
 
 const rootReducer = combineReducers({
   registration: registrationReducer,
+  buyersRegistration: buyerRegistrationReducer,
 });
 
 export const setupStore = () => {

@@ -14,9 +14,9 @@ const SellerRegistrationForm: FC = () => {
 
   const {
     email,
-    numberPhone,
+    phoneNumber,
     name,
-    surname,
+    lastName,
     businessName,
     sellerType,
     factoryAddress,
@@ -59,9 +59,9 @@ const SellerRegistrationForm: FC = () => {
     if (checkFieldsThirdPage(password, repeatPassword, isCheckRules)) {
       console.log({
         email,
-        numberPhone,
+        phoneNumber,
         name,
-        surname,
+        lastName,
         businessName,
         sellerType,
         factoryAddress,

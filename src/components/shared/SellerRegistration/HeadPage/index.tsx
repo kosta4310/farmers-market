@@ -9,9 +9,9 @@ import { registrationSlice } from '../../../../store/reducers/registrationSlice'
 const HeadPage: FC = () => {
   const {
     email,
-    numberPhone,
+    phoneNumber,
     name,
-    surname,
+    lastName,
     businessName,
     sellerType,
     aboutUs,
@@ -25,7 +25,7 @@ const HeadPage: FC = () => {
   } = useAppSelector(state => state.registration);
 
   const arrayFieldsByPages: { [key: string]: () => boolean | void } = {
-    1: () => checkFieldsFirstPage(name, surname, numberPhone, email),
+    1: () => checkFieldsFirstPage(name, lastName, phoneNumber, email),
     2: () =>
       checkFieldsSecondPage(
         businessName,

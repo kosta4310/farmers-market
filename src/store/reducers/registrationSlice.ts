@@ -58,9 +58,9 @@ export const registrationSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
-    // setTemplate: (state, action: PayloadAction<string>) => {
-    //   state.template = action.payload;
-    // },
+    setTemplate: (state, action: PayloadAction<string>) => {
+      state.template = action.payload;
+    },
     setEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
     },

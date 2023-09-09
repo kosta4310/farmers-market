@@ -18,8 +18,8 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
   const [login, setLogin] = useState('');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { template } = useAppSelector((state) => state.registration);
-  const { setTemplate, setEmail, setNumberPhone } = registrationSlice.actions;
+  const { template } = useAppSelector(state => state.registration);
+  const { setEmail, setPhoneNumber, setTemplate } = registrationSlice.actions;
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setTemplate(e.target.value));
@@ -34,9 +34,9 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
 
     if (/^\+?\d+$/.test(login)) {
       if (login.startsWith('+38')) {
-        dispatch(setNumberPhone(login.slice(3)));
+        dispatch(setPhoneNumber(login.slice(3)));
       } else {
-        dispatch(setNumberPhone(login));
+        dispatch(setPhoneNumber(login));
       }
     }
 
