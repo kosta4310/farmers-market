@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import RegistrationField from '../../../common/RegistrationField';
 import Checkbox from '../../../common/Checkbox';
 import Button from '../../../common/Button';
@@ -11,10 +12,9 @@ import {
   buyersRegistrationSlice,
   thunkBuyersSignUp,
 } from '../../../../store/reducers/buyersSlice.ts';
-import ModalError from '../../../common/ModalError/index.tsx';
-import ModalConfirmationEmail from '../../ModalConfirmationEmail/index.tsx';
 
 const BuyerRegistrationForm: FC = () => {
+  const navigate = useNavigate();
   const {
     email,
     phoneNumber,
@@ -23,8 +23,6 @@ const BuyerRegistrationForm: FC = () => {
     password,
     repeatPassword,
     isCheckRules,
-    modalConfirmationEmailIsOpen,
-    error,
   } = useAppSelector(state => state.buyersRegistration);
   const {
     setEmail,
@@ -34,7 +32,6 @@ const BuyerRegistrationForm: FC = () => {
     setPassword,
     setRepeatPassword,
     setIsCheckRules,
-    setModalConfirmationEmailIsOpen,
   } = buyersRegistrationSlice.actions;
 
   const handleChange = useHandleChange();
@@ -50,16 +47,12 @@ const BuyerRegistrationForm: FC = () => {
     };
     if (checkFields({ ...userData, repeatPassword, isCheckRules })) {
       dispatch(thunkBuyersSignUp(userData));
+      navigate('/');
     }
   };
 
   return (
     <>
-      <ModalConfirmationEmail
-        isModalOpen={modalConfirmationEmailIsOpen}
-        setIsModalOpen={setModalConfirmationEmailIsOpen}
-      />
-      {error && <ModalError>{error}</ModalError>}
       <div className="flex flex-col gap-6 mb-7">
         <h2 className="text-2xl text-gray-700 font-medium">Реєстрація</h2>
         <RegistrationField
