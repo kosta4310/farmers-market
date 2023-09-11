@@ -1,5 +1,3 @@
-import { fetchBuyersSignUp } from '../../../../api/apiAuthBuyers';
-
 interface RegistrationFields {
   name: string;
   lastName: string;
