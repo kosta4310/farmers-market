@@ -11,6 +11,8 @@ interface RegistrationSliceState {
   password: string;
   repeatPassword: string;
   isCheckRules: boolean;
+  modalConfirmationEmailIsOpen: boolean;
+  error: string;
 }
 
 const initialState: RegistrationSliceState = {
@@ -21,6 +23,8 @@ const initialState: RegistrationSliceState = {
   password: '',
   repeatPassword: '',
   isCheckRules: false,
+  modalConfirmationEmailIsOpen: false,
+  error: '',
 };
 
 export const thunkBuyersSignUp = createAsyncThunk(
@@ -34,11 +38,8 @@ export const thunkBuyersSignUp = createAsyncThunk(
         throw new Error(`${err.statusCode}_SIGNUP`);
       }
 
-      // Show modal window
-
-      // const { _id, name, login }: Buyer = await res.json();
-      // const password = options.password;
-      // return { _id, name, login, password };
+      // const response = await res.json();
+      // return response;
     } catch (error) {
       return rejectWithValue(getErrorMessage(error));
     }
@@ -70,6 +71,21 @@ export const buyersRegistrationSlice = createSlice({
     setIsCheckRules: (state, action: PayloadAction<boolean>) => {
       state.isCheckRules = action.payload;
     },
+    setModalConfirmationEmailIsOpen: (
+      state,
+      action: PayloadAction<boolean>,
+    ) => {
+      state.modalConfirmationEmailIsOpen = action.payload;
+    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(thunkBuyersSignUp.fulfilled, state => {
+        state.modalConfirmationEmailIsOpen = true;
+      })
+      .addCase(thunkBuyersSignUp.rejected, (state, action) => {
+        state.error = action.payload as string;
+      });
   },
 });
 

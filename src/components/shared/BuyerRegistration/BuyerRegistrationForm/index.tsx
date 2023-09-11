@@ -7,8 +7,12 @@ import ConsentProcessPersonalData from '../../../common/ConsentProcessPersonalDa
 import useHandleChange from '../../../../hooks/useHandleChange.ts';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux.ts';
 import { checkFields } from '../utils/registration.util.ts';
-import { fetchBuyersSignUp } from '../../../../api/apiAuthBuyers/index.ts';
-import { registrationSlice } from '../../../../store/reducers/registrationSlice.ts';
+import {
+  buyersRegistrationSlice,
+  thunkBuyersSignUp,
+} from '../../../../store/reducers/buyersSlice.ts';
+import ModalError from '../../../common/ModalError/index.tsx';
+import ModalConfirmationEmail from '../../ModalConfirmationEmail/index.tsx';
 
 const BuyerRegistrationForm: FC = () => {
   const {
@@ -19,6 +23,8 @@ const BuyerRegistrationForm: FC = () => {
     password,
     repeatPassword,
     isCheckRules,
+    modalConfirmationEmailIsOpen,
+    error,
   } = useAppSelector(state => state.buyersRegistration);
   const {
     setEmail,
@@ -28,7 +34,8 @@ const BuyerRegistrationForm: FC = () => {
     setPassword,
     setRepeatPassword,
     setIsCheckRules,
-  } = registrationSlice.actions;
+    setModalConfirmationEmailIsOpen,
+  } = buyersRegistrationSlice.actions;
 
   const handleChange = useHandleChange();
   const dispatch = useAppDispatch();
@@ -42,12 +49,17 @@ const BuyerRegistrationForm: FC = () => {
       password,
     };
     if (checkFields({ ...userData, repeatPassword, isCheckRules })) {
-      const res = await fetchBuyersSignUp(userData);
+      dispatch(thunkBuyersSignUp(userData));
     }
   };
 
   return (
     <>
+      <ModalConfirmationEmail
+        isModalOpen={modalConfirmationEmailIsOpen}
+        setIsModalOpen={setModalConfirmationEmailIsOpen}
+      />
+      {error && <ModalError>{error}</ModalError>}
       <div className="flex flex-col gap-6 mb-7">
         <h2 className="text-2xl text-gray-700 font-medium">Реєстрація</h2>
         <RegistrationField
