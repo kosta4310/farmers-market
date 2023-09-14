@@ -18,6 +18,10 @@ export const router = (template: string) =>
           element: <MainPage />,
         },
         {
+          path: '/?token=:tokenValue',
+          element: <MainPage />,
+        },
+        {
           path: '/about',
           element: <AboutPage />,
         },

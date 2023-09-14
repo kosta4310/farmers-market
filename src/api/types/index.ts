@@ -6,7 +6,7 @@ export type BuyersSignup = {
   password: string;
 };
 
-export type BuyersSignin = {
+export type Signin = {
   email: string;
   password: string;
 };

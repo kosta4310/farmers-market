@@ -3,5 +3,7 @@ const BASE = 'http://127.0.0.1:4000';
 
 const BUYERS_SIGNUP = `${BASE}/auth/buyers/register`;
 const BUYERS_SIGNIN = `${BASE}/buyers/login`;
+const CONFIRM_EMAIL = `${BASE}/auth/verify-email`;
+const AUTH_SIGNIN = `${BASE}/auth/login`;
 
-export { BASE, BUYERS_SIGNIN, BUYERS_SIGNUP };
+export { BASE, BUYERS_SIGNIN, BUYERS_SIGNUP, CONFIRM_EMAIL, AUTH_SIGNIN };

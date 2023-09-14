@@ -28,9 +28,9 @@ const RegistrationField: FC<RegistrationFieldProps> = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (inputType === 'number' && e.target.value.length > 10) {
-      e.target.value = e.target.value.slice(0, 10);
-    }
+    // if (inputType === 'number' && e.target.value.length > 10) {
+    //   e.target.value = e.target.value.slice(0, 10);
+    // }
 
     if (onChange) {
       onChange(e.target.value);
@@ -81,7 +81,7 @@ const RegistrationField: FC<RegistrationFieldProps> = ({
         {label}
         <div className="flex items-center">
           <span className="border border-gray-200 rounded-tl rounded-bl p-3 text-gray-400">
-            +38
+            +380
           </span>
           <input
             className="border border-gray-200 rounded-tr rounded-br p-3 outline-none focus:bg-none focus:ring-0 w-full"

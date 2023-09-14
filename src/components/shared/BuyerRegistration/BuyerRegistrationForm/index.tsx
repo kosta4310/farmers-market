@@ -75,7 +75,7 @@ const BuyerRegistrationForm: FC = () => {
           label="Номер телефону"
           inputType="number"
           inputId="numberPhone"
-          value={phoneNumber !== '' ? phoneNumber : ''}
+          value={phoneNumber}
           hint="Ваш номер будет використано тільки для підтвердження"
           placeholder="Будь-ласка введіть вірний номер"
           onChange={value => handleChange(setPhoneNumber, value)}
