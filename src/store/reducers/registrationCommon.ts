@@ -7,10 +7,12 @@ import { Buyer } from '../types';
 
 interface RegistrationSliceState {
   error: string;
+  isLogged: boolean;
 }
 
 const initialState: RegistrationSliceState = {
   error: '',
+  isLogged: false,
 };
 
 export const thunkConfirmEmail = createAsyncThunk(
@@ -62,7 +64,8 @@ export const registrationCommonSlice = createSlice({
     builder
       .addCase(
         thunkConfirmEmail.fulfilled,
-        (_state, action: PayloadAction<Buyer>) => {
+        (state, action: PayloadAction<Buyer>) => {
+          state.isLogged = true;
           const {
             lastName,
             name,

@@ -13,16 +13,23 @@ const MainPage: FC = () => {
   );
   const dispatch = useAppDispatch();
   const { error } = useAppSelector(state => state.registrationCommon);
-  const { setModalConfirmationEmailIsOpen } = buyersRegistrationSlice.actions;
+  const { setModalConfirmationEmailIsOpen, setName, setLastName } =
+    buyersRegistrationSlice.actions;
   const query = useQuery();
 
   useEffect(() => {
     const code = query.get('code');
 
     if (code) {
-      dispatch(thunkConfirmEmail({ code }));
+      console.log('main');
+
+      dispatch(thunkConfirmEmail({ code })).then(res => {
+        dispatch(setLastName(res.payload.lastName));
+        dispatch(setName(res.payload.name));
+      });
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
