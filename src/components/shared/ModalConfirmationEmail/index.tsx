@@ -16,11 +16,14 @@ const ModalConfirmationEmail: FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}
     >
-      <span>
-        Акаунт успішно створено. Для завершення реєстрації, будь-ласка
-        підтвердіть вашу електронну адресу за посиланням, яке ми надіслали на
-        електронну пошту, яку ви надали
-      </span>
+      <div className="text-center">
+        Аккаунт успішно створено.
+        <br /> Для завершення реєстрації, будь ласка,
+        <br />
+        підтвердіть вашу електронну адресу за <br />
+        посиланням, яке ми надіслали на вказану
+        <br /> Вами <b>електронну пошту</b>
+      </div>
     </CustomModalWithRedux>
   );
 };
