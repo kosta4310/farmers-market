@@ -1,6 +1,6 @@
 interface User {
   email: string;
-  role: 'buyer' | 'seller';
+  role: Role;
 }
 
 export interface Buyer {
@@ -9,4 +9,9 @@ export interface Buyer {
   phoneNumber: string;
   token: string;
   user: User;
+}
+
+export enum Role {
+  BUYER = 'buyer',
+  SELLER = 'seller',
 }

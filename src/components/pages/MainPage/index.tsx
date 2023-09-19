@@ -6,6 +6,7 @@ import { buyersRegistrationSlice } from '../../../store/reducers/buyersSlice';
 import ModalError from '../../common/ModalError';
 import { useQuery } from '../../../hooks/useQuery';
 import { thunkConfirmEmail } from '../../../store/reducers/registrationCommon';
+import { Role } from '../../../store/types';
 
 const MainPage: FC = () => {
   const { modalConfirmationEmailIsOpen } = useAppSelector(
@@ -21,11 +22,11 @@ const MainPage: FC = () => {
     const code = query.get('code');
 
     if (code) {
-      console.log('main');
-
       dispatch(thunkConfirmEmail({ code })).then(res => {
-        dispatch(setLastName(res.payload.lastName));
-        dispatch(setName(res.payload.name));
+        if (res.payload.user.role === Role.BUYER) {
+          dispatch(setLastName(res.payload.lastName));
+          dispatch(setName(res.payload.name));
+        } /*дописать для продавца*/
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

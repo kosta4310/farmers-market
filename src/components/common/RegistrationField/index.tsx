@@ -28,9 +28,9 @@ const RegistrationField: FC<RegistrationFieldProps> = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // if (inputType === 'number' && e.target.value.length > 10) {
-    //   e.target.value = e.target.value.slice(0, 10);
-    // }
+    if (inputType === 'number' && e.target.value.length > 9) {
+      e.target.value = e.target.value.slice(0, 9);
+    }
 
     if (onChange) {
       onChange(e.target.value);

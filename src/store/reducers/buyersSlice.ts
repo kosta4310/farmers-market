@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BuyersSignup } from '../../api/types';
-import { fetchBuyersSignUp } from '../../api/apiAuthBuyers';
+import { fetchBuyersSignUp } from '../../api/authBuyers';
 import { getErrorMessage } from '../../utils/func/getErrorMessage';
 
 interface RegistrationSliceState {

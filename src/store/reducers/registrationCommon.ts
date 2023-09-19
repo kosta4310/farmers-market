@@ -59,6 +59,9 @@ export const registrationCommonSlice = createSlice({
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
+    setIsLogged: (state, action: PayloadAction<boolean>) => {
+      state.isLogged = action.payload;
+    },
   },
   extraReducers(builder) {
     builder

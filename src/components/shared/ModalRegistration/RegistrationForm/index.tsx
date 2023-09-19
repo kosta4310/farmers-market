@@ -33,8 +33,8 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
     if (login.trim() === '') return;
 
     if (/^\+?\d+$/.test(login)) {
-      if (login.startsWith('+38')) {
-        dispatch(setPhoneNumber(login.slice(3)));
+      if (login.startsWith('+380')) {
+        dispatch(setPhoneNumber(login.slice(4)));
       } else {
         dispatch(setPhoneNumber(login));
       }

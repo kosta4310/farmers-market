@@ -14,7 +14,7 @@ const ModalRegistration: FC<ModalRegistrationProps> = ({
   setIsModalOpen,
 }) => {
   const [selectedTab, setSelectedTab] = useState<'auth' | 'registration'>(
-    'auth'
+    'auth',
   );
 
   const handleTabClick = (tab: 'auth' | 'registration') => {
@@ -40,7 +40,10 @@ const ModalRegistration: FC<ModalRegistrationProps> = ({
         </div>
         <div>
           {selectedTab === 'auth' ? (
-            <AuthForm />
+            <AuthForm
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+            />
           ) : (
             <RegistrationForm
               isModalOpen={isModalOpen}
