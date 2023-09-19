@@ -44,13 +44,13 @@ const CustomModalWithRedux: FC<CustomModalProps> = ({
     <Modal
       isOpen={isModalOpen}
       onRequestClose={handleCloseModal}
-      className={`bg-white h-max w-4/12 max-lg:w-8/12 max-md:w-full
+      className={`bg-white mt-20 h-max w-4/12 max-lg:w-8/12 max-md:w-full
     p-11 outline-none shadow-sm ${
       isClosing
         ? 'animate__animated animate__fadeOutUp'
         : 'animate__animated animate__fadeInDown'
     }`}
-      overlayClassName="fixed top-48 left-0 right-0 bottom-0 flex justify-center"
+      overlayClassName="fixed top-0 left-0 right-0 bottom-0 flex justify-center bg-black/50"
     >
       <span
         className="cursor-pointer absolute top-4 right-5 hover:opacity-50 transition duration-200"
