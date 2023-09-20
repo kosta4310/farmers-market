@@ -4,7 +4,6 @@ import { fetchBuyersSignUp } from '../../api/authBuyers';
 import { getErrorMessage } from '../../utils/func/getErrorMessage';
 
 interface RegistrationSliceState {
-  email: string;
   phoneNumber: string;
   name: string;
   lastName: string;
@@ -16,7 +15,6 @@ interface RegistrationSliceState {
 }
 
 const initialState: RegistrationSliceState = {
-  email: '',
   phoneNumber: '',
   name: '',
   lastName: '',
@@ -50,9 +48,6 @@ export const buyersRegistrationSlice = createSlice({
   name: 'buersRegistration',
   initialState,
   reducers: {
-    setEmail: (state, action: PayloadAction<string>) => {
-      state.email = action.payload;
-    },
     setPhoneNumber: (state, action: PayloadAction<string>) => {
       state.phoneNumber = action.payload;
     },

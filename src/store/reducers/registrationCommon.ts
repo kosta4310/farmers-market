@@ -8,11 +8,13 @@ import { Buyer } from '../types';
 interface RegistrationSliceState {
   error: string;
   isLogged: boolean;
+  email: string;
 }
 
 const initialState: RegistrationSliceState = {
   error: '',
   isLogged: false,
+  email: '',
 };
 
 export const thunkConfirmEmail = createAsyncThunk(
@@ -56,6 +58,9 @@ export const registrationCommonSlice = createSlice({
   name: 'registrationCommon',
   initialState,
   reducers: {
+    setEmail: (state, action: PayloadAction<string>) => {
+      state.email = action.payload;
+    },
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },

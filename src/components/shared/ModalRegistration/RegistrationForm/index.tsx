@@ -5,6 +5,7 @@ import RadioChoice from '../../../common/RadioChoice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux.ts';
 import { registrationSlice } from '../../../../store/reducers/registrationSlice.ts';
+import { registrationCommonSlice } from '../../../../store/reducers/registrationCommon.ts';
 
 interface RegistrationFormProps {
   isModalOpen: boolean;
@@ -19,7 +20,8 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { template } = useAppSelector(state => state.registration);
-  const { setEmail, setPhoneNumber, setTemplate } = registrationSlice.actions;
+  const { setTemplate } = registrationSlice.actions;
+  const { setEmail } = registrationCommonSlice.actions;
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setTemplate(e.target.value));
@@ -31,14 +33,6 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
 
   const handleButtonRegistration = () => {
     if (login.trim() === '') return;
-
-    if (/^\+?\d+$/.test(login)) {
-      if (login.startsWith('+380')) {
-        dispatch(setPhoneNumber(login.slice(4)));
-      } else {
-        dispatch(setPhoneNumber(login));
-      }
-    }
 
     if (login.includes('@')) {
       dispatch(setEmail(login));
@@ -52,10 +46,10 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
     <div className="flex flex-col">
       <div className="flex flex-col gap-8">
         <RegField
-          label="Номер телефону або електронна пошта"
+          label="Електронна пошта"
           inputType="text"
           inputId="reg"
-          placeholder="Введіть номер або електронну пошту"
+          placeholder="Введіть електронну пошту"
           value={login}
           onChange={handleInputChange}
         />

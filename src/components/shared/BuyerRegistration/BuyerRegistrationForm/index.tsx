@@ -12,11 +12,11 @@ import {
   buyersRegistrationSlice,
   thunkBuyersSignUp,
 } from '../../../../store/reducers/buyersSlice.ts';
+import { registrationCommonSlice } from '../../../../store/reducers/registrationCommon.ts';
 
 const BuyerRegistrationForm: FC = () => {
   const navigate = useNavigate();
   const {
-    email,
     phoneNumber,
     name,
     lastName,
@@ -24,8 +24,8 @@ const BuyerRegistrationForm: FC = () => {
     repeatPassword,
     isCheckRules,
   } = useAppSelector(state => state.buyersRegistration);
+  const { email } = useAppSelector(state => state.registrationCommon);
   const {
-    setEmail,
     setPhoneNumber,
     setLastName,
     setName,
@@ -33,6 +33,7 @@ const BuyerRegistrationForm: FC = () => {
     setRepeatPassword,
     setIsCheckRules,
   } = buyersRegistrationSlice.actions;
+  const { setEmail } = registrationCommonSlice.actions;
 
   const handleChange = useHandleChange();
   const dispatch = useAppDispatch();
