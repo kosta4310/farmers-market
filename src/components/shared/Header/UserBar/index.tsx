@@ -6,6 +6,7 @@ import favorites from '../../../../assets/icons/user-bar/favorites.svg';
 import basket from '../../../../assets/icons/user-bar/basket.svg';
 import ModalRegistration from '../../ModalRegistration';
 import { useAppSelector } from '../../../../hooks/redux';
+import { Link } from 'react-router-dom';
 
 const UserPanel: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,7 +20,9 @@ const UserPanel: FC = () => {
 
   return (
     <div className="flex justify-between items-center px-10 py-1.5 bg-default shadow-md">
-      <img src={logo} alt="logo" />
+      <Link to={'/'}>
+        <img src={logo} alt="logo" />
+      </Link>
       <SearchBar />
       <span className="flex gap-6 items-center cursor-pointer">
         {isLogged && name && lastName && (
