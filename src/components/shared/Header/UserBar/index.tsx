@@ -30,7 +30,9 @@ const UserPanel: FC = () => {
             {name} {lastName}
           </span>
         )}
-        <img src={user} alt="user" onClick={handleOpenRegistration} />
+        {!isLogged && (
+          <img src={user} alt="user" onClick={handleOpenRegistration} />
+        )}
         <img src={favorites} alt="favorites" />
         <img src={basket} alt="basket" />
       </span>
