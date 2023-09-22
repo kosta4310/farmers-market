@@ -13,7 +13,7 @@ const useClickOutside = (ref: RefObject<HTMLElement>, callback: () => void) => {
       document.removeEventListener('mousedown', handleClick);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ref]);
 };
 
 export default useClickOutside;
