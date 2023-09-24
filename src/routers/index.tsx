@@ -11,21 +11,7 @@ import MyPurchasesPage from '../components/pages/MyPurchases';
 import MyFavoritesPage from '../components/pages/MyFavorites';
 import ReviewsPage from '../components/pages/Reviews';
 import PrivateMessagesPage from '../components/pages/PrivateMessages';
-
-export enum Route {
-  main = '/',
-  tokenValue = '/?token=:tokenValue',
-  about = '/about',
-  rules = '/rules',
-  delivery = '/delivery',
-  payment = '/payment',
-  registration = '/registration',
-  myPage = '/myPage',
-  myPurchases = '/myPurchases',
-  myFavorites = '/myFavorites',
-  reviews = '/reviews',
-  privateMessages = '/privateMessages',
-}
+import { Route } from './route';
 
 export const router = (template: string) =>
   createBrowserRouter([

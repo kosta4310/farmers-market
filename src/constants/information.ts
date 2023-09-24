@@ -1,10 +1,10 @@
-import { Route } from '../routers';
+import { Route } from '../routers/route';
 
 export const information = [
-  { id: 1, title: 'Про нас', route: '/about' },
-  { id: 2, title: 'Правила та умови', route: '/rules' },
-  { id: 3, title: 'Доставка', route: '/delivery' },
-  { id: 4, title: 'Оплата', route: '/payment' },
+  { id: 1, title: 'Про нас', route: Route.about },
+  { id: 2, title: 'Правила та умови', route: Route.rules },
+  { id: 3, title: 'Доставка', route: Route.delivery },
+  { id: 4, title: 'Оплата', route: Route.payment },
 ];
 
 export const menuBuyer = [

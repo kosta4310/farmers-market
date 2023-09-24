@@ -10,7 +10,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import DropDownMenu from '../../../common/DropDownMenu';
 import { menuBuyer } from '../../../../constants/information';
 import { registrationCommonSlice } from '../../../../store/reducers/registrationCommon';
-import { Route } from '../../../../routers';
+import { Route } from '../../../../routers/route';
 
 const UserPanel: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
