@@ -6,40 +6,80 @@ import RulesPage from '../components/pages/RulesPage';
 import DeliveryPage from '../components/pages/DeliveryPage';
 import PaymentPage from '../components/pages/PaymentPage';
 import RegistrationPage from '../components/pages/RegistrationPage';
+import MyPage from '../components/pages/MyPage';
+import MyPurchasesPage from '../components/pages/MyPurchases';
+import MyFavoritesPage from '../components/pages/MyFavorites';
+import ReviewsPage from '../components/pages/Reviews';
+import PrivateMessagesPage from '../components/pages/PrivateMessages';
+
+export enum Route {
+  main = '/',
+  tokenValue = '/?token=:tokenValue',
+  about = '/about',
+  rules = '/rules',
+  delivery = '/delivery',
+  payment = '/payment',
+  registration = '/registration',
+  myPage = '/myPage',
+  myPurchases = '/myPurchases',
+  myFavorites = '/myFavorites',
+  reviews = '/reviews',
+  privateMessages = '/privateMessages',
+}
 
 export const router = (template: string) =>
   createBrowserRouter([
     {
-      path: '/',
+      path: Route.main,
       element: <ScreenLayout />,
       children: [
         {
-          path: '/',
+          path: Route.main,
           element: <MainPage />,
         },
         {
-          path: '/?token=:tokenValue',
+          path: Route.tokenValue,
           element: <MainPage />,
         },
         {
-          path: '/about',
+          path: Route.about,
           element: <AboutPage />,
         },
         {
-          path: '/rules',
+          path: Route.rules,
           element: <RulesPage />,
         },
         {
-          path: '/delivery',
+          path: Route.delivery,
           element: <DeliveryPage />,
         },
         {
-          path: '/payment',
+          path: Route.payment,
           element: <PaymentPage />,
         },
         {
-          path: '/registration',
+          path: Route.registration,
           element: <RegistrationPage template={template} />,
+        },
+        {
+          path: Route.myPage,
+          element: <MyPage />,
+        },
+        {
+          path: Route.myPurchases,
+          element: <MyPurchasesPage />,
+        },
+        {
+          path: Route.myFavorites,
+          element: <MyFavoritesPage />,
+        },
+        {
+          path: Route.reviews,
+          element: <ReviewsPage />,
+        },
+        {
+          path: Route.privateMessages,
+          element: <PrivateMessagesPage />,
         },
       ],
     },

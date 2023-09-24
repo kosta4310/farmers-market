@@ -1,19 +1,18 @@
 import { RefObject, useEffect } from 'react';
 
 const useClickOutside = (ref: RefObject<HTMLElement>, callback: () => void) => {
-  const handleClick = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event.target as Node)) {
-      callback();
-    }
-  };
-
   useEffect(() => {
-    document.addEventListener('mousedown', handleClick);
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
+    const handleClick = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callback();
+      }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
+
+    document.addEventListener('mouseup', handleClick);
+    return () => {
+      document.removeEventListener('mouseup', handleClick);
+    };
+  }, [ref, callback]);
 };
 
 export default useClickOutside;
