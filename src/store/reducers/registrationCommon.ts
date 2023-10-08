@@ -3,7 +3,6 @@ import { Signin } from '../../api/types';
 import { fetchConfirmEmail } from '../../api/confirmEmail';
 import { getErrorMessage } from '../../utils/func/getErrorMessage';
 import { fetchSignIn } from '../../api/authCommon';
-import { Buyer } from '../types';
 
 interface RegistrationSliceState {
   error: string;
@@ -70,21 +69,18 @@ export const registrationCommonSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(
-        thunkConfirmEmail.fulfilled,
-        (state, action: PayloadAction<Buyer>) => {
-          state.isLogged = true;
-          // const {
-          //   lastName,
-          //   name,
-          //   phoneNumber,
-          //   token,
-          //   user: { email, role },
-          // } = action.payload;
-          // console.log({ lastName, name, phoneNumber, token, email, role });
-          // console.log('payload', action.payload);
-        },
-      )
+      .addCase(thunkConfirmEmail.fulfilled, state => {
+        state.isLogged = true;
+        // const {
+        //   lastName,
+        //   name,
+        //   phoneNumber,
+        //   token,
+        //   user: { email, role },
+        // } = action.payload;
+        // console.log({ lastName, name, phoneNumber, token, email, role });
+        // console.log('payload', action.payload);
+      })
       .addCase(thunkConfirmEmail.rejected, (_state, action) => {
         // state.error = action.payload as string;
         console.log('error confirm', action.payload);

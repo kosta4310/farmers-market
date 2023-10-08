@@ -6,7 +6,6 @@ import { buyersRegistrationSlice } from '../../../store/reducers/buyersSlice';
 import ModalError from '../../common/ModalError';
 import { useQuery } from '../../../hooks/useQuery';
 import { thunkConfirmEmail } from '../../../store/reducers/registrationCommon';
-import { Role } from '../../../store/types';
 
 const MainPage: FC = () => {
   const { modalConfirmationEmailIsOpen } = useAppSelector(

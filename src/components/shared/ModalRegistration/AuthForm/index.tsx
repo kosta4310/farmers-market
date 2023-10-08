@@ -8,7 +8,6 @@ import {
   thunkAuthSignin,
 } from '../../../../store/reducers/registrationCommon';
 import { useAppDispatch } from '../../../../hooks/redux';
-import { Role } from '../../../../store/types';
 import { buyersRegistrationSlice } from '../../../../store/reducers/buyersSlice';
 
 interface AuthProps {
