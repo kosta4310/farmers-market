@@ -51,7 +51,7 @@ const UserPanel: FC = () => {
               setIsModalOpenMenu={setIsModalOpenMenu}
               buttonName={
                 <span>
-                  {name} {lastName}
+                  {name} {lastName.charAt(0).toUpperCase()}
                 </span>
               }
             >

@@ -74,14 +74,15 @@ export const registrationCommonSlice = createSlice({
         thunkConfirmEmail.fulfilled,
         (state, action: PayloadAction<Buyer>) => {
           state.isLogged = true;
-          const {
-            lastName,
-            name,
-            phoneNumber,
-            token,
-            user: { email, role },
-          } = action.payload;
-          console.log({ lastName, name, phoneNumber, token, email, role });
+          // const {
+          //   lastName,
+          //   name,
+          //   phoneNumber,
+          //   token,
+          //   user: { email, role },
+          // } = action.payload;
+          // console.log({ lastName, name, phoneNumber, token, email, role });
+          // console.log('payload', action.payload);
         },
       )
       .addCase(thunkConfirmEmail.rejected, (_state, action) => {

@@ -29,9 +29,9 @@ const AuthForm: FC<AuthProps> = ({ isModalOpen, setIsModalOpen }) => {
 
     dispatch(thunkAuthSignin({ email: login, password })).then(res => {
       dispatch(setIsLogged(true));
-      if (res.payload.user.role === Role.BUYER) {
-        dispatch(setLastName(res.payload.lastName));
-        dispatch(setName(res.payload.name));
+      if (res.payload.buyer) {
+        dispatch(setLastName(res.payload.buyer.lastName));
+        dispatch(setName(res.payload.buyer.name));
       }
       /*дописать для продавца*/
     });
