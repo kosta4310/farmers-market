@@ -20,7 +20,7 @@ export default {
         white: '#FFFFFF',
         attention: '#FF4646',
         disabled: '#888888',
-        stroke_input: '#',
+        stroke_input: '#E2E2E2',
         card_background: '#F4F4F4',
         orange: '#FF7A00',
         blue: '#003171',
