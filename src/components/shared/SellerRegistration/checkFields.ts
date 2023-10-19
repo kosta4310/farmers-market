@@ -31,13 +31,6 @@ export function checkFieldsSecondPage(
   businessName: string,
   sellerType: string,
   aboutUs: string,
-  iban: string,
-  bankName: string,
-  mfo: string,
-  erdpou: string,
-  fullBusinessName: string,
-  numberCard: string,
-  cardExpiryDate: string,
 ) {
   let response;
   switch (sellerType) {
@@ -60,48 +53,21 @@ export function checkFieldsSecondPage(
       alert('Заповніть поле про нас');
       return false;
     }
-    if (iban.trim() === '') {
-      alert('Введіть IBAN');
-      return false;
-    }
-    if (bankName.trim() === '') {
-      alert('Введіть назву банку');
-      return false;
-    }
-    if (mfo.trim() === '') {
-      alert('Введіть МФО');
-      return false;
-    }
-    if (erdpou.trim() === '') {
-      alert('Введіть ЕРДПОУ');
-      return false;
-    }
-    if (fullBusinessName.trim() === '') {
-      alert('Введіть повну назву підприємства');
-      return false;
-    }
+
     return true;
   }
 
   function privateCase() {
-    if (numberCard.trim() === '') {
-      alert('Введіть номер карти');
-      return false;
-    }
-    if (cardExpiryDate.trim() === '') {
-      alert('Введіть срок дії карти');
-      return false;
-    }
     return true;
   }
 }
 
-export function checkFieldsThirdPage(
+export function checkFieldsFourthPage(
   password: string,
   repeatPassword: string,
   isCheckRules: boolean,
 ) {
-  if (password.trim() === '') {
+  if (password === '') {
     alert('Введіть пароль');
     return false;
   }
@@ -115,5 +81,27 @@ export function checkFieldsThirdPage(
     alert('Підтвердіть умови використання');
     return false;
   }
+  return true;
+}
+
+export function checkFieldsThirdPage(
+  factoryAddress: string,
+  deliveryConditions: string,
+  workHoursFrom: string,
+  workHoursTo: string,
+) {
+  // if (factoryAddress === '') {
+  //   alert('Введіть адресу для самовивізу товару');
+  //   return false;
+  // }
+  // if (deliveryConditions === '') {
+  //   alert('Введіть умови доставки');
+  //   return false;
+  // }
+  // if (workHoursFrom === '' || workHoursTo === '') {
+  //   alert('Введіть часи роботи підприємства');
+  //   return false;
+  // }
+
   return true;
 }

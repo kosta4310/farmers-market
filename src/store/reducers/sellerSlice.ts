@@ -1,69 +1,53 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface RegistrationSliceState {
-  template: string;
-  email: string;
   phoneNumber: string;
   name: string;
   lastName: string;
+  sellerType: string;
+  businessName: string;
+  factoryPhoto: Blob | null;
+  factoryLogo: Blob | null;
+  aboutUs: string;
+  contactPerson: string;
+  factoryAddress: string;
+  workHoursFrom: string;
+  workHoursTo: string;
+  deliveryConditions: string;
+  photo: Blob | null;
+  aboutMe: string;
+  registrationPage: number;
   password: string;
   repeatPassword: string;
   isCheckRules: boolean;
-  businessName: string;
-  sellerType: string;
-  factoryAddress: string;
-  workSchedule: string;
-  aboutUs: string;
-  contactPerson: string;
-  workHoursFrom: string;
-  workHoursTo: string;
-  registrationPage: number;
-  iban: string;
-  bankName: string;
-  mfo: string;
-  erdpou: string;
-  fullBusinessName: string;
-  numberCard: string;
-  cardExpiryDate: string;
 }
 
 const initialState: RegistrationSliceState = {
-  template: 'buyer',
-  email: '',
   phoneNumber: '',
   name: '',
   lastName: '',
+  sellerType: 'business',
+  businessName: '',
+  factoryPhoto: null,
+  factoryLogo: null,
+  aboutUs: '',
+  contactPerson: '',
+  factoryAddress: '',
+  workHoursFrom: '',
+  workHoursTo: '',
+  deliveryConditions: '',
+  photo: null,
+  aboutMe: '',
   password: '',
   repeatPassword: '',
   isCheckRules: false,
-  businessName: '',
-  sellerType: 'business',
-  factoryAddress: '',
-  workSchedule: '',
-  aboutUs: '',
-  contactPerson: '',
-  workHoursFrom: '',
-  workHoursTo: '',
   registrationPage: 1,
-  iban: '',
-  bankName: '',
-  mfo: '',
-  erdpou: '',
-  fullBusinessName: '',
-  numberCard: '',
-  cardExpiryDate: '',
 };
 
-const registrationSlice = createSlice({
+export const sellerRegistrationSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
-    setTemplate: (state, action: PayloadAction<string>) => {
-      state.template = action.payload;
-    },
-    setEmail: (state, action: PayloadAction<string>) => {
-      state.email = action.payload;
-    },
     setPhoneNumber: (state, action: PayloadAction<string>) => {
       state.phoneNumber = action.payload;
     },
@@ -91,9 +75,6 @@ const registrationSlice = createSlice({
     setFactoryAddress: (state, action: PayloadAction<string>) => {
       state.factoryAddress = action.payload;
     },
-    setWorkSchedule: (state, action: PayloadAction<string>) => {
-      state.workSchedule = action.payload;
-    },
     setAboutUs: (state, action: PayloadAction<string>) => {
       state.aboutUs = action.payload;
     },
@@ -109,28 +90,10 @@ const registrationSlice = createSlice({
     setRegistrationPage: (state, action: PayloadAction<number>) => {
       state.registrationPage = action.payload;
     },
-    setIban: (state, action: PayloadAction<string>) => {
-      state.iban = action.payload;
-    },
-    setBankName: (state, action: PayloadAction<string>) => {
-      state.bankName = action.payload;
-    },
-    setMfo: (state, action: PayloadAction<string>) => {
-      state.mfo = action.payload;
-    },
-    setErdpou: (state, action: PayloadAction<string>) => {
-      state.erdpou = action.payload;
-    },
-    setFullBusinessName: (state, action: PayloadAction<string>) => {
-      state.fullBusinessName = action.payload;
-    },
-    setNumberCard: (state, action: PayloadAction<string>) => {
-      state.numberCard = action.payload;
-    },
-    setCardExpiryDate: (state, action: PayloadAction<string>) => {
-      state.cardExpiryDate = action.payload;
+    setDeliveryConditions: (state, action: PayloadAction<string>) => {
+      state.deliveryConditions = action.payload;
     },
   },
 });
 
-// export default registrationSlice.reducer;
+export default sellerRegistrationSlice.reducer;

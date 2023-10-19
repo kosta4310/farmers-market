@@ -4,7 +4,7 @@ import { router } from './routers';
 import { useAppSelector } from './hooks/redux.ts';
 
 const App: FC = () => {
-  const template = useAppSelector((state) => state.registration.template);
+  const template = useAppSelector(state => state.registrationCommon.template);
 
   return <RouterProvider router={router(template)} />;
 };

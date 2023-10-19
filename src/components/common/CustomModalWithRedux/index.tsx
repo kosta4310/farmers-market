@@ -11,7 +11,7 @@ interface CustomModalProps {
   isModalOpen: boolean;
   setIsModalOpen: ActionCreatorWithPayload<
     boolean,
-    'buersRegistration/setModalConfirmationEmailIsOpen'
+    'registrationCommon/setModalConfirmationEmailIsOpen'
   >;
   children: React.ReactNode;
 }

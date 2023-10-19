@@ -5,16 +5,22 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { buyersRegistrationSlice } from '../../../store/reducers/buyersSlice';
 import ModalError from '../../common/ModalError';
 import { useQuery } from '../../../hooks/useQuery';
-import { thunkConfirmEmail } from '../../../store/reducers/registrationCommon';
+import {
+  registrationCommonSlice,
+  thunkConfirmEmail,
+} from '../../../store/reducers/registrationCommon';
 
 const MainPage: FC = () => {
-  const { modalConfirmationEmailIsOpen } = useAppSelector(
-    state => state.buyersRegistration,
-  );
+  // const { modalConfirmationEmailIsOpen } = useAppSelector(
+  //   state => state.buyersRegistration,
+  // );
   const dispatch = useAppDispatch();
-  const { error } = useAppSelector(state => state.registrationCommon);
-  const { setModalConfirmationEmailIsOpen, setName, setLastName } =
-    buyersRegistrationSlice.actions;
+  const { error, modalConfirmationEmailIsOpen } = useAppSelector(
+    state => state.registrationCommon,
+  );
+  const { setName, setLastName } = buyersRegistrationSlice.actions;
+
+  const { setModalConfirmationEmailIsOpen } = registrationCommonSlice.actions;
   const query = useQuery();
 
   useEffect(() => {

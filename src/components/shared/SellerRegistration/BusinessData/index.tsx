@@ -1,11 +1,11 @@
-import { FC, Fragment } from 'react';
+import { FC } from 'react';
 import { AnyAction } from '@reduxjs/toolkit';
 import RegistrationField from '../../../common/RegistrationField';
 import UploadAndDisplayImage from '../../../common/FileUpload';
 import RegistrationFieldArea from '../../../common/RegistrationFieldArea';
 import RadioChoice from '../../../common/RadioChoice';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { registrationSlice } from '../../../../store/reducers/registrationSlice';
+import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
 
 const getHoursList = (from: number, to: number) => {
   const minutes = ['00', '30'];
@@ -31,37 +31,21 @@ const BusinessData: FC = () => {
     setBusinessName,
     setSellerType,
     setFactoryAddress,
-    setWorkSchedule,
     setAboutUs,
     setContactPerson,
     setWorkHoursFrom,
     setWorkHoursTo,
-    setIban,
-    setBankName,
-    setMfo,
-    setErdpou,
-    setFullBusinessName,
-    setNumberCard,
-    setCardExpiryDate,
-  } = registrationSlice.actions;
+  } = sellerRegistrationSlice.actions;
 
   const {
     businessName,
     sellerType,
     factoryAddress,
-    workSchedule,
     aboutUs,
     contactPerson,
     workHoursFrom,
     workHoursTo,
-    iban,
-    bankName,
-    mfo,
-    erdpou,
-    fullBusinessName,
-    numberCard,
-    cardExpiryDate,
-  } = useAppSelector(state => state.registration);
+  } = useAppSelector(state => state.sellerRegistration);
 
   const dispatch = useAppDispatch();
 
@@ -79,7 +63,7 @@ const BusinessData: FC = () => {
           <h3 className="pb-3">Виберіть тип підприємства *</h3>
           <div className="flex gap-28 mb-4">
             <RadioChoice
-              label="Юридична особа"
+              label="Юридична особа/ФОП"
               value="business"
               selectedOption={sellerType}
               handleOptionChange={e =>
@@ -107,7 +91,7 @@ const BusinessData: FC = () => {
           />
         )}
         {sellerType === 'business' ? (
-          <Fragment>
+          <>
             <UploadAndDisplayImage
               label={'Фотографія підприємства *'}
               inputId={'factoryPhoto'}
@@ -120,7 +104,7 @@ const BusinessData: FC = () => {
               hint="Зображення має бути не більшим ніж 2 МБ, 
           та розміром не більше 1024х1024 пікселей."
             />
-          </Fragment>
+          </>
         ) : (
           <UploadAndDisplayImage
             label={'Фото'}
@@ -144,127 +128,6 @@ const BusinessData: FC = () => {
           placeholder="Будь-ласка наешіть ім’я та прізвище контактної особи"
           onChange={value => handleChange(setContactPerson, value)}
         />
-        <RegistrationField
-          label="Локація для самовивозу"
-          inputType="text"
-          inputId="factoryAddress"
-          value={factoryAddress}
-          placeholder="Будь-ласка введіть дійсну адресу"
-          onChange={value => handleChange(setFactoryAddress, value)}
-        />
-        <RegistrationField
-          label="Часи роботи підприємства для самовивізу продуктів та товарів"
-          inputType="text"
-          inputId="workSchedule"
-          value={workSchedule}
-          placeholder="Будь-ласка напішіть дійсні часи роботи"
-          onChange={value => handleChange(setWorkSchedule, value)}
-        />
-        <label className="flex gap-1 flex-col">
-          Часи роботи підприємства для самовивізу продуктів та товарів
-          <div className="flex gap-3">
-            <label htmlFor="fromHours" className="flex-auto">
-              З
-              <select
-                className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0 ml-2 pr-20 "
-                id="fromHours"
-                placeholder="Вибиріть час"
-                value={workHoursFrom}
-                onChange={({ target }) =>
-                  handleChange(setWorkHoursFrom, target.value)
-                }
-              >
-                {getSelectOption()}
-              </select>
-            </label>
-            <label htmlFor="toHours" className="flex-auto">
-              До
-              <select
-                className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0 ml-2 pr-20"
-                id="toHours"
-                placeholder="Вибиріть час"
-                value={workHoursTo}
-                onChange={({ target }) =>
-                  handleChange(setWorkHoursTo, target.value)
-                }
-              >
-                {getSelectOption()}
-              </select>
-            </label>
-          </div>
-        </label>
-        {/* Банковські реквизити* */}
-        {sellerType === 'business' ? (
-          <label className="flex gap-1 flex-col">
-            {'Банковські реквизити *'}
-            <input
-              className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
-              id={'iban'}
-              type={'text'}
-              value={iban}
-              onChange={e => handleChange(setIban, e.target.value)}
-              placeholder={
-                'Введіть номер розрахункового рахунку у форматі IBAN'
-              }
-            />
-            <input
-              className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
-              id={'bankName'}
-              type={'text'}
-              value={bankName}
-              onChange={e => handleChange(setBankName, e.target.value)}
-              placeholder={'Введіть назву банка'}
-            />
-            <div className="flex gap-x-3">
-              <input
-                className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0 "
-                id={'mfo'}
-                type={'text'}
-                value={mfo}
-                onChange={e => handleChange(setMfo, e.target.value)}
-                placeholder={'Введіть МФО банку '}
-              />
-              <input
-                className="grow border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
-                id={'erdpou'}
-                type={'text'}
-                value={erdpou}
-                onChange={e => handleChange(setErdpou, e.target.value)}
-                placeholder={'Введіть код ЄДРПОУ/ІПН вашого підприємства '}
-              />
-            </div>
-            <input
-              className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
-              id={'fullBusinessName'}
-              type={'text'}
-              value={fullBusinessName}
-              onChange={e => handleChange(setFullBusinessName, e.target.value)}
-              placeholder={'Введіть повну юридичну назву підприємства'}
-            />
-          </label>
-        ) : (
-          <label className="flex gap-1 flex-col">
-            {'Банковські реквизити *'}
-            <div className="flex gap-x-3">
-              <input
-                className="grow border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
-                id={'numberCard'}
-                type={'text'}
-                value={numberCard}
-                onChange={e => handleChange(setNumberCard, e.target.value)}
-                placeholder={'Введіть номер банковської карти'}
-              />
-              <input
-                className="border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0"
-                id={'cardExpiryDate'}
-                type={'text'}
-                value={cardExpiryDate}
-                onChange={e => handleChange(setCardExpiryDate, e.target.value)}
-                placeholder={'Введіть термін дії картки'}
-              />
-            </div>
-          </label>
-        )}
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ interface Props {
   isModalOpen: boolean;
   setIsModalOpen: ActionCreatorWithPayload<
     boolean,
-    'buersRegistration/setModalConfirmationEmailIsOpen'
+    'registrationCommon/setModalConfirmationEmailIsOpen'
   >;
 }
 

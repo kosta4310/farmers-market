@@ -4,7 +4,7 @@ import Button from '../../../common/Button';
 import RadioChoice from '../../../common/RadioChoice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux.ts';
-import { registrationSlice } from '../../../../store/reducers/registrationSlice.ts';
+// import { registrationSlice } from '../../../../store/reducers/registrationSlice.ts';
 import { registrationCommonSlice } from '../../../../store/reducers/registrationCommon.ts';
 
 interface RegistrationFormProps {
@@ -19,8 +19,8 @@ const RegistrationForm: FC<RegistrationFormProps> = ({
   const [login, setLogin] = useState('');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { template } = useAppSelector(state => state.registration);
-  const { setTemplate } = registrationSlice.actions;
+  const { template } = useAppSelector(state => state.registrationCommon);
+  const { setTemplate } = registrationCommonSlice.actions;
   const { setEmail } = registrationCommonSlice.actions;
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -2,48 +2,47 @@ import { FC } from 'react';
 import HeadPageContent from '../HeadPageContent';
 import ButtonArrow from '../../../common/ButtonArrow';
 import PageNavigation from '../PageNavigation';
-import { checkFieldsFirstPage, checkFieldsSecondPage } from '../checkFields';
+import {
+  checkFieldsFirstPage,
+  checkFieldsSecondPage,
+  checkFieldsThirdPage,
+} from '../checkFields';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { registrationSlice } from '../../../../store/reducers/registrationSlice';
+import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
 
 const HeadPage: FC = () => {
   const {
-    email,
     phoneNumber,
     name,
     lastName,
     businessName,
     sellerType,
     aboutUs,
-    iban,
-    bankName,
-    mfo,
-    erdpou,
-    fullBusinessName,
-    numberCard,
-    cardExpiryDate,
-  } = useAppSelector(state => state.registration);
+    factoryAddress,
+    workHoursFrom,
+    workHoursTo,
+    deliveryConditions,
+  } = useAppSelector(state => state.sellerRegistration);
+
+  const { email } = useAppSelector(state => state.registrationCommon);
 
   const arrayFieldsByPages: { [key: string]: () => boolean | void } = {
     1: () => checkFieldsFirstPage(name, lastName, phoneNumber, email),
-    2: () =>
-      checkFieldsSecondPage(
-        businessName,
-        sellerType,
-        aboutUs,
-        iban,
-        bankName,
-        mfo,
-        erdpou,
-        fullBusinessName,
-        numberCard,
-        cardExpiryDate,
+    2: () => checkFieldsSecondPage(businessName, sellerType, aboutUs),
+    3: () =>
+      checkFieldsThirdPage(
+        factoryAddress,
+        workHoursFrom,
+        workHoursTo,
+        deliveryConditions,
       ),
   };
 
   const dispatch = useAppDispatch();
-  const { registrationPage } = useAppSelector(state => state.registration);
-  const { setRegistrationPage } = registrationSlice.actions;
+  const { registrationPage } = useAppSelector(
+    state => state.sellerRegistration,
+  );
+  const { setRegistrationPage } = sellerRegistrationSlice.actions;
 
   const handlerRightButton = () => {
     const isValid = arrayFieldsByPages[registrationPage];
@@ -60,7 +59,7 @@ const HeadPage: FC = () => {
     <div className="flex flex-col gap-6 mb-7">
       <PageNavigation page={registrationPage} />
       <HeadPageContent />
-      {registrationPage !== 3 && (
+      {registrationPage !== 4 && (
         <div className="flex items-center justify-between">
           <ButtonArrow
             direction={'left'}
@@ -72,7 +71,7 @@ const HeadPage: FC = () => {
           <ButtonArrow
             direction={'right'}
             onClick={handlerRightButton}
-            hide={registrationPage === 3}
+            hide={registrationPage === 4}
           >
             Далі
           </ButtonArrow>

@@ -8,12 +8,16 @@ interface RegistrationSliceState {
   error: string;
   isLogged: boolean;
   email: string;
+  modalConfirmationEmailIsOpen: boolean;
+  template: string;
 }
 
 const initialState: RegistrationSliceState = {
   error: '',
   isLogged: false,
   email: '',
+  modalConfirmationEmailIsOpen: false,
+  template: 'buyer',
 };
 
 export const thunkConfirmEmail = createAsyncThunk(
@@ -65,6 +69,15 @@ export const registrationCommonSlice = createSlice({
     },
     setIsLogged: (state, action: PayloadAction<boolean>) => {
       state.isLogged = action.payload;
+    },
+    setTemplate: (state, action: PayloadAction<string>) => {
+      state.template = action.payload;
+    },
+    setModalConfirmationEmailIsOpen: (
+      state,
+      action: PayloadAction<boolean>,
+    ) => {
+      state.modalConfirmationEmailIsOpen = action.payload;
     },
   },
   extraReducers(builder) {

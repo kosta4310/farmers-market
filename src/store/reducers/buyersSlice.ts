@@ -2,6 +2,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BuyersSignup } from '../../api/types';
 import { fetchBuyersSignUp } from '../../api/authBuyers';
 import { getErrorMessage } from '../../utils/func/getErrorMessage';
+import { registrationCommonSlice } from './registrationCommon';
+
+const { setModalConfirmationEmailIsOpen, setError } =
+  registrationCommonSlice.actions;
 
 interface RegistrationSliceState {
   phoneNumber: string;
@@ -10,8 +14,8 @@ interface RegistrationSliceState {
   password: string;
   repeatPassword: string;
   isCheckRules: boolean;
-  modalConfirmationEmailIsOpen: boolean;
-  error: string;
+  // modalConfirmationEmailIsOpen: boolean;
+  // error: string;
 }
 
 const initialState: RegistrationSliceState = {
@@ -21,25 +25,25 @@ const initialState: RegistrationSliceState = {
   password: '',
   repeatPassword: '',
   isCheckRules: false,
-  modalConfirmationEmailIsOpen: false,
-  error: '',
+  // modalConfirmationEmailIsOpen: false,
+  // error: '',
 };
 
 export const thunkBuyersSignUp = createAsyncThunk(
   'buyers/fetchBuyersSignUp',
-  async (options: BuyersSignup, { rejectWithValue }) => {
+  async (options: BuyersSignup, { rejectWithValue, dispatch }) => {
     try {
       const res = await fetchBuyersSignUp(options);
       if (!res.ok) {
         const err: { message: string; statusCode: number } = await res.json();
 
-        throw new Error(`${err.statusCode}_SIGNUP`);
+        throw new Error(`${err.statusCode}_${err.message}`);
       }
-
-      // const response = await res.json();
-      // return response;
+      dispatch(setModalConfirmationEmailIsOpen(true));
     } catch (error) {
-      return rejectWithValue(getErrorMessage(error));
+      const err = getErrorMessage(error);
+      dispatch(setError(err));
+      return rejectWithValue(err);
     }
   },
 );
@@ -66,20 +70,21 @@ export const buyersRegistrationSlice = createSlice({
     setIsCheckRules: (state, action: PayloadAction<boolean>) => {
       state.isCheckRules = action.payload;
     },
-    setModalConfirmationEmailIsOpen: (
-      state,
-      action: PayloadAction<boolean>,
-    ) => {
-      state.modalConfirmationEmailIsOpen = action.payload;
-    },
+    // setModalConfirmationEmailIsOpen: (
+    //   state,
+    //   action: PayloadAction<boolean>,
+    // ) => {
+    //   state.modalConfirmationEmailIsOpen = action.payload;
+    // },
   },
   extraReducers(builder) {
     builder
-      .addCase(thunkBuyersSignUp.fulfilled, state => {
-        state.modalConfirmationEmailIsOpen = true;
+      .addCase(thunkBuyersSignUp.fulfilled, (_, action) => {
+        console.log('open modal');
+        setModalConfirmationEmailIsOpen(true);
       })
-      .addCase(thunkBuyersSignUp.rejected, (state, action) => {
-        state.error = action.payload as string;
+      .addCase(thunkBuyersSignUp.rejected, (_, action) => {
+        setError(action.payload as string);
       });
   },
 });

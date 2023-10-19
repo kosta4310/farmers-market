@@ -2,14 +2,17 @@ import { FC } from 'react';
 import { AnyAction } from '@reduxjs/toolkit';
 import RegistrationField from '../../../common/RegistrationField';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { registrationSlice } from '../../../../store/reducers/registrationSlice';
+import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
+import { registrationCommonSlice } from '../../../../store/reducers/registrationCommon';
+// import { registrationSlice } from '../../../../store/reducers/registrationSlice';
 
 const CommonData: FC = () => {
-  const { setEmail, setPhoneNumber, setLastName, setName } =
-    registrationSlice.actions;
-
-  const { email, phoneNumber, name, lastName } = useAppSelector(
-    state => state.registration,
+  const { setPhoneNumber, setLastName, setName } =
+    sellerRegistrationSlice.actions;
+  const { setEmail } = registrationCommonSlice.actions;
+  const { email } = useAppSelector(state => state.registrationCommon);
+  const { phoneNumber, name, lastName } = useAppSelector(
+    state => state.sellerRegistration,
   );
 
   const dispatch = useAppDispatch();

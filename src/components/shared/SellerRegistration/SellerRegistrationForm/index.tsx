@@ -3,39 +3,31 @@ import { Link } from 'react-router-dom';
 import { AnyAction } from '@reduxjs/toolkit';
 import Button from '../../../common/Button';
 import Checkbox from '../../../common/Checkbox';
-import { checkFieldsThirdPage } from '../checkFields';
+import { checkFieldsFourthPage } from '../checkFields';
 import RegistrationField from '../../../common/RegistrationField';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { registrationSlice } from '../../../../store/reducers/registrationSlice';
+import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
+// import { registrationSlice } from '../../../../store/reducers/registrationSlice';
 
 const SellerRegistrationForm: FC = () => {
   const { setPassword, setRepeatPassword, setIsCheckRules } =
-    registrationSlice.actions;
+    sellerRegistrationSlice.actions;
 
   const {
-    email,
     phoneNumber,
     name,
     lastName,
     businessName,
     sellerType,
     factoryAddress,
-    workSchedule,
     aboutUs,
     contactPerson,
     password,
     repeatPassword,
     workHoursFrom,
     workHoursTo,
-    iban,
-    bankName,
-    mfo,
-    erdpou,
-    fullBusinessName,
-    numberCard,
-    cardExpiryDate,
     isCheckRules,
-  } = useAppSelector(state => state.registration);
+  } = useAppSelector(state => state.sellerRegistration);
 
   const dispatch = useAppDispatch();
 
@@ -56,29 +48,20 @@ const SellerRegistrationForm: FC = () => {
   );
 
   function handleRegistration() {
-    if (checkFieldsThirdPage(password, repeatPassword, isCheckRules)) {
+    if (checkFieldsFourthPage(password, repeatPassword, isCheckRules)) {
       console.log({
-        email,
         phoneNumber,
         name,
         lastName,
         businessName,
         sellerType,
         factoryAddress,
-        workSchedule,
         aboutUs,
         contactPerson,
         password,
         repeatPassword,
         workHoursFrom,
         workHoursTo,
-        iban,
-        bankName,
-        mfo,
-        erdpou,
-        fullBusinessName,
-        numberCard,
-        cardExpiryDate,
       });
     }
   }
