@@ -18,10 +18,10 @@ const HeadPage: FC = () => {
     businessName,
     sellerType,
     aboutUs,
-    factoryAddress,
-    workHoursFrom,
-    workHoursTo,
-    deliveryConditions,
+    // factoryAddress,
+    // workHoursFrom,
+    // workHoursTo,
+    // deliveryConditions,
   } = useAppSelector(state => state.sellerRegistration);
 
   const { email } = useAppSelector(state => state.registrationCommon);
@@ -29,13 +29,11 @@ const HeadPage: FC = () => {
   const arrayFieldsByPages: { [key: string]: () => boolean | void } = {
     1: () => checkFieldsFirstPage(name, lastName, phoneNumber, email),
     2: () => checkFieldsSecondPage(businessName, sellerType, aboutUs),
-    3: () =>
-      checkFieldsThirdPage(
-        factoryAddress,
-        workHoursFrom,
-        workHoursTo,
-        deliveryConditions,
-      ),
+    3: () => checkFieldsThirdPage(),
+    // factoryAddress,
+    // workHoursFrom,
+    // workHoursTo,
+    // deliveryConditions,
   };
 
   const dispatch = useAppDispatch();

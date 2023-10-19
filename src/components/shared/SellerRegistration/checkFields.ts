@@ -84,12 +84,11 @@ export function checkFieldsFourthPage(
   return true;
 }
 
-export function checkFieldsThirdPage(
-  factoryAddress: string,
-  deliveryConditions: string,
-  workHoursFrom: string,
-  workHoursTo: string,
-) {
+export function checkFieldsThirdPage() {
+// factoryAddress: string,
+// deliveryConditions: string,
+// workHoursFrom: string,
+// workHoursTo: string,
   // if (factoryAddress === '') {
   //   alert('Введіть адресу для самовивізу товару');
   //   return false;

@@ -7,45 +7,13 @@ import RadioChoice from '../../../common/RadioChoice';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
 
-const getHoursList = (from: number, to: number) => {
-  const minutes = ['00', '30'];
-  const res: Array<string> = [];
-  for (let index = from; index < to; index++) {
-    minutes.forEach(minute => res.push(index + ':' + minute));
-  }
-  res.push(to + ':' + '00');
-  return res;
-};
-
-const getSelectOption = () =>
-  getHoursList(6, 21).map((hours, idx) => {
-    return (
-      <option key={idx} value={hours}>
-        {hours}
-      </option>
-    );
-  });
-
 const BusinessData: FC = () => {
-  const {
-    setBusinessName,
-    setSellerType,
-    setFactoryAddress,
-    setAboutUs,
-    setContactPerson,
-    setWorkHoursFrom,
-    setWorkHoursTo,
-  } = sellerRegistrationSlice.actions;
+  const { setBusinessName, setSellerType, setAboutUs, setContactPerson } =
+    sellerRegistrationSlice.actions;
 
-  const {
-    businessName,
-    sellerType,
-    factoryAddress,
-    aboutUs,
-    contactPerson,
-    workHoursFrom,
-    workHoursTo,
-  } = useAppSelector(state => state.sellerRegistration);
+  const { businessName, sellerType, aboutUs, contactPerson } = useAppSelector(
+    state => state.sellerRegistration,
+  );
 
   const dispatch = useAppDispatch();
 
