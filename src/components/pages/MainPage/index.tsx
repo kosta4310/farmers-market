@@ -18,6 +18,7 @@ const MainPage: FC = () => {
   const { error, modalConfirmationEmailIsOpen } = useAppSelector(
     state => state.registrationCommon,
   );
+  const { photo } = useAppSelector(state => state.sellerRegistration);
   const { setName, setLastName } = buyersRegistrationSlice.actions;
 
   const { setModalConfirmationEmailIsOpen } = registrationCommonSlice.actions;
@@ -44,7 +45,8 @@ const MainPage: FC = () => {
         setIsModalOpen={setModalConfirmationEmailIsOpen}
       />
       {error && <ModalError>{error}</ModalError>}
-      <img className="w-full h-auto" src={banner} alt="banner" />
+      <img src={photo} alt="foto" />
+      {/* <img className="w-full h-auto" src={banner} alt="banner" /> */}
     </>
   );
 };

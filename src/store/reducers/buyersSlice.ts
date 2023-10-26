@@ -7,16 +7,12 @@ import { registrationCommonSlice } from './registrationCommon';
 const { setModalConfirmationEmailIsOpen, setError } =
   registrationCommonSlice.actions;
 
-interface RegistrationSliceState {
-  phoneNumber: string;
-  name: string;
-  lastName: string;
-  password: string;
+interface IRegistrationSliceState extends BuyersSignup {
   repeatPassword: string;
   isCheckRules: boolean;
-  // modalConfirmationEmailIsOpen: boolean;
-  // error: string;
 }
+
+type RegistrationSliceState = Omit<IRegistrationSliceState, 'email'>;
 
 const initialState: RegistrationSliceState = {
   phoneNumber: '',
@@ -25,8 +21,6 @@ const initialState: RegistrationSliceState = {
   password: '',
   repeatPassword: '',
   isCheckRules: false,
-  // modalConfirmationEmailIsOpen: false,
-  // error: '',
 };
 
 export const thunkBuyersSignUp = createAsyncThunk(

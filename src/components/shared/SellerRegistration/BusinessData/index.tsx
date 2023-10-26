@@ -8,12 +8,25 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
 
 const BusinessData: FC = () => {
-  const { setBusinessName, setSellerType, setAboutUs, setContactPerson } =
-    sellerRegistrationSlice.actions;
+  const {
+    setBusinessName,
+    setSellerType,
+    setAboutUs,
+    setContactPerson,
+    setPhoto,
+    setFactoryPhoto,
+    setFactoryLogo,
+  } = sellerRegistrationSlice.actions;
 
-  const { businessName, sellerType, aboutUs, contactPerson } = useAppSelector(
-    state => state.sellerRegistration,
-  );
+  const {
+    businessName,
+    sellerType,
+    aboutUs,
+    contactPerson,
+    photo,
+    factoryPhoto,
+    factoryLogo,
+  } = useAppSelector(state => state.sellerRegistration);
 
   const dispatch = useAppDispatch();
 
@@ -65,12 +78,16 @@ const BusinessData: FC = () => {
               inputId={'factoryPhoto'}
               hint="Зображення має бути не більшим ніж 2 МБ, 
           та розміром не більше 1024х1024 пікселей."
+              selectedImage={factoryPhoto}
+              setSelectedImage={setFactoryPhoto}
             />
             <UploadAndDisplayImage
               label={'Логотип підприємства'}
               inputId={'factoryLogo'}
               hint="Зображення має бути не більшим ніж 2 МБ, 
           та розміром не більше 1024х1024 пікселей."
+              selectedImage={factoryLogo}
+              setSelectedImage={setFactoryLogo}
             />
           </>
         ) : (
@@ -79,6 +96,8 @@ const BusinessData: FC = () => {
             inputId={'photo'}
             hint="Зображення має бути не більшим ніж 2 МБ, 
           та розміром не більше 1024х1024 пікселей."
+            selectedImage={photo}
+            setSelectedImage={setPhoto}
           />
         )}
         <RegistrationFieldArea

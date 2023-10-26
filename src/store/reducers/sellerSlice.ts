@@ -1,23 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { SellerSignUp } from '../../api/types';
 
-interface RegistrationSliceState {
-  phoneNumber: string;
-  name: string;
-  lastName: string;
-  sellerType: string;
-  businessName: string;
-  factoryPhoto: Blob | null;
-  factoryLogo: Blob | null;
-  aboutUs: string;
-  contactPerson: string;
-  factoryAddress: string;
-  workHoursFrom: string;
-  workHoursTo: string;
-  deliveryConditions: string;
-  photo: Blob | null;
-  aboutMe: string;
+interface RegistrationSliceState extends SellerSignUp {
   registrationPage: number;
-  password: string;
   repeatPassword: string;
   isCheckRules: boolean;
 }
@@ -28,15 +13,15 @@ const initialState: RegistrationSliceState = {
   lastName: '',
   sellerType: 'business',
   businessName: '',
-  factoryPhoto: null,
-  factoryLogo: null,
+  factoryPhoto: '',
+  factoryLogo: '',
   aboutUs: '',
   contactPerson: '',
   factoryAddress: '',
   workHoursFrom: '',
   workHoursTo: '',
   deliveryConditions: '',
-  photo: null,
+  photo: '',
   aboutMe: '',
   password: '',
   repeatPassword: '',
@@ -92,6 +77,15 @@ export const sellerRegistrationSlice = createSlice({
     },
     setDeliveryConditions: (state, action: PayloadAction<string>) => {
       state.deliveryConditions = action.payload;
+    },
+    setFactoryPhoto: (state, action: PayloadAction<string>) => {
+      state.factoryPhoto = action.payload;
+    },
+    setFactoryLogo: (state, action: PayloadAction<string>) => {
+      state.factoryLogo = action.payload;
+    },
+    setPhoto: (state, action: PayloadAction<string>) => {
+      state.photo = action.payload;
     },
   },
 });

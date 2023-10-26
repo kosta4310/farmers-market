@@ -27,6 +27,9 @@ const SellerRegistrationForm: FC = () => {
     workHoursFrom,
     workHoursTo,
     isCheckRules,
+    photo,
+    factoryPhoto,
+    factoryLogo,
   } = useAppSelector(state => state.sellerRegistration);
 
   const dispatch = useAppDispatch();
@@ -59,9 +62,11 @@ const SellerRegistrationForm: FC = () => {
         aboutUs,
         contactPerson,
         password,
-        repeatPassword,
         workHoursFrom,
         workHoursTo,
+        photo,
+        factoryPhoto,
+        factoryLogo,
       });
     }
   }

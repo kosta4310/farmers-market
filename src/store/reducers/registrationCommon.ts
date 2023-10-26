@@ -82,7 +82,7 @@ export const registrationCommonSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(thunkConfirmEmail.fulfilled, state => {
+      .addCase(thunkConfirmEmail.fulfilled, (state, action) => {
         state.isLogged = true;
         // const {
         //   lastName,
@@ -92,7 +92,7 @@ export const registrationCommonSlice = createSlice({
         //   user: { email, role },
         // } = action.payload;
         // console.log({ lastName, name, phoneNumber, token, email, role });
-        // console.log('payload', action.payload);
+        console.log('payload', action.payload);
       })
       .addCase(thunkConfirmEmail.rejected, (_state, action) => {
         // state.error = action.payload as string;
