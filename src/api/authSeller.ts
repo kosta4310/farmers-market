@@ -1,7 +1,10 @@
+import { SELLER_SIGNUP } from './config';
+import { SellerSignUp } from './types';
+
 export async function fetchSellerSignUp(
-  options: BuyersSignup,
+  options: SellerSignUp,
 ): Promise<Response> {
-  const response = await fetch(BUYERS_SIGNUP, {
+  const response = await fetch(SELLER_SIGNUP, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

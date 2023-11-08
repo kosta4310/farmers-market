@@ -28,7 +28,7 @@ export function checkFieldsFirstPage(
 }
 
 export function checkFieldsSecondPage(
-  businessName: string,
+  companyName: string,
   sellerType: string,
   aboutUs: string,
 ) {
@@ -45,7 +45,7 @@ export function checkFieldsSecondPage(
   }
   return response;
   function businessCase() {
-    if (businessName.trim() === '') {
+    if (companyName?.trim() === '') {
       alert('Введіть назву підприємства');
       return false;
     }
@@ -85,10 +85,10 @@ export function checkFieldsFourthPage(
 }
 
 export function checkFieldsThirdPage() {
-// factoryAddress: string,
-// deliveryConditions: string,
-// workHoursFrom: string,
-// workHoursTo: string,
+  // factoryAddress: string,
+  // deliveryConditions: string,
+  // workHoursFrom: string,
+  // workHoursTo: string,
   // if (factoryAddress === '') {
   //   alert('Введіть адресу для самовивізу товару');
   //   return false;

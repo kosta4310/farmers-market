@@ -16,12 +16,12 @@ export interface SellerSignUp {
   name: string;
   lastName: string;
   sellerType: string;
-  businessName: string;
+  companyName: string;
   factoryPhoto: string;
   factoryLogo: string;
   aboutUs: string;
   contactPerson: string;
-  factoryAddress: string;
+  address: string;
   workHoursFrom: string;
   workHoursTo: string;
   deliveryConditions: string;

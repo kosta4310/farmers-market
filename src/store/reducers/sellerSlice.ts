@@ -1,5 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SellerSignUp } from '../../api/types';
+import { fetchSellerSignUp } from '../../api/authSeller';
+import { registrationCommonSlice } from './registrationCommon';
+import { getErrorMessage } from '../../utils/func/getErrorMessage';
+
+const { setModalConfirmationEmailIsOpen, setError } =
+  registrationCommonSlice.actions;
 
 interface RegistrationSliceState extends SellerSignUp {
   registrationPage: number;
@@ -12,12 +18,12 @@ const initialState: RegistrationSliceState = {
   name: '',
   lastName: '',
   sellerType: 'business',
-  businessName: '',
+  companyName: '',
   factoryPhoto: '',
   factoryLogo: '',
   aboutUs: '',
   contactPerson: '',
-  factoryAddress: '',
+  address: '',
   workHoursFrom: '',
   workHoursTo: '',
   deliveryConditions: '',
@@ -28,6 +34,28 @@ const initialState: RegistrationSliceState = {
   isCheckRules: false,
   registrationPage: 1,
 };
+
+export const thunkSellerSignUp = createAsyncThunk(
+  'seller/fetchSellerSignUp',
+  async (
+    options: SellerSignUp & { email: string },
+    { rejectWithValue, dispatch },
+  ) => {
+    try {
+      const res = await fetchSellerSignUp(options);
+      if (!res.ok) {
+        const err: { message: string; statusCode: number } = await res.json();
+
+        throw new Error(`${err.statusCode}_${err.message}`);
+      }
+      dispatch(setModalConfirmationEmailIsOpen(true));
+    } catch (error) {
+      const err = getErrorMessage(error);
+      dispatch(setError(err));
+      return rejectWithValue(err);
+    }
+  },
+);
 
 export const sellerRegistrationSlice = createSlice({
   name: 'registration',
@@ -52,13 +80,13 @@ export const sellerRegistrationSlice = createSlice({
       state.isCheckRules = action.payload;
     },
     setBusinessName: (state, action: PayloadAction<string>) => {
-      state.businessName = action.payload;
+      state.companyName = action.payload;
     },
     setSellerType: (state, action: PayloadAction<string>) => {
       state.sellerType = action.payload;
     },
     setFactoryAddress: (state, action: PayloadAction<string>) => {
-      state.factoryAddress = action.payload;
+      state.address = action.payload;
     },
     setAboutUs: (state, action: PayloadAction<string>) => {
       state.aboutUs = action.payload;
@@ -87,6 +115,15 @@ export const sellerRegistrationSlice = createSlice({
     setPhoto: (state, action: PayloadAction<string>) => {
       state.photo = action.payload;
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(thunkSellerSignUp.fulfilled, () => {
+        setModalConfirmationEmailIsOpen(true);
+      })
+      .addCase(thunkSellerSignUp.rejected, (_, action) => {
+        setError(action.payload as string);
+      });
   },
 });
 

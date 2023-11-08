@@ -19,7 +19,7 @@ const BusinessData: FC = () => {
   } = sellerRegistrationSlice.actions;
 
   const {
-    businessName,
+    companyName,
     sellerType,
     aboutUs,
     contactPerson,
@@ -66,7 +66,7 @@ const BusinessData: FC = () => {
             label={`Назва підприємства *`}
             inputType="text"
             inputId="factoryName"
-            value={businessName}
+            value={companyName}
             placeholder="Будь-ласка введіть дійсну назву"
             onChange={value => handleChange(setBusinessName, value)}
           />

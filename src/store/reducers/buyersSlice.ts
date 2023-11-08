@@ -64,17 +64,10 @@ export const buyersRegistrationSlice = createSlice({
     setIsCheckRules: (state, action: PayloadAction<boolean>) => {
       state.isCheckRules = action.payload;
     },
-    // setModalConfirmationEmailIsOpen: (
-    //   state,
-    //   action: PayloadAction<boolean>,
-    // ) => {
-    //   state.modalConfirmationEmailIsOpen = action.payload;
-    // },
   },
   extraReducers(builder) {
     builder
-      .addCase(thunkBuyersSignUp.fulfilled, (_, action) => {
-        console.log('open modal');
+      .addCase(thunkBuyersSignUp.fulfilled, () => {
         setModalConfirmationEmailIsOpen(true);
       })
       .addCase(thunkBuyersSignUp.rejected, (_, action) => {

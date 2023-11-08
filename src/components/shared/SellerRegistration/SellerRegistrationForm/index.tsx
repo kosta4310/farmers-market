@@ -1,25 +1,28 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AnyAction } from '@reduxjs/toolkit';
 import Button from '../../../common/Button';
 import Checkbox from '../../../common/Checkbox';
 import { checkFieldsFourthPage } from '../checkFields';
 import RegistrationField from '../../../common/RegistrationField';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
-// import { registrationSlice } from '../../../../store/reducers/registrationSlice';
+import {
+  sellerRegistrationSlice,
+  thunkSellerSignUp,
+} from '../../../../store/reducers/sellerSlice';
 
 const SellerRegistrationForm: FC = () => {
   const { setPassword, setRepeatPassword, setIsCheckRules } =
     sellerRegistrationSlice.actions;
+  const navigate = useNavigate();
 
   const {
     phoneNumber,
     name,
     lastName,
-    businessName,
+    companyName,
     sellerType,
-    factoryAddress,
+    address,
     aboutUs,
     contactPerson,
     password,
@@ -30,7 +33,11 @@ const SellerRegistrationForm: FC = () => {
     photo,
     factoryPhoto,
     factoryLogo,
+    aboutMe,
+    deliveryConditions,
   } = useAppSelector(state => state.sellerRegistration);
+
+  const { email } = useAppSelector(state => state.registrationCommon);
 
   const dispatch = useAppDispatch();
 
@@ -56,9 +63,9 @@ const SellerRegistrationForm: FC = () => {
         phoneNumber,
         name,
         lastName,
-        businessName,
+        companyName,
         sellerType,
-        factoryAddress,
+        address,
         aboutUs,
         contactPerson,
         password,
@@ -67,7 +74,30 @@ const SellerRegistrationForm: FC = () => {
         photo,
         factoryPhoto,
         factoryLogo,
+        email,
       });
+      dispatch(
+        thunkSellerSignUp({
+          phoneNumber,
+          name,
+          lastName,
+          companyName,
+          sellerType,
+          address,
+          aboutUs,
+          contactPerson,
+          password,
+          workHoursFrom,
+          workHoursTo,
+          photo,
+          factoryPhoto,
+          factoryLogo,
+          deliveryConditions,
+          aboutMe,
+          email,
+        }),
+      );
+      navigate('/');
     }
   }
 

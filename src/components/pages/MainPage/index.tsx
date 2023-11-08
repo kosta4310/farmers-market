@@ -11,9 +11,6 @@ import {
 } from '../../../store/reducers/registrationCommon';
 
 const MainPage: FC = () => {
-  // const { modalConfirmationEmailIsOpen } = useAppSelector(
-  //   state => state.buyersRegistration,
-  // );
   const dispatch = useAppDispatch();
   const { error, modalConfirmationEmailIsOpen } = useAppSelector(
     state => state.registrationCommon,
@@ -32,7 +29,10 @@ const MainPage: FC = () => {
         if (res.payload.buyer) {
           dispatch(setLastName(res.payload.buyer.lastName));
           dispatch(setName(res.payload.buyer.name));
-        } /*дописать для продавца*/
+        } else {
+          dispatch(setLastName(res.payload.seller.lastName));
+          dispatch(setName(res.payload.seller.name));
+        }
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,8 +45,9 @@ const MainPage: FC = () => {
         setIsModalOpen={setModalConfirmationEmailIsOpen}
       />
       {error && <ModalError>{error}</ModalError>}
-      <img src={photo} alt="foto" />
-      {/* <img className="w-full h-auto" src={banner} alt="banner" /> */}
+
+      <img className="w-full h-auto" src={banner} alt="banner" />
+      <img src={photo} className="w-20" alt="foto" />
     </>
   );
 };
