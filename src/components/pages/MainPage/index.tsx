@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import banner from '../../../assets/img/banner.svg';
 import ModalConfirmationEmail from '../../shared/ModalConfirmationEmail';
+import ProductCardList from '../../shared/ProductCardList';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { buyersRegistrationSlice } from '../../../store/reducers/buyersSlice';
 import ModalError from '../../common/ModalError';
@@ -15,7 +16,7 @@ const MainPage: FC = () => {
   const { error, modalConfirmationEmailIsOpen } = useAppSelector(
     state => state.registrationCommon,
   );
-  const { photo } = useAppSelector(state => state.sellerRegistration);
+  // const { photo } = useAppSelector(state => state.sellerRegistration);
   const { setName, setLastName } = buyersRegistrationSlice.actions;
 
   const { setModalConfirmationEmailIsOpen } = registrationCommonSlice.actions;
@@ -47,7 +48,9 @@ const MainPage: FC = () => {
       {error && <ModalError>{error}</ModalError>}
 
       <img className="w-full h-auto" src={banner} alt="banner" />
-      <img src={photo} className="w-20" alt="foto" />
+      <ProductCardList prop={true} />
+      <ProductCardList prop={false} />
+      {/* <img src={photo} className="w-20" alt="foto" /> */}
     </>
   );
 };
