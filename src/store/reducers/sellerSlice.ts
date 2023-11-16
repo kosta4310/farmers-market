@@ -33,6 +33,8 @@ const initialState: RegistrationSliceState = {
   repeatPassword: '',
   isCheckRules: false,
   registrationPage: 1,
+  businessName:'',
+  factoryAddress:''
 };
 
 export const thunkSellerSignUp = createAsyncThunk(
