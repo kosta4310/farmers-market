@@ -1,7 +1,6 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import inputImage from '../../../assets/img/input.svg';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { sellerRegistrationSlice } from '../../../store/reducers/sellerSlice';
 import { useAppDispatch } from '../../../hooks/redux';
 
 interface FileUploaddProps {

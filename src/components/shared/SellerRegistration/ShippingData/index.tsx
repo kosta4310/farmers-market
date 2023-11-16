@@ -25,22 +25,14 @@ const getSelectOption = () =>
 
 const ShippingData: FC = () => {
   const {
-    setBusinessName,
-    setSellerType,
     setFactoryAddress,
-    setAboutUs,
-    setContactPerson,
     setWorkHoursFrom,
     setWorkHoursTo,
     setDeliveryConditions,
   } = sellerRegistrationSlice.actions;
 
   const {
-    businessName,
-    sellerType,
     factoryAddress,
-    aboutUs,
-    contactPerson,
     workHoursFrom,
     workHoursTo,
     deliveryConditions,
