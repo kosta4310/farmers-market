@@ -41,8 +41,9 @@ export const thunkAuthSignin = createAsyncThunk(
   'auth/signin',
   async (options: Signin, { rejectWithValue }) => {
     try {
+      console.log(options);
       const res = await fetchSignIn(options);
-
+      console.log(res);
       if (res.status !== 201) {
         const err: { message: string; statusCode: number } = await res.json();
 
@@ -50,7 +51,7 @@ export const thunkAuthSignin = createAsyncThunk(
       }
       return await res.json();
     } catch (error) {
-      console.log('errror', error);
+      console.log('error', error);
 
       return rejectWithValue(getErrorMessage(error));
     }

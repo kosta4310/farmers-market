@@ -8,7 +8,7 @@ import {
   thunkAuthSignin,
 } from '../../../../store/reducers/registrationCommon';
 import { useAppDispatch } from '../../../../hooks/redux';
-import { buyersRegistrationSlice } from '../../../../store/reducers/buyersSlice';
+import { userSlice } from '../../../../store/reducers/userSlice.ts';
 
 interface AuthProps {
   isModalOpen: boolean;
@@ -18,8 +18,9 @@ interface AuthProps {
 const AuthForm: FC<AuthProps> = ({ isModalOpen, setIsModalOpen }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { setName, setLastName } = buyersRegistrationSlice.actions;
   const { setIsLogged } = registrationCommonSlice.actions;
+  const { SET_LOGGED_USER } = userSlice.actions;
+
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
@@ -28,15 +29,16 @@ const AuthForm: FC<AuthProps> = ({ isModalOpen, setIsModalOpen }) => {
 
     dispatch(thunkAuthSignin({ email: login, password })).then(res => {
       dispatch(setIsLogged(true));
+      //Для Покупця
       if (res.payload.buyer) {
-        dispatch(setLastName(res.payload.buyer.lastName));
-        dispatch(setName(res.payload.buyer.name));
+        dispatch(SET_LOGGED_USER(res.payload.buyer));
       }
-      /*дописать для продавца*/
+      // Для Продавця
+      if (res.payload.seller) {
+        dispatch(SET_LOGGED_USER(res.payload.seller));
+      }
     });
-
     navigate('/');
-
     setIsModalOpen(!isModalOpen);
     /*положить токен в лс */
   }
