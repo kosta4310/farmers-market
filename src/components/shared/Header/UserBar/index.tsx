@@ -12,7 +12,7 @@ import { registrationCommonSlice } from '../../../../store/reducers/registration
 import { Route } from '../../../../routers/route';
 import userIcon from '../../../../assets/icons/user-bar/user.svg';
 
-const UserPanel: FC = () => {
+const UserBar: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ const UserPanel: FC = () => {
       </Link>
       <SearchBar />
       <span className="flex gap-6 items-center cursor-pointer">
-        {isLogged && user && user.name && user.lastName && (
+        {isLogged && user.name && user.lastName && (
           <>
             <DropDownMenu
               isModalOpenMenu={isModalOpenMenu}
@@ -88,4 +88,4 @@ const UserPanel: FC = () => {
   );
 };
 
-export default UserPanel;
+export default UserBar;
