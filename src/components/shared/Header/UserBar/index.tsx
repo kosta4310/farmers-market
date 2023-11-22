@@ -1,7 +1,6 @@
 import { FC, MouseEventHandler, useState } from 'react';
 import SearchBar from '../../../common/SearchBar';
 import logo from '../../../../assets/img/user-panel-logo.svg';
-import user from '../../../../assets/icons/user-bar/user.svg';
 import favorites from '../../../../assets/icons/user-bar/favorites.svg';
 import basket from '../../../../assets/icons/user-bar/basket.svg';
 import ModalRegistration from '../../ModalRegistration';
@@ -11,15 +10,18 @@ import DropDownMenu from '../../../common/DropDownMenu';
 import { menuBuyer } from '../../../../constants/information';
 import { registrationCommonSlice } from '../../../../store/reducers/registrationCommon';
 import { Route } from '../../../../routers/route';
+import userIcon from '../../../../assets/icons/user-bar/user.svg';
 
 const UserPanel: FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { name, lastName } = useAppSelector(state => state.buyersRegistration);
-  const { setIsLogged } = registrationCommonSlice.actions;
-  const { isLogged } = useAppSelector(state => state.registrationCommon);
-  const [isModalOpenMenu, setIsModalOpenMenu] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenMenu, setIsModalOpenMenu] = useState(false);
+
+  const { user } = useAppSelector(state => state.userState);
+  const { setIsLogged } = registrationCommonSlice.actions;
+  const { isLogged } = useAppSelector(state => state.registrationCommon);
 
   const handleOpenRegistration = () => {
     setIsModalOpen(!isModalOpen);
@@ -44,14 +46,14 @@ const UserPanel: FC = () => {
       </Link>
       <SearchBar />
       <span className="flex gap-6 items-center cursor-pointer">
-        {isLogged && name && lastName && (
+        {isLogged && user && user.name && user.lastName && (
           <>
             <DropDownMenu
               isModalOpenMenu={isModalOpenMenu}
               setIsModalOpenMenu={setIsModalOpenMenu}
               buttonName={
-                <span>
-                  {name} {lastName.charAt(0).toUpperCase()}
+                <span className={'text-white'}>
+                  {user.name} {user.lastName.charAt(0).toUpperCase()}
                 </span>
               }
             >
@@ -73,7 +75,7 @@ const UserPanel: FC = () => {
           </>
         )}
         {!isLogged && (
-          <img src={user} alt="user" onClick={handleOpenRegistration} />
+          <img src={userIcon} alt="user" onClick={handleOpenRegistration} />
         )}
         <img src={favorites} alt="favorites" />
         <img src={basket} alt="basket" />
