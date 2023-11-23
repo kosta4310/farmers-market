@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export class UserState {
-  user?: {
+  user: {
     phoneNumber?: string;
     name?: string;
     lastName?: string;

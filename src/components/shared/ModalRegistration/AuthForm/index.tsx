@@ -29,18 +29,16 @@ const AuthForm: FC<AuthProps> = ({ isModalOpen, setIsModalOpen }) => {
 
     dispatch(thunkAuthSignin({ email: login, password })).then(res => {
       dispatch(setIsLogged(true));
-      //Для Покупця
       if (res.payload.buyer) {
         dispatch(SET_LOGGED_USER(res.payload.buyer));
       }
-      // Для Продавця
       if (res.payload.seller) {
         dispatch(SET_LOGGED_USER(res.payload.seller));
       }
     });
     navigate('/');
     setIsModalOpen(!isModalOpen);
-    /*положить токен в лс */
+    // TODO add token to local Storage
   }
 
   function handleOnChangeLogin(value: string): void {
