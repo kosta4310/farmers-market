@@ -26,7 +26,6 @@ export interface SellerSignUp {
   workHoursTo: string;
   deliveryConditions: string;
   photo: string;
-  aboutMe: string;
   password: string;
   businessName?:string;
   factoryAddress?:string

@@ -32,7 +32,7 @@ const ShippingData: FC = () => {
   } = sellerRegistrationSlice.actions;
 
   const {
-    factoryAddress,
+    address,
     workHoursFrom,
     workHoursTo,
     deliveryConditions,
@@ -46,7 +46,7 @@ const ShippingData: FC = () => {
   ) => {
     dispatch(action(value));
   };
-
+  console.log(workHoursTo)
   return (
     <div className="flex flex-col w-[558px] mt-20 mx-auto">
       <div className="flex flex-col gap-6 mb-7">
@@ -54,7 +54,7 @@ const ShippingData: FC = () => {
           label="Адреса для самовивізу"
           inputType="text"
           inputId="factoryAddress"
-          value={factoryAddress}
+          value={address}
           placeholder="Введіть адресу для самовивізу"
           onChange={value => handleChange(setFactoryAddress, value)}
         />

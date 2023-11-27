@@ -28,7 +28,6 @@ const initialState: RegistrationSliceState = {
   workHoursTo: '',
   deliveryConditions: '',
   photo: '',
-  aboutMe: '',
   password: '',
   repeatPassword: '',
   isCheckRules: false,

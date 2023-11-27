@@ -15,9 +15,9 @@ const HeadPage: FC = () => {
     phoneNumber,
     name,
     lastName,
-    businessName,
     sellerType,
     aboutUs,
+    companyName
     // factoryAddress,
     // workHoursFrom,
     // workHoursTo,
@@ -28,7 +28,7 @@ const HeadPage: FC = () => {
 
   const arrayFieldsByPages: { [key: string]: () => boolean | void } = {
     1: () => checkFieldsFirstPage(name, lastName, phoneNumber, email),
-    2: () => checkFieldsSecondPage(businessName??'', sellerType, aboutUs),
+    2: () => checkFieldsSecondPage(companyName, sellerType, aboutUs),
     3: () => checkFieldsThirdPage(),
     // factoryAddress,
     // workHoursFrom,

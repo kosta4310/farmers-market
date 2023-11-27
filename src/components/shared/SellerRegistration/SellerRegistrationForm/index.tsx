@@ -33,8 +33,7 @@ const SellerRegistrationForm: FC = () => {
         photo,
         factoryPhoto,
         factoryLogo,
-        aboutMe,
-        deliveryConditions,
+        deliveryConditions
     } = useAppSelector(state => state.sellerRegistration);
 
     const {email} = useAppSelector(state => state.registrationCommon);
@@ -75,6 +74,7 @@ const SellerRegistrationForm: FC = () => {
                 factoryPhoto,
                 factoryLogo,
                 email,
+                deliveryConditions
             });
             dispatch(
                 thunkSellerSignUp({
@@ -93,7 +93,6 @@ const SellerRegistrationForm: FC = () => {
                     factoryPhoto,
                     factoryLogo,
                     deliveryConditions,
-                    aboutMe,
                     email,
                 }),
             );
