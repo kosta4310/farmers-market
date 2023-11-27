@@ -12,6 +12,11 @@ import MyFavoritesPage from '../components/pages/MyFavorites';
 import ReviewsPage from '../components/pages/Reviews';
 import PrivateMessagesPage from '../components/pages/PrivateMessages';
 import { Route } from './route';
+import ProductInfo from '../components/pages/ProductInfo';
+import Description from '../components/common/FullInfoProductChildrenRoute/Description';
+import Consitution from '../components/common/FullInfoProductChildrenRoute/Constitution';
+import Feedback from '../components/common/FullInfoProductChildrenRoute/Feedback';
+import Questions from '../components/common/FullInfoProductChildrenRoute/Questions';
 
 export const router = (template: string) =>
   createBrowserRouter([
@@ -66,6 +71,28 @@ export const router = (template: string) =>
         {
           path: Route.privateMessages,
           element: <PrivateMessagesPage />,
+        },
+        {
+          path: Route.product,
+          element: <ProductInfo />,
+          children: [
+            {
+              path: Route.description,
+              element: <Description />,
+            },
+            {
+              path: Route.constitution,
+              element: <Consitution />,
+            },
+            {
+              path: Route.feedback,
+              element: <Feedback />,
+            },
+            {
+              path: Route.questions,
+              element: <Questions />,
+            },
+          ],
         },
       ],
     },

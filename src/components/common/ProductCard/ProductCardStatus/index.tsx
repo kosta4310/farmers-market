@@ -1,18 +1,18 @@
 import { FC } from 'react';
 
-interface statusProps {
+interface StatusProps {
   template: number;
 }
 
-const ProductCardStatus: FC<statusProps> = ({ template }) => {
+const ProductCardStatus: FC<StatusProps> = ({ template }) => {
   function getStatus() {
     switch (template) {
       case 1:
-        return { text: 'ХІТ', color: 'bg-[#FF4646]' };
+        return { text: 'ХІТ', color: 'bg-attention' };
       case 2:
-        return { text: 'НОВЕ', color: 'bg-[#0D7211]' };
+        return { text: 'НОВЕ', color: 'bg-secondary' };
       case 3:
-        return { text: 'АКЦІЙНА ЦіНА', color: 'bg-[#444]' };
+        return { text: 'АКЦІЙНА ЦіНА', color: 'bg-text_com' };
       default:
         return {};
     }
