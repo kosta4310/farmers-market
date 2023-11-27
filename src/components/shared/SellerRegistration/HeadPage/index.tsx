@@ -15,9 +15,10 @@ const HeadPage: FC = () => {
     phoneNumber,
     name,
     lastName,
-    sellerType,
+    typeSeller,
     aboutUs,
-    companyName
+    companyName,
+    registrationPage,
     // factoryAddress,
     // workHoursFrom,
     // workHoursTo,
@@ -28,7 +29,7 @@ const HeadPage: FC = () => {
 
   const arrayFieldsByPages: { [key: string]: () => boolean | void } = {
     1: () => checkFieldsFirstPage(name, lastName, phoneNumber, email),
-    2: () => checkFieldsSecondPage(companyName, sellerType, aboutUs),
+    2: () => checkFieldsSecondPage(companyName, typeSeller, aboutUs),
     3: () => checkFieldsThirdPage(),
     // factoryAddress,
     // workHoursFrom,
@@ -37,20 +38,21 @@ const HeadPage: FC = () => {
   };
 
   const dispatch = useAppDispatch();
-  const { registrationPage } = useAppSelector(
-    state => state.sellerRegistration,
-  );
-  const { setRegistrationPage } = sellerRegistrationSlice.actions;
+  const { SET_FIELD } = sellerRegistrationSlice.actions;
 
   const handlerRightButton = () => {
     const isValid = arrayFieldsByPages[registrationPage];
     if (isValid()) {
-      dispatch(setRegistrationPage(registrationPage + 1));
+      dispatch(
+        SET_FIELD({ field: 'registrationPage', value: registrationPage + 1 }),
+      );
     }
   };
 
   const handlerLeftButton = () => {
-    dispatch(setRegistrationPage(registrationPage - 1));
+    dispatch(
+      SET_FIELD({ field: 'registrationPage', value: registrationPage - 1 }),
+    );
   };
 
   return (

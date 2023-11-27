@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { AnyAction } from '@reduxjs/toolkit';
 import RegistrationField from '../../../common/RegistrationField';
 import UploadAndDisplayImage from '../../../common/FileUpload';
 import RegistrationFieldArea from '../../../common/RegistrationFieldArea';
@@ -8,33 +7,13 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
 
 const BusinessData: FC = () => {
-  const {
-    setBusinessName,
-    setSellerType,
-    setAboutUs,
-    setContactPerson,
-    setPhoto,
-    setFactoryPhoto,
-    setFactoryLogo,
-  } = sellerRegistrationSlice.actions;
-
-  const {
-    companyName,
-    sellerType,
-    aboutUs,
-    contactPerson,
-    photo,
-    factoryPhoto,
-    factoryLogo,
-  } = useAppSelector(state => state.sellerRegistration);
+  const { companyName, typeSeller, aboutUs, contactPerson, image, logo } =
+    useAppSelector(state => state.sellerRegistration);
 
   const dispatch = useAppDispatch();
 
-  const handleChange = (
-    action: (value: string) => AnyAction,
-    value: string,
-  ) => {
-    dispatch(action(value));
+  const handleChange = (field: string, value: string) => {
+    dispatch(sellerRegistrationSlice.actions.SET_FIELD({ field, value }));
   };
 
   return (
@@ -46,66 +25,63 @@ const BusinessData: FC = () => {
             <RadioChoice
               label="Юридична особа/ФОП"
               value="business"
-              selectedOption={sellerType}
+              selectedOption={typeSeller}
               handleOptionChange={e =>
-                handleChange(setSellerType, e.target.value)
+                handleChange('typeSeller', e.target.value)
               }
             />
             <RadioChoice
               label="Приватна особа"
-              value="private"
-              selectedOption={sellerType}
+              value="privatePerson"
+              selectedOption={typeSeller}
               handleOptionChange={e =>
-                handleChange(setSellerType, e.target.value)
+                handleChange('typeSeller', e.target.value)
               }
             />
           </div>
         </div>
-        {sellerType === 'business' && (
+        {typeSeller === 'business' && (
           <RegistrationField
             label={`Назва підприємства *`}
             inputType="text"
             inputId="factoryName"
             value={companyName}
             placeholder="Будь-ласка введіть дійсну назву"
-            onChange={value => handleChange(setBusinessName, value)}
+            onChange={value => handleChange('companyName', value)}
           />
         )}
-        {sellerType === 'business' ? (
+        {typeSeller === 'business' ? (
           <>
             <UploadAndDisplayImage
               label={'Фотографія підприємства *'}
-              inputId={'factoryPhoto'}
-              hint="Зображення має бути не більшим ніж 2 МБ, 
+              inputId={'image'}
+              hint="Зображення має бути не більшим ніж 2 МБ,
           та розміром не більше 1024х1024 пікселей."
-              selectedImage={factoryPhoto}
-              setSelectedImage={setFactoryPhoto}
+              selectedImage={image}
             />
             <UploadAndDisplayImage
               label={'Логотип підприємства'}
-              inputId={'factoryLogo'}
-              hint="Зображення має бути не більшим ніж 2 МБ, 
+              inputId={'logo'}
+              hint="Зображення має бути не більшим ніж 2 МБ,
           та розміром не більше 1024х1024 пікселей."
-              selectedImage={factoryLogo}
-              setSelectedImage={setFactoryLogo}
+              selectedImage={logo}
             />
           </>
         ) : (
           <UploadAndDisplayImage
             label={'Фото'}
-            inputId={'photo'}
-            hint="Зображення має бути не більшим ніж 2 МБ, 
+            inputId={'image'}
+            hint="Зображення має бути не більшим ніж 2 МБ,
           та розміром не більше 1024х1024 пікселей."
-            selectedImage={photo}
-            setSelectedImage={setPhoto}
+            selectedImage={image}
           />
         )}
         <RegistrationFieldArea
-          label={sellerType === 'business' ? 'Про нас *' : 'Про мене'}
+          label={typeSeller === 'business' ? 'Про нас *' : 'Про мене'}
           fieldId="aboutUs"
           value={aboutUs}
           placeholder="Розкажіть будь ласка про себе"
-          onChange={value => handleChange(setAboutUs, value)}
+          onChange={value => handleChange('aboutUs', value)}
         />
         <RegistrationField
           label="Ім’я та прізвище контактної особи"
@@ -113,7 +89,7 @@ const BusinessData: FC = () => {
           inputId="contactPerson"
           value={contactPerson}
           placeholder="Будь-ласка наешіть ім’я та прізвище контактної особи"
-          onChange={value => handleChange(setContactPerson, value)}
+          onChange={value => handleChange('contactPerson', value)}
         />
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import inputImage from '../../../assets/img/input.svg';
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useAppDispatch } from '../../../hooks/redux';
+import { sellerRegistrationSlice } from '../../../store/reducers/sellerSlice.ts';
 
 interface FileUploaddProps {
   label: string;
@@ -9,10 +9,6 @@ interface FileUploaddProps {
   placeholder?: string;
   onChange?: (value: string) => void;
   hint?: string;
-  setSelectedImage:
-    | ActionCreatorWithPayload<string, 'registration/setFactoryPhoto'>
-    | ActionCreatorWithPayload<string, 'registration/setFactoryLogo'>
-    | ActionCreatorWithPayload<string, 'registration/setPhoto'>;
   selectedImage: string;
 }
 
@@ -20,7 +16,6 @@ const UploadAndDisplayImage: FC<FileUploaddProps> = ({
   label,
   inputId,
   hint,
-  setSelectedImage,
   selectedImage,
 }) => {
   const dispatch = useAppDispatch();
@@ -35,7 +30,12 @@ const UploadAndDisplayImage: FC<FileUploaddProps> = ({
     if (file) {
       reader.readAsDataURL(file);
       reader.addEventListener('load', () => {
-        dispatch(setSelectedImage(reader.result as string));
+        dispatch(
+          sellerRegistrationSlice.actions.SET_FIELD({
+            field: inputId,
+            value: reader.result as string,
+          }),
+        );
       });
     }
   };
@@ -49,7 +49,18 @@ const UploadAndDisplayImage: FC<FileUploaddProps> = ({
             <div>
               <img alt="not found" width={'250px'} src={selectedImage} />
               <br />
-              <button onClick={() => setSelectedImage('')}>Remove</button>
+              <button
+                onClick={() =>
+                  dispatch(
+                    sellerRegistrationSlice.actions.SET_FIELD({
+                      field: inputId,
+                      value: '',
+                    }),
+                  )
+                }
+              >
+                Remove
+              </button>
             </div>
           ) : (
             <img src={inputImage} alt="input image" />

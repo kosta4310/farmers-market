@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import RegistrationField from '../../../common/RegistrationField';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { AnyAction } from '@reduxjs/toolkit';
 import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
 
 const getHoursList = (from: number, to: number) => {
@@ -24,29 +23,15 @@ const getSelectOption = () =>
   });
 
 const ShippingData: FC = () => {
-  const {
-    setFactoryAddress,
-    setWorkHoursFrom,
-    setWorkHoursTo,
-    setDeliveryConditions,
-  } = sellerRegistrationSlice.actions;
-
-  const {
-    address,
-    workHoursFrom,
-    workHoursTo,
-    deliveryConditions,
-  } = useAppSelector(state => state.sellerRegistration);
+  const { address, workHoursFrom, workHoursTo, deliveryConditions } =
+    useAppSelector(state => state.sellerRegistration);
 
   const dispatch = useAppDispatch();
 
-  const handleChange = (
-    action: (value: string) => AnyAction,
-    value: string,
-  ) => {
-    dispatch(action(value));
+  const handleChange = (field: string, value: string) => {
+    dispatch(sellerRegistrationSlice.actions.SET_FIELD({ field, value }));
   };
-  console.log(workHoursTo)
+
   return (
     <div className="flex flex-col w-[558px] mt-20 mx-auto">
       <div className="flex flex-col gap-6 mb-7">
@@ -56,7 +41,7 @@ const ShippingData: FC = () => {
           inputId="factoryAddress"
           value={address}
           placeholder="Введіть адресу для самовивізу"
-          onChange={value => handleChange(setFactoryAddress, value)}
+          onChange={value => handleChange('address', value)}
         />
 
         {/* <RegistrationField
@@ -79,7 +64,7 @@ const ShippingData: FC = () => {
                 placeholder="Вибиріть час"
                 value={workHoursFrom}
                 onChange={({ target }) =>
-                  handleChange(setWorkHoursFrom, target.value)
+                  handleChange('workHoursFrom', target.value)
                 }
               >
                 {getSelectOption()}
@@ -93,7 +78,7 @@ const ShippingData: FC = () => {
                 placeholder="Вибиріть час"
                 value={workHoursTo}
                 onChange={({ target }) =>
-                  handleChange(setWorkHoursTo, target.value)
+                  handleChange('workHoursTo', target.value)
                 }
               >
                 {getSelectOption()}
@@ -108,7 +93,7 @@ const ShippingData: FC = () => {
           inputId="deliveryConditions"
           value={deliveryConditions}
           placeholder="Опишіть умови доставки"
-          onChange={value => handleChange(setDeliveryConditions, value)}
+          onChange={value => handleChange('deliveryConditions', value)}
         />
       </div>
     </div>

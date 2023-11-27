@@ -7,20 +7,14 @@ export class UserState {
     lastName?: string;
     sellerType?: string;
     companyName?: string;
-    factoryPhoto?: string;
-    factoryLogo?: string;
+    logo?: string;
     aboutUs?: string;
     contactPerson?: string;
     address?: string;
-    workHoursFrom?: string;
-    workHoursTo?: string;
+    workingHours?: string;
     deliveryConditions?: string;
-    photo?: string;
-    aboutMe?: string;
-    isCheckRules?: string;
-    registrationPage?: number;
-    businessName?: string;
-    factoryAddress?: string;
+    image?: string;
+    isActive?: boolean;
     userConfig?: {
       email?: string;
       role?: string;
@@ -34,20 +28,14 @@ export class UserState {
       lastName: res['lastName'],
       sellerType: res['sellerType'],
       companyName: res['companyName'],
-      factoryPhoto: res['factoryPhoto'],
-      factoryLogo: res['factoryLogo'],
+      logo: res['logo'],
       aboutUs: res['aboutUs'],
       contactPerson: res['contactPerson'],
       address: res['address'],
-      workHoursFrom: res['workHoursFrom'],
-      workHoursTo: res['workHoursTo'],
+      workingHours: res['workingHours'],
       deliveryConditions: res['deliveryConditions'],
-      photo: res['photo'],
-      aboutMe: res['aboutMe'],
-      isCheckRules: res['isCheckRules'],
-      registrationPage: res['registrationPage'],
-      businessName: res['businessName'],
-      factoryAddress: res['factoryAddress'],
+      image: res['image'],
+      isActive: res['isActive'],
       userConfig: {
         email: res['user']['email'],
         role: res['user']['role'],
