@@ -11,4 +11,10 @@ export const Route = {
   myFavorites: '/myFavorites',
   reviews: '/reviews',
   privateMessages: '/privateMessages',
+  product: '/product/:id',
+  description: '/product/:id/description',
+  constitution: '/product/:id/constitution',
+  feedback: '/product/:id/feedback',
+  questions: '/product/:id/questions',
+
 };

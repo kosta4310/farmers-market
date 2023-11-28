@@ -7,6 +7,7 @@ import 'swiper/css';
 import ProductCard from '../../common/ProductCard';
 import arrowLeft from '../../../assets/icons/prodCard/arrow-left.svg';
 import arrowRight from '../../../assets/icons/prodCard/arrow-right.svg';
+import { NavLink, useLocation } from 'react-router-dom';
 
 interface props {
   prop: boolean;
@@ -14,26 +15,26 @@ interface props {
 
 const ProductCardList: FC<props> = ({ prop }) => {
   const swiperRef = useRef<SwiperType>();
-
+  const location = useLocation();
   const slides = [
-    'Slide 1',
-    'Slide 2',
-    'Slide 3',
-    'Slide 4',
-    'Slide 5',
-    'Slide 6',
-    'Slide 7',
-    'Slide 8',
-    'Slide 9',
+    'Slide1',
+    'Slide2',
+    'Slide3',
+    'Slide4',
+    'Slide5',
+    'Slide6',
+    'Slide7',
+    'Slide8',
+    'Slide9',
   ];
 
   return (
     <div className="mt-[60px]  mb-[97px]">
       <div className="mb-10 relative">
-        <h1 className="text-[40px] font-semibold leading-9 text-[#0D7211] text-center ">
+        <h1 className="text-[40px] font-semibold leading-9 text-secondary text-center ">
           {prop ? 'Найпопулярніші товари' : 'Нещодавно переглянуті товари'}
         </h1>
-        <div className="absolute top-0 right-[calc(50vw-570px)]">
+        <div className="absolute top-0 right-[calc(50vw-610px)]">
           <button
             className="mr-3"
             type="button"
@@ -49,7 +50,7 @@ const ProductCardList: FC<props> = ({ prop }) => {
       <div className="flex justify-center">
         <Swiper
           slidesPerView={4}
-          loop={true}
+          loop={false}
           modules={[Navigation, Virtual]}
           onBeforeInit={swiper => {
             swiperRef.current = swiper;
@@ -58,10 +59,15 @@ const ProductCardList: FC<props> = ({ prop }) => {
           className="mySwiper w-[1250px] "
         >
           <ul>
-            {slides?.map(slide => (
-              <li key={slide}>
+            {slides?.map(card => (
+              <li key={card}>
                 <SwiperSlide>
-                  <ProductCard />
+                  <NavLink
+                    to={`/product/:${card}/description`}
+                    state={{ from: location }}
+                  >
+                    <ProductCard />
+                  </NavLink>
                 </SwiperSlide>
               </li>
             ))}
