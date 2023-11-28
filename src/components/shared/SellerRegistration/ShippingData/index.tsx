@@ -1,7 +1,5 @@
-import { FC } from 'react';
 import RegistrationField from '../../../common/RegistrationField';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
+import { useAppSelector } from '../../../../hooks/redux';
 
 const getHoursList = (from: number, to: number) => {
   const minutes = ['00', '30'];
@@ -22,15 +20,13 @@ const getSelectOption = () =>
     );
   });
 
-const ShippingData: FC = () => {
+const ShippingData = ({
+  handleChange,
+}: {
+  handleChange: (field: string, value: any) => void;
+}) => {
   const { address, workHoursFrom, workHoursTo, deliveryConditions } =
     useAppSelector(state => state.sellerRegistration);
-
-  const dispatch = useAppDispatch();
-
-  const handleChange = (field: string, value: string) => {
-    dispatch(sellerRegistrationSlice.actions.SET_FIELD({ field, value }));
-  };
 
   return (
     <div className="flex flex-col w-[558px] mt-20 mx-auto">

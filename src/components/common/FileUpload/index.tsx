@@ -3,16 +3,16 @@ import inputImage from '../../../assets/img/input.svg';
 import { useAppDispatch } from '../../../hooks/redux';
 import { sellerRegistrationSlice } from '../../../store/reducers/sellerSlice.ts';
 
-interface FileUploaddProps {
+interface FileUploadProps {
   label: string;
   inputId: string;
   placeholder?: string;
-  onChange?: (value: string) => void;
+  handleChange?: (field: string, value: any) => void;
   hint?: string;
   selectedImage: string;
 }
 
-const UploadAndDisplayImage: FC<FileUploaddProps> = ({
+const UploadAndDisplayImage: FC<FileUploadProps> = ({
   label,
   inputId,
   hint,

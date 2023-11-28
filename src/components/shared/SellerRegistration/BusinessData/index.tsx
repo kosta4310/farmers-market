@@ -1,20 +1,16 @@
-import { FC } from 'react';
 import RegistrationField from '../../../common/RegistrationField';
 import UploadAndDisplayImage from '../../../common/FileUpload';
 import RegistrationFieldArea from '../../../common/RegistrationFieldArea';
 import RadioChoice from '../../../common/RadioChoice';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
+import { useAppSelector } from '../../../../hooks/redux';
 
-const BusinessData: FC = () => {
+const BusinessData = ({
+  handleChange,
+}: {
+  handleChange: (field: string, value: any) => void;
+}) => {
   const { companyName, typeSeller, aboutUs, contactPerson, image, logo } =
     useAppSelector(state => state.sellerRegistration);
-
-  const dispatch = useAppDispatch();
-
-  const handleChange = (field: string, value: string) => {
-    dispatch(sellerRegistrationSlice.actions.SET_FIELD({ field, value }));
-  };
 
   return (
     <div className="flex flex-col w-[558px] mt-20 mx-auto">
@@ -58,6 +54,7 @@ const BusinessData: FC = () => {
               hint="Зображення має бути не більшим ніж 2 МБ,
           та розміром не більше 1024х1024 пікселей."
               selectedImage={image}
+              handleChange={handleChange}
             />
             <UploadAndDisplayImage
               label={'Логотип підприємства'}
@@ -65,6 +62,7 @@ const BusinessData: FC = () => {
               hint="Зображення має бути не більшим ніж 2 МБ,
           та розміром не більше 1024х1024 пікселей."
               selectedImage={logo}
+              handleChange={handleChange}
             />
           </>
         ) : (
@@ -74,6 +72,7 @@ const BusinessData: FC = () => {
             hint="Зображення має бути не більшим ніж 2 МБ,
           та розміром не більше 1024х1024 пікселей."
             selectedImage={image}
+            handleChange={handleChange}
           />
         )}
         <RegistrationFieldArea

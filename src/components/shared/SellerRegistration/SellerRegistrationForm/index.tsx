@@ -1,16 +1,16 @@
-import { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../../common/Button';
 import Checkbox from '../../../common/Checkbox';
 import { checkFieldsFourthPage } from '../checkFields';
 import RegistrationField from '../../../common/RegistrationField';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import {
-  sellerRegistrationSlice,
-  thunkSellerSignUp,
-} from '../../../../store/reducers/sellerSlice';
+import { thunkSellerSignUp } from '../../../../store/reducers/sellerSlice';
 
-const SellerRegistrationForm: FC = () => {
+const SellerRegistrationForm = ({
+  handleChange,
+}: {
+  handleChange: (field: string, value: any) => void;
+}) => {
   const navigate = useNavigate();
 
   const {
@@ -86,9 +86,7 @@ const SellerRegistrationForm: FC = () => {
       navigate('/');
     }
   }
-  const handleChange = (field: string, value: any) => {
-    dispatch(sellerRegistrationSlice.actions.SET_FIELD({ field, value }));
-  };
+
   return (
     <div className="flex flex-col w-[558px] mt-20 mx-auto">
       <div className="flex flex-col gap-6 mb-7">

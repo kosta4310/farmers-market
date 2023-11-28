@@ -1,21 +1,18 @@
-import { FC } from 'react';
 import RegistrationField from '../../../common/RegistrationField';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
 import { registrationCommonSlice } from '../../../../store/reducers/registrationCommon';
 
-const CommonData: FC = () => {
+const CommonData = ({
+  handleChange,
+}: {
+  handleChange: (field: string, value: any) => void;
+}) => {
   const { setEmail } = registrationCommonSlice.actions;
   const { email } = useAppSelector(state => state.registrationCommon);
   const { phoneNumber, name, lastName } = useAppSelector(
     state => state.sellerRegistration,
   );
-
   const dispatch = useAppDispatch();
-
-  const handleChange = (field: string, value: string) => {
-    dispatch(sellerRegistrationSlice.actions.SET_FIELD({ field, value }));
-  };
 
   return (
     <div className="flex flex-col w-[558px] mt-20 mx-auto">
