@@ -1,13 +1,11 @@
 import { FC } from 'react';
 import inputImage from '../../../assets/img/input.svg';
-import { useAppDispatch } from '../../../hooks/redux';
-import { sellerRegistrationSlice } from '../../../store/reducers/sellerSlice.ts';
 
 interface FileUploadProps {
   label: string;
   inputId: string;
   placeholder?: string;
-  handleChange?: (field: string, value: any) => void;
+  handleChange: (field: string, value: any) => void;
   hint?: string;
   selectedImage: string;
 }
@@ -17,9 +15,8 @@ const UploadAndDisplayImage: FC<FileUploadProps> = ({
   inputId,
   hint,
   selectedImage,
+  handleChange,
 }) => {
-  const dispatch = useAppDispatch();
-
   const hintMessage = <span className="text-xs text-gray-500">{hint}</span>;
 
   const filePreview:
@@ -30,12 +27,7 @@ const UploadAndDisplayImage: FC<FileUploadProps> = ({
     if (file) {
       reader.readAsDataURL(file);
       reader.addEventListener('load', () => {
-        dispatch(
-          sellerRegistrationSlice.actions.SET_FIELD({
-            field: inputId,
-            value: reader.result as string,
-          }),
-        );
+        handleChange(inputId, reader.result as string);
       });
     }
   };
@@ -50,14 +42,9 @@ const UploadAndDisplayImage: FC<FileUploadProps> = ({
               <img alt="not found" width={'250px'} src={selectedImage} />
               <br />
               <button
-                onClick={() =>
-                  dispatch(
-                    sellerRegistrationSlice.actions.SET_FIELD({
-                      field: inputId,
-                      value: '',
-                    }),
-                  )
-                }
+                onClick={() => {
+                  handleChange(inputId, '');
+                }}
               >
                 Remove
               </button>
