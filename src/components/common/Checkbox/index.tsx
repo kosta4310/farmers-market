@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import ButtonArrow from '../ButtonArrow';
 
 interface CheckboxProps {
   label: string | React.ReactElement;
