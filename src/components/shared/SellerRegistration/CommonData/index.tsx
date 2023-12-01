@@ -1,28 +1,18 @@
-import { FC } from 'react';
-import { AnyAction } from '@reduxjs/toolkit';
 import RegistrationField from '../../../common/RegistrationField';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { sellerRegistrationSlice } from '../../../../store/reducers/sellerSlice';
 import { registrationCommonSlice } from '../../../../store/reducers/registrationCommon';
-// import { registrationSlice } from '../../../../store/reducers/registrationSlice';
 
-const CommonData: FC = () => {
-  const { setPhoneNumber, setLastName, setName } =
-    sellerRegistrationSlice.actions;
+const CommonData = ({
+  handleChange,
+}: {
+  handleChange: (field: string, value: any) => void;
+}) => {
   const { setEmail } = registrationCommonSlice.actions;
   const { email } = useAppSelector(state => state.registrationCommon);
   const { phoneNumber, name, lastName } = useAppSelector(
     state => state.sellerRegistration,
   );
-
   const dispatch = useAppDispatch();
-
-  const handleChange = (
-    action: (value: string) => AnyAction,
-    value: string,
-  ) => {
-    dispatch(action(value));
-  };
 
   return (
     <div className="flex flex-col w-[558px] mt-20 mx-auto">
@@ -34,7 +24,7 @@ const CommonData: FC = () => {
           inputId="name"
           value={name}
           placeholder="Введіть ім'я використовуючи українську або латинську абетку"
-          onChange={value => handleChange(setName, value)}
+          onChange={value => handleChange('name', value)}
         />
         <RegistrationField
           label="Прізвище *"
@@ -42,7 +32,7 @@ const CommonData: FC = () => {
           inputId="surname"
           value={lastName}
           placeholder="Введіть прізвище використовуючи українську або латинську абетку"
-          onChange={value => handleChange(setLastName, value)}
+          onChange={value => handleChange('lastName', value)}
         />
         <RegistrationField
           label="Номер телефону *"
@@ -51,7 +41,7 @@ const CommonData: FC = () => {
           value={phoneNumber !== '' ? phoneNumber : ''}
           hint="Ваш номер будет використано тільки для підтвердження"
           placeholder="Будь-ласка введіть вірний номер"
-          onChange={value => handleChange(setPhoneNumber, value)}
+          onChange={value => handleChange('phoneNumber', value)}
         />
         <RegistrationField
           label="Електрона пошта *"
@@ -59,7 +49,7 @@ const CommonData: FC = () => {
           inputId="email"
           value={email.trim() !== '' ? email : ''}
           placeholder="Будь-ласка введіть дійсну адресу"
-          onChange={value => handleChange(setEmail, value)}
+          onChange={value => dispatch(setEmail(value))}
         />
       </div>
     </div>

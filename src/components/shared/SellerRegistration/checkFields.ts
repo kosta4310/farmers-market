@@ -28,7 +28,7 @@ export function checkFieldsFirstPage(
 }
 
 export function checkFieldsSecondPage(
-  companyName: string,
+  companyName: string | undefined,
   sellerType: string,
   aboutUs: string,
 ) {

@@ -1,30 +1,22 @@
 import { FC } from 'react';
 import inputImage from '../../../assets/img/input.svg';
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { useAppDispatch } from '../../../hooks/redux';
 
-interface FileUploaddProps {
+interface FileUploadProps {
   label: string;
   inputId: string;
   placeholder?: string;
-  onChange?: (value: string) => void;
+  handleChange: (field: string, value: any) => void;
   hint?: string;
-  setSelectedImage:
-    | ActionCreatorWithPayload<string, 'registration/setFactoryPhoto'>
-    | ActionCreatorWithPayload<string, 'registration/setFactoryLogo'>
-    | ActionCreatorWithPayload<string, 'registration/setPhoto'>;
   selectedImage: string;
 }
 
-const UploadAndDisplayImage: FC<FileUploaddProps> = ({
+const UploadAndDisplayImage: FC<FileUploadProps> = ({
   label,
   inputId,
   hint,
-  setSelectedImage,
   selectedImage,
+  handleChange,
 }) => {
-  const dispatch = useAppDispatch();
-
   const hintMessage = <span className="text-xs text-gray-500">{hint}</span>;
 
   const filePreview:
@@ -35,7 +27,7 @@ const UploadAndDisplayImage: FC<FileUploaddProps> = ({
     if (file) {
       reader.readAsDataURL(file);
       reader.addEventListener('load', () => {
-        dispatch(setSelectedImage(reader.result as string));
+        handleChange(inputId, reader.result as string);
       });
     }
   };
@@ -49,7 +41,13 @@ const UploadAndDisplayImage: FC<FileUploaddProps> = ({
             <div>
               <img alt="not found" width={'250px'} src={selectedImage} />
               <br />
-              <button onClick={() => setSelectedImage('')}>Remove</button>
+              <button
+                onClick={() => {
+                  handleChange(inputId, '');
+                }}
+              >
+                Remove
+              </button>
             </div>
           ) : (
             <img src={inputImage} alt="input image" />

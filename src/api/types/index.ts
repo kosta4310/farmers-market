@@ -15,19 +15,15 @@ export interface SellerSignUp {
   phoneNumber: string;
   name: string;
   lastName: string;
-  sellerType: string;
+  typeSeller: string;
   companyName: string;
-  factoryPhoto: string;
-  factoryLogo: string;
+  image: string;
+  logo: string;
   aboutUs: string;
   contactPerson: string;
   address: string;
   workHoursFrom: string;
   workHoursTo: string;
   deliveryConditions: string;
-  photo: string;
-  aboutMe: string;
   password: string;
-  businessName?:string;
-  factoryAddress?:string
 }
