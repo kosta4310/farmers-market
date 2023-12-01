@@ -12,6 +12,7 @@ module.exports = {
     'react-refresh/only-export-components': 'warn',
     'import/no-extraneous-dependencies': 0,
     'no-console': 0,
-    'react-hooks/rules-of-hooks': 0
+    'react-hooks/rules-of-hooks': 0,
+    "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
   },
 }
