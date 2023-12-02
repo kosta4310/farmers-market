@@ -1,8 +1,9 @@
-import { FC, ReactNode, MouseEvent } from 'react';
+import { FC, MouseEvent, ReactNode } from 'react';
 import ArrowLeft from '../../../assets/icons/arrow/ArrowLeft.svg';
 import ArrowRight from '../../../assets/icons/arrow/ArrowRight.svg';
 
 export interface ButtonArrowProps {
+  // eslint-disable-next-line no-unused-vars
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
   children: ReactNode;
   direction: 'left' | 'right';
