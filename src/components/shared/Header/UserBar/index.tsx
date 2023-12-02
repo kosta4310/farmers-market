@@ -7,7 +7,7 @@ import ModalRegistration from '../../ModalRegistration';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import DropDownMenu from '../../../common/DropDownMenu';
-import { menuBuyer } from '../../../../constants/information';
+import { menuDashboard } from '../../../../constants/information.tsx';
 import { registrationCommonSlice } from '../../../../store/reducers/registrationCommon';
 import { Route } from '../../../../routers/route';
 import userIcon from '../../../../assets/icons/user-bar/user.svg';
@@ -58,9 +58,13 @@ const UserBar: FC = () => {
               }
             >
               <ul className="cursor-auto">
-                {menuBuyer.map(item => {
+                {menuDashboard.map(item => {
                   return (
-                    <li key={item.id} className="pt-2">
+                    <li key={item.id} className="pt-2 flex gap-3">
+                      <div className={'w-[20px] h-[20px]'}>
+                        {item.icon && item.icon({ color: 'main' })}
+                      </div>
+
                       <NavLink onClick={handleMenuClick} to={item.route}>
                         {item.title}
                       </NavLink>

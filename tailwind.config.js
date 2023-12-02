@@ -13,6 +13,9 @@ export default {
       textColor: {
         default: '#00A919',
       },
+      gridTemplateColumns: {
+        dash: '25% 1fr',
+      },
       colors: {
         text_com: '#444444',
         input: '#BDBDBD',
