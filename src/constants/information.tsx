@@ -11,7 +11,7 @@ import {
   PublicMessagesIcon,
   ReviewsIcon,
   UserIcon,
-} from '../components/shared/Icons/user.tsx';
+} from '../components/shared/Icons/dashBoardIcons.tsx';
 import { ReactNode } from 'react';
 
 export const information = [

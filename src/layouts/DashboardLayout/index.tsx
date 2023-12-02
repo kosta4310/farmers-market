@@ -2,7 +2,7 @@ import { menuDashboard } from '../../constants/information.tsx';
 import { FC, useEffect, useMemo, useState } from 'react';
 
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { DeleteIcon } from '../../components/shared/Icons/user.tsx';
+import { DeleteIcon } from '../../components/shared/Icons/dashBoardIcons.tsx';
 
 const DashBoardLayout: FC = () => {
   const location = useLocation();
