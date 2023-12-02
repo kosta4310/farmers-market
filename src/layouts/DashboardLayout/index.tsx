@@ -32,6 +32,7 @@ const DashBoardLayout: FC = () => {
         <ul>
           {menuDashboard.map(m => (
             <li
+              key={m.id}
               onMouseLeave={() => onMouseLeave()}
               onMouseEnter={() => onMouseEnter(m.id)}
               className={`cursor-pointer flex text-[20px] gap-[10px] h-[56px] items-center`}
