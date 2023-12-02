@@ -14,7 +14,7 @@ interface RegistrationSliceState {
 
 const initialState: RegistrationSliceState = {
   error: '',
-  isLogged: false,
+  isLogged: true,
   email: '',
   modalConfirmationEmailIsOpen: false,
   template: 'buyer',

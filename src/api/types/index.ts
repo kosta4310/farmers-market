@@ -22,8 +22,9 @@ export interface SellerSignUp {
   aboutUs: string;
   contactPerson: string;
   address: string;
-  workHoursFrom: string;
-  workHoursTo: string;
   deliveryConditions: string;
   password: string;
+  workingHours?: string;
+  workHoursTo?: string;
+  workHoursFrom?: string;
 }

@@ -5,12 +5,14 @@ import { checkFieldsFourthPage } from '../checkFields';
 import RegistrationField from '../../../common/RegistrationField';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { thunkSellerSignUp } from '../../../../store/reducers/sellerSlice';
+import { FC } from 'react';
 
-const SellerRegistrationForm = ({
-  handleChange,
-}: {
-  handleChange: (field: string, value: any) => void;
-}) => {
+interface IProps {
+  // eslint-disable-next-line no-unused-vars
+  handleChange: (field: string, value: string | boolean) => void;
+}
+
+const SellerRegistrationForm: FC<IProps> = ({ handleChange }) => {
   const navigate = useNavigate();
 
   const {
@@ -47,23 +49,6 @@ const SellerRegistrationForm = ({
 
   function handleRegistration() {
     if (checkFieldsFourthPage(password, repeatPassword, isCheckRules)) {
-      console.log({
-        phoneNumber,
-        name,
-        lastName,
-        companyName,
-        typeSeller,
-        address,
-        aboutUs,
-        contactPerson,
-        password,
-        workHoursFrom,
-        workHoursTo,
-        image,
-        logo,
-        email,
-        deliveryConditions,
-      });
       dispatch(
         thunkSellerSignUp({
           phoneNumber,
@@ -75,8 +60,7 @@ const SellerRegistrationForm = ({
           aboutUs,
           contactPerson,
           password,
-          workHoursFrom,
-          workHoursTo,
+          workingHours: workHoursFrom + '-' + workHoursTo,
           image,
           logo,
           deliveryConditions,
