@@ -7,6 +7,7 @@ import { useAppSelector } from '../../../../hooks/redux';
 const BusinessData = ({
   handleChange,
 }: {
+  // eslint-disable-next-line no-unused-vars
   handleChange: (field: string, value: any) => void;
 }) => {
   const { companyName, typeSeller, aboutUs, contactPerson, image, logo } =

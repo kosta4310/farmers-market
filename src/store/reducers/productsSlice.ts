@@ -10,10 +10,14 @@ export class AddProduct {
   carbohydrates: string;
   price: number;
   quantity: number;
-  unit: string;
+  unit: {
+    value: string;
+    label: string;
+  };
   deliveryType: string;
   phoneNumber: string;
   category: {
+    id: string | number;
     value: string;
     label: string;
   };
@@ -51,7 +55,7 @@ export interface IProducts {
 const initialState: IProducts = {
   searchResult: [],
   myProducts: [],
-  addProduct: {} as AddProduct,
+  addProduct: { ...new AddProduct({} as IProducts) },
 };
 
 const slice = createSlice({

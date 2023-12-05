@@ -18,7 +18,7 @@ import Questions from '../components/common/FullInfoProductChildrenRoute/Questio
 import MyPage from '../components/pages/MyPage';
 import MyPurchasesPage from '../components/pages/MyPurchases';
 import DashBoardLayout from '../layouts/DashboardLayout';
-import AddProduct from '../components/pages/AddProduct';
+import { AddProduct } from '../components/pages/AddProduct';
 
 export const router = (template: string) =>
   createBrowserRouter([
