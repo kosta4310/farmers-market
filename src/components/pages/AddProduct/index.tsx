@@ -8,6 +8,9 @@ import {
   unit,
 } from '../../../constants/categories.ts';
 import UploadAndDisplayImage from '../../common/FileUpload';
+import Checkbox from '../../common/Checkbox';
+import RegistrationField from '../../common/RegistrationField';
+import Button from '../../common/Button';
 
 const inputStyle =
   'w-full border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0';
@@ -20,6 +23,7 @@ const Label = ({ label }: { label: string }) => (
 
 export const AddProduct: FC = () => {
   const { addProduct } = useAppSelector(state => state.productState);
+  const { user } = useAppSelector(state => state.userState);
   const dispatch = useAppDispatch();
 
   const { SET_FIELD } = productSlice.actions;
@@ -169,7 +173,7 @@ export const AddProduct: FC = () => {
           />
         </div>
       </div>
-      <div id={'price-and-others'} className={'flex gap-6'}>
+      <div id={'price-and-others'} className={'flex gap-6 mb-6'}>
         <div id={'price'}>
           <Label label={'Ціна за одиницю товару, грн.'} />
           <input
@@ -203,6 +207,104 @@ export const AddProduct: FC = () => {
             options={unit}
           />
         </div>
+      </div>
+      <div id={'delivery-method'} className={'mb-6'}>
+        <Label label={'Вибиріть способи доставки'} />
+        <Checkbox
+          label={'Самовивіз'}
+          inputId={'delivery-itself'}
+          onChange={val => {
+            dispatch(
+              SET_FIELD({
+                ['deliveryType']: val.target.checked ? 'itSelf' : '',
+              }),
+            );
+          }}
+          classes={'mb-2.5'}
+        />
+        <Checkbox
+          label={'Адресна доставка'}
+          inputId={'address-delivery'}
+          onChange={val => {
+            dispatch(
+              SET_FIELD({
+                ['deliveryType']: val.target.checked ? 'address-delivery' : '',
+              }),
+            );
+          }}
+        />
+      </div>
+      <div id={'delivery-place'} className={'mb-6'}>
+        <Label label={'Місце доставки'} />
+        <Checkbox
+          label={'Київ та передмістя'}
+          inputId={'delivery-kyiv'}
+          onChange={val => {
+            console.log(val.target.checked);
+          }}
+          classes={'mb-2.5'}
+        />
+        <Checkbox
+          label={'Інші міста за домовленістю'}
+          inputId={'other-delivery'}
+          onChange={val => {
+            console.log(val.target.checked);
+          }}
+        />
+      </div>
+      <div className={'mb-6'}>
+        <Label label={'Номер телефону для обробки замовлень'} />
+        <Checkbox
+          classes={'mb-3'}
+          label={'Використовувати номер контактної особи для обробки замовлень'}
+          inputId={'phoneNum'}
+          onChange={val => {
+            dispatch(
+              SET_FIELD({
+                ['phoneNumber']: val.target.checked ? user.phoneNumber : '',
+              }),
+            );
+          }}
+        />
+        <RegistrationField
+          label=""
+          inputType="number"
+          inputId="numberPhone"
+          value={addProduct.phoneNumber}
+          hint=""
+          placeholder="Будь-ласка введіть вірний номер"
+          onChange={value => {
+            dispatch(
+              SET_FIELD({
+                ['phoneNumber']: value,
+              }),
+            );
+          }}
+        />
+      </div>
+      <div className={'grid grid-cols-max2 gap-6'}>
+        <span className="flex justify-center mb-7">
+          <Button
+            color="green"
+            size="w-max"
+            onClick={() => {
+              console.log('Added');
+            }}
+          >
+            Додати оголошення
+          </Button>
+        </span>
+        <span className="flex justify-center mb-7">
+          <Button
+            color="transparent"
+            size="w-max"
+            onClick={() => {
+              console.log('шаблон');
+            }}
+          >
+            Зберегти як шаблон
+          </Button>
+        </span>
       </div>
     </section>
   );

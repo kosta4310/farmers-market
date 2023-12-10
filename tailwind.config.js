@@ -15,6 +15,7 @@ export default {
       },
       gridTemplateColumns: {
         dash: '25% 1fr',
+        max2: 'max-content max-content',
       },
       colors: {
         text_com: '#444444',
