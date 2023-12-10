@@ -52,7 +52,7 @@ const SearchProduct: FC = () => {
             {list?.map(card => (
               <li key={card.id} className="mb-3">
                 <NavLink
-                  to={`/product/:${card}/description`}
+                  to={`/product/:${card.id}/description`}
                   state={{ from: location }}
                 >
                   <ProductCard prop={card} />
