@@ -1,4 +1,5 @@
 import { FC, useRef } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Virtual } from 'swiper/modules';
 import { Swiper as SwiperType } from 'swiper';
@@ -7,8 +8,7 @@ import 'swiper/css';
 import ProductCard from '../../common/ProductCard';
 import arrowLeft from '../../../assets/icons/prodCard/arrow-left.svg';
 import arrowRight from '../../../assets/icons/prodCard/arrow-right.svg';
-import { NavLink, useLocation } from 'react-router-dom';
-
+import { productCardList } from '../../../constants/productCardList';
 interface props {
   prop: boolean;
 }
@@ -16,17 +16,6 @@ interface props {
 const ProductCardList: FC<props> = ({ prop }) => {
   const swiperRef = useRef<SwiperType>();
   const location = useLocation();
-  const slides = [
-    'Slide1',
-    'Slide2',
-    'Slide3',
-    'Slide4',
-    'Slide5',
-    'Slide6',
-    'Slide7',
-    'Slide8',
-    'Slide9',
-  ];
 
   return (
     <div className="mt-[60px]  mb-[97px]">
@@ -59,14 +48,14 @@ const ProductCardList: FC<props> = ({ prop }) => {
           className="mySwiper w-[1250px] "
         >
           <ul>
-            {slides?.map(card => (
-              <li key={card}>
+            {productCardList?.map(card => (
+              <li key={card.id}>
                 <SwiperSlide>
                   <NavLink
-                    to={`/product/:${card}/description`}
+                    to={`/product/:${card.id}/description`}
                     state={{ from: location }}
                   >
-                    <ProductCard />
+                    <ProductCard prop={card} />
                   </NavLink>
                 </SwiperSlide>
               </li>

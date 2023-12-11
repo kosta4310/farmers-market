@@ -1,15 +1,13 @@
 import { FC } from 'react';
 
 import defaultImg from '../../../assets/img/default-image.jpg';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import build from '../../../assets/icons/fullInfoCard/build.svg';
 
-interface Props {
-  prop: string | undefined;
-}
-
-const FullInfoProduct: FC<Props> = ({ prop }) => {
+const FullInfoProduct: FC = () => {
   const location = useLocation().pathname.split('/')[3];
+
+  const { id } = useParams();
 
   function position(): boolean {
     switch (location) {
@@ -52,7 +50,7 @@ const FullInfoProduct: FC<Props> = ({ prop }) => {
           <ul className="flex gap-14 mb-6">
             <li>
               <NavLink
-                to={`/product/${prop}/description`}
+                to={`/product/${id}/description`}
                 className={({ isActive }) =>
                   isActive
                     ? 'text-base text-secondary border-b-2 border-secondary'
@@ -65,7 +63,7 @@ const FullInfoProduct: FC<Props> = ({ prop }) => {
             {true && (
               <li>
                 <NavLink
-                  to={`/product/${prop}/constitution`}
+                  to={`/product/${id}/constitution`}
                   className={({ isActive }) =>
                     isActive
                       ? 'text-base text-secondary border-b-2 border-secondary'
@@ -79,7 +77,7 @@ const FullInfoProduct: FC<Props> = ({ prop }) => {
 
             <li>
               <NavLink
-                to={`/product/${prop}/questions`}
+                to={`/product/${id}/questions`}
                 className={({ isActive }) =>
                   isActive
                     ? 'text-base text-secondary border-b-2 border-secondary'
@@ -91,7 +89,7 @@ const FullInfoProduct: FC<Props> = ({ prop }) => {
             </li>
             <li>
               <NavLink
-                to={`/product/${prop}/feedback`}
+                to={`/product/${id}/feedback`}
                 className={({ isActive }) =>
                   isActive
                     ? 'text-base text-secondary border-b-2 border-secondary'

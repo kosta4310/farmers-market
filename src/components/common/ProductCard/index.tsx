@@ -10,8 +10,16 @@ import basketRed from '../../../assets/icons/prodCard/basketRed.svg';
 import ProductCardCounter from './ProductCardCounter';
 import ProductCardStatus from './ProductCardStatus';
 import ProductCardDeliver from './ProductCardDeliver';
+interface Props {
+  prop: {
+    id: string;
+    title: string;
+    price: number;
+    oldPrice?: number;
+  };
+}
 
-const ProductCard: FC = () => {
+const ProductCard: FC<Props> = ({ prop }) => {
   const [like, setLike] = useState<boolean>(false);
   const [buyIt, setBuyIt] = useState<boolean>(false);
 
@@ -52,7 +60,7 @@ const ProductCard: FC = () => {
 
       <div className="px-3 mb-4">
         <h1 className="mb-4 text-xl font-medium  text-text_com">
-          Яблуко білий налив
+          {prop.title}
         </h1>
         <p className="text-sm h-[40px] overflow-ellipsis overflow-hidden text-disabled">
           Власна плантація яблук вирощено без пестецидів
@@ -61,11 +69,14 @@ const ProductCard: FC = () => {
       <div className="flex justify-between px-3 mb-4">
         <ProductCardCounter prop={totalCost} />
         <div className="flex ">
-          <p className="line-through text-base font-medium text-text_com mr-2">
-            115 грн
-          </p>
+          {prop.oldPrice && (
+            <p className="line-through text-base font-medium text-text_com mr-2">
+              {prop.oldPrice} грн
+            </p>
+          )}
+
           <p className="underline text-base font-medium text-secondary">
-            95 грн
+            {prop.price} грн
           </p>
         </div>
       </div>
@@ -82,12 +93,14 @@ const ProductCard: FC = () => {
           </button>
         ) : (
           <button
-            className="w-full h-12 bg-[#00A9191A] flex justify-center items-center rounded-md border-secondary border hover:bg-secondary"
+            className="w-full h-12 bg-[#00A9191A] flex justify-center items-center rounded-md border-secondary border hover:bg-card_background "
             onClick={e => {
               setBuyIt(true), e.preventDefault();
             }}
           >
-            <span className="mr-3 text-base  text-white">Додати в кошик</span>
+            <span className="mr-3 text-base  text-secondary">
+              Додати в кошик
+            </span>
             <img src={basketW} alt="basket" />
           </button>
         )}

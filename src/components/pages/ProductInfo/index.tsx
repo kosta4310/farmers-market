@@ -1,14 +1,10 @@
 import { FC } from 'react';
-
-import FullInfoProduct from '../../shared/FullInfoProduct';
-import { useParams } from 'react-router-dom';
+import SearchProduct from '../../shared/SearchProduct';
 
 const ProductInfo: FC = () => {
-  const {id} = useParams();
-  
   return (
     <>
-      <FullInfoProduct prop={id} />
+      <SearchProduct />
     </>
   );
 };

@@ -17,6 +17,8 @@ import Description from '../components/common/FullInfoProductChildrenRoute/Descr
 import Consitution from '../components/common/FullInfoProductChildrenRoute/Constitution';
 import Feedback from '../components/common/FullInfoProductChildrenRoute/Feedback';
 import Questions from '../components/common/FullInfoProductChildrenRoute/Questions';
+import FullInfoProduct from '../components/shared/FullInfoProduct';
+
 
 export const router = (template: string) =>
   createBrowserRouter([
@@ -72,9 +74,16 @@ export const router = (template: string) =>
           path: Route.privateMessages,
           element: <PrivateMessagesPage />,
         },
+
+
+        
         {
           path: Route.product,
           element: <ProductInfo />,
+        },
+        {
+          path: Route.id,
+          element: <FullInfoProduct />,
           children: [
             {
               path: Route.description,
