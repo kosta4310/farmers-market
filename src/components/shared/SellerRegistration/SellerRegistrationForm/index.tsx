@@ -8,7 +8,6 @@ import { thunkSellerSignUp } from '../../../../store/reducers/sellerSlice';
 import { FC } from 'react';
 
 interface IProps {
-  // eslint-disable-next-line no-unused-vars
   handleChange: (field: string, value: string | boolean) => void;
 }
 
