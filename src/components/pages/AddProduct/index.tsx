@@ -34,6 +34,10 @@ export const AddProduct: FC = () => {
     );
   }, [addProduct.category]);
 
+  const onHandleChangeField = (field: string, value: any) => {
+    dispatch(SET_FIELD({ [field]: value }));
+  };
+
   return (
     <section className={'p-[16px]'}>
       <h1 className={'text-[24px] font-bold text-text_com mb-4'}>
@@ -50,7 +54,7 @@ export const AddProduct: FC = () => {
           required
           value={addProduct.name}
           onChange={e => {
-            dispatch(SET_FIELD({ ['name']: e.target.value }));
+            onHandleChangeField('name', e.target.value);
           }}
         />
       </div>
@@ -61,16 +65,11 @@ export const AddProduct: FC = () => {
           <Select
             value={addProduct.category}
             onChange={val => {
-              console.log(val);
-              dispatch(
-                SET_FIELD({
-                  ['category']: {
-                    value: val?.value ?? '',
-                    label: val?.label ?? '',
-                    id: val?.id ?? '',
-                  },
-                }),
-              );
+              onHandleChangeField('category', {
+                value: val?.value ?? '',
+                label: val?.label ?? '',
+                id: val?.id ?? '',
+              });
             }}
             options={mainCategories}
           />
@@ -80,14 +79,10 @@ export const AddProduct: FC = () => {
           <Select
             value={addProduct.subcategory}
             onChange={val => {
-              dispatch(
-                SET_FIELD({
-                  ['subcategory']: {
-                    value: val?.value ?? '',
-                    label: val?.label ?? '',
-                  },
-                }),
-              );
+              onHandleChangeField('subcategory', {
+                value: val?.value ?? '',
+                label: val?.label ?? '',
+              });
             }}
             options={subCategoryLocal}
           />
@@ -103,7 +98,7 @@ export const AddProduct: FC = () => {
           та розміром не більше 1024х1024 пікселей."
           selectedImage={addProduct.image}
           handleChange={(_, value) => {
-            dispatch(SET_FIELD({ ['image']: value }));
+            onHandleChangeField('image', value);
           }}
         />
       </div>
@@ -120,7 +115,7 @@ export const AddProduct: FC = () => {
           required
           value={addProduct.description}
           onChange={e => {
-            dispatch(SET_FIELD({ ['description']: e.target.value }));
+            onHandleChangeField('description', e.target.value);
           }}
         />
       </div>
@@ -135,7 +130,7 @@ export const AddProduct: FC = () => {
             required
             value={addProduct.caloricContent}
             onChange={e => {
-              dispatch(SET_FIELD({ ['caloricContent']: e.target.value }));
+              onHandleChangeField('caloricContent', e.target.value);
             }}
           />
           <input
@@ -146,7 +141,7 @@ export const AddProduct: FC = () => {
             required
             value={addProduct.proteins}
             onChange={e => {
-              dispatch(SET_FIELD({ ['proteins']: e.target.value }));
+              onHandleChangeField('proteins', e.target.value);
             }}
           />
           <input
@@ -157,7 +152,7 @@ export const AddProduct: FC = () => {
             required
             value={addProduct.fats}
             onChange={e => {
-              dispatch(SET_FIELD({ ['fats']: e.target.value }));
+              onHandleChangeField('fats', e.target.value);
             }}
           />
           <input
@@ -168,7 +163,7 @@ export const AddProduct: FC = () => {
             required
             value={addProduct.carbohydrates}
             onChange={e => {
-              dispatch(SET_FIELD({ ['carbohydrates']: e.target.value }));
+              onHandleChangeField('carbohydrates', e.target.value);
             }}
           />
         </div>
@@ -185,7 +180,7 @@ export const AddProduct: FC = () => {
             required
             value={addProduct.price}
             onChange={e => {
-              dispatch(SET_FIELD({ ['price']: +e.target.value }));
+              onHandleChangeField('price', +e.target.value);
             }}
           />
         </div>
@@ -195,14 +190,10 @@ export const AddProduct: FC = () => {
             value={addProduct.unit}
             placeholder={'Виберіть одиницю'}
             onChange={val => {
-              dispatch(
-                SET_FIELD({
-                  ['unit']: {
-                    value: val?.value ?? '',
-                    label: val?.label ?? '',
-                  },
-                }),
-              );
+              onHandleChangeField('unit', {
+                value: val?.value ?? '',
+                label: val?.label ?? '',
+              });
             }}
             options={unit}
           />
@@ -214,10 +205,9 @@ export const AddProduct: FC = () => {
           label={'Самовивіз'}
           inputId={'delivery-itself'}
           onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
-            dispatch(
-              SET_FIELD({
-                ['deliveryType']: val.target.checked ? 'itSelf' : '',
-              }),
+            onHandleChangeField(
+              'deliveryType',
+              val.target.checked ? 'itSelf' : '',
             );
           }}
           classes={'mb-2.5'}
@@ -226,10 +216,9 @@ export const AddProduct: FC = () => {
           label={'Адресна доставка'}
           inputId={'address-delivery'}
           onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
-            dispatch(
-              SET_FIELD({
-                ['deliveryType']: val.target.checked ? 'address-delivery' : '',
-              }),
+            onHandleChangeField(
+              'deliveryType',
+              val.target.checked ? 'address-delivery' : '',
             );
           }}
         />
@@ -259,10 +248,9 @@ export const AddProduct: FC = () => {
           label={'Використовувати номер контактної особи для обробки замовлень'}
           inputId={'phoneNum'}
           onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
-            dispatch(
-              SET_FIELD({
-                ['phoneNumber']: val.target.checked ? user.phoneNumber : '',
-              }),
+            onHandleChangeField(
+              'phoneNumber',
+              val.target.checked ? user.phoneNumber : '',
             );
           }}
         />
@@ -274,11 +262,7 @@ export const AddProduct: FC = () => {
           hint=""
           placeholder="Будь-ласка введіть вірний номер"
           onChange={value => {
-            dispatch(
-              SET_FIELD({
-                ['phoneNumber']: value,
-              }),
-            );
+            onHandleChangeField('phoneNumber', value);
           }}
         />
       </div>
