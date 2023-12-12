@@ -7,6 +7,7 @@ interface Props {
   isModalOpenMenu: boolean;
   setIsModalOpenMenu: Dispatch<SetStateAction<boolean>>;
 }
+
 const DropDownMenu: FC<Props> = ({
   isModalOpenMenu,
   setIsModalOpenMenu,
@@ -31,7 +32,7 @@ const DropDownMenu: FC<Props> = ({
       {isModalOpenMenu && (
         <nav
           ref={menuRef}
-          className="absolute top-[calc(100%+1rem)] bg-white min-w-full whitespace-nowrap p-3 right-0 cursor-auto outline-none shadow-sm"
+          className="absolute z-50 top-[calc(100%+1rem)] bg-white min-w-full whitespace-nowrap p-3 right-0 cursor-auto outline-none shadow-sm"
         >
           {children}
         </nav>

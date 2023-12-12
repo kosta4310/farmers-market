@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux.ts';
 import { productSlice } from '../../../store/reducers/productsSlice.ts';
 import Select from 'react-select';
@@ -213,7 +213,7 @@ export const AddProduct: FC = () => {
         <Checkbox
           label={'Самовивіз'}
           inputId={'delivery-itself'}
-          onChange={val => {
+          onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
             dispatch(
               SET_FIELD({
                 ['deliveryType']: val.target.checked ? 'itSelf' : '',
@@ -225,7 +225,7 @@ export const AddProduct: FC = () => {
         <Checkbox
           label={'Адресна доставка'}
           inputId={'address-delivery'}
-          onChange={val => {
+          onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
             dispatch(
               SET_FIELD({
                 ['deliveryType']: val.target.checked ? 'address-delivery' : '',
@@ -239,7 +239,7 @@ export const AddProduct: FC = () => {
         <Checkbox
           label={'Київ та передмістя'}
           inputId={'delivery-kyiv'}
-          onChange={val => {
+          onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
             console.log(val.target.checked);
           }}
           classes={'mb-2.5'}
@@ -247,7 +247,7 @@ export const AddProduct: FC = () => {
         <Checkbox
           label={'Інші міста за домовленістю'}
           inputId={'other-delivery'}
-          onChange={val => {
+          onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
             console.log(val.target.checked);
           }}
         />
@@ -258,7 +258,7 @@ export const AddProduct: FC = () => {
           classes={'mb-3'}
           label={'Використовувати номер контактної особи для обробки замовлень'}
           inputId={'phoneNum'}
-          onChange={val => {
+          onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
             dispatch(
               SET_FIELD({
                 ['phoneNumber']: val.target.checked ? user.phoneNumber : '',

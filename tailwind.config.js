@@ -29,6 +29,7 @@ export default {
         orange: '#FF7A00',
         blue: '#003171',
         purple: '#7000FF',
+        but_backgraund: '#00A9191A',
       },
     },
   },

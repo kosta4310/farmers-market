@@ -6,16 +6,17 @@ import { userSlice } from './store/reducers/userSlice.ts';
 
 const { SET_LOGGED_USER } = userSlice.actions;
 
-const foo = {
-  phoneNumber: '789789798',
-  name: 'Alex',
-  lastName: 'Osa',
-  companyName: 'name compant',
+//TODO remove when we have endpoint Get user by token
+const userState = {
+  phoneNumber: '77766655',
+  name: 'Test',
+  lastName: 'Testenko',
+  companyName: 'Fruit & Ko',
   logo: '',
-  aboutUs: 'about us',
+  aboutUs: 'We are big develop company',
   contactPerson: null,
-  address: 'address',
-  workingHours: '8:30-7:30',
+  address: 'Ukraine,Kyiv',
+  workingHours: '8:30AM-7:30PM',
   image:
     'https://res.cloudinary.com/debx785xm/image/upload/v1698740839/xqj2utbevda5n8hfjkxf.jpg',
   isActive: false,
@@ -30,7 +31,7 @@ const App: FC = () => {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(SET_LOGGED_USER(foo));
+    dispatch(SET_LOGGED_USER(userState));
   }, []);
 
   return <RouterProvider router={router(template)} />;
