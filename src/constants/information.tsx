@@ -25,7 +25,6 @@ interface IMenu {
   id: number;
   title: string;
   route: string;
-  // eslint-disable-next-line no-unused-vars
   icon?: (color: IColors) => ReactNode;
 }
 
