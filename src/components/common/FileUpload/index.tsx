@@ -5,6 +5,7 @@ interface FileUploadProps {
   label: string;
   inputId: string;
   placeholder?: string;
+  // eslint-disable-next-line no-unused-vars
   handleChange: (field: string, value: any) => void;
   hint?: string;
   selectedImage: string;
@@ -34,7 +35,7 @@ const UploadAndDisplayImage: FC<FileUploadProps> = ({
 
   return (
     <div>
-      <label className="flex gap-1 flex-col" htmlFor={inputId}>
+      <label className="flex gap-1 flex-col cursor-pointer" htmlFor={inputId}>
         {label}
         <div className="rounded-tl rounded-bl p-3 text-gray-400 ">
           {selectedImage ? (
@@ -53,7 +54,12 @@ const UploadAndDisplayImage: FC<FileUploadProps> = ({
             <img src={inputImage} alt="input image" />
           )}
         </div>
-        <input type="file" id={inputId} onChange={filePreview} />
+        <input
+          type="file"
+          className={'hidden'}
+          id={inputId}
+          onChange={filePreview}
+        />
       </label>
       {hintMessage}
     </div>

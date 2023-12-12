@@ -13,7 +13,10 @@ const HeadPageContent = () => {
 
   const dispatch = useAppDispatch();
 
-  const handleChangeRegistrationField = (field: string, value: string) => {
+  const handleChangeRegistrationField = (
+    field: string,
+    value: string | boolean,
+  ) => {
     dispatch(sellerRegistrationSlice.actions.SET_FIELD({ field, value }));
   };
 

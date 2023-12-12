@@ -6,8 +6,6 @@ import RulesPage from '../components/pages/RulesPage';
 import DeliveryPage from '../components/pages/DeliveryPage';
 import PaymentPage from '../components/pages/PaymentPage';
 import RegistrationPage from '../components/pages/RegistrationPage';
-import MyPage from '../components/pages/MyPage';
-import MyPurchasesPage from '../components/pages/MyPurchases';
 import MyFavoritesPage from '../components/pages/MyFavorites';
 import ReviewsPage from '../components/pages/Reviews';
 import PrivateMessagesPage from '../components/pages/PrivateMessages';
@@ -19,6 +17,10 @@ import Feedback from '../components/common/FullInfoProductChildrenRoute/Feedback
 import Questions from '../components/common/FullInfoProductChildrenRoute/Questions';
 import FullInfoProduct from '../components/shared/FullInfoProduct';
 
+import MyPage from '../components/pages/MyPage';
+import MyPurchasesPage from '../components/pages/MyPurchases';
+import DashBoardLayout from '../layouts/DashboardLayout';
+import { AddProduct } from '../components/pages/AddProduct';
 
 export const router = (template: string) =>
   createBrowserRouter([
@@ -55,28 +57,34 @@ export const router = (template: string) =>
           element: <RegistrationPage template={template} />,
         },
         {
-          path: Route.myPage,
-          element: <MyPage />,
+          element: <DashBoardLayout />,
+          children: [
+            {
+              path: Route.dashboard.myPage,
+              element: <MyPage />,
+            },
+            {
+              path: Route.dashboard.addProduct,
+              element: <AddProduct />,
+            },
+            {
+              path: Route.dashboard.myPurchases,
+              element: <MyPurchasesPage />,
+            },
+            {
+              path: Route.dashboard.myFavorites,
+              element: <MyFavoritesPage />,
+            },
+            {
+              path: Route.dashboard.reviews,
+              element: <ReviewsPage />,
+            },
+            {
+              path: Route.dashboard.privateMessages,
+              element: <PrivateMessagesPage />,
+            },
+          ],
         },
-        {
-          path: Route.myPurchases,
-          element: <MyPurchasesPage />,
-        },
-        {
-          path: Route.myFavorites,
-          element: <MyFavoritesPage />,
-        },
-        {
-          path: Route.reviews,
-          element: <ReviewsPage />,
-        },
-        {
-          path: Route.privateMessages,
-          element: <PrivateMessagesPage />,
-        },
-
-
-        
         {
           path: Route.product,
           element: <ProductInfo />,

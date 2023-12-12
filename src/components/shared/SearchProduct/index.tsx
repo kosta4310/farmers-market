@@ -19,7 +19,7 @@ const SearchProduct: FC = () => {
   const { state } = location;
 
   const newProdList = list.slice(0);
-  
+
   useEffect(() => {
     setList(productCardList);
   }, []);
