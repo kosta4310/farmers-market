@@ -14,7 +14,7 @@ interface RegistrationSliceState {
 
 const initialState: RegistrationSliceState = {
   error: '',
-  isLogged: true, //TODO Change to false when we have endpoint Get user by token
+  isLogged: false,
   email: '',
   modalConfirmationEmailIsOpen: false,
   template: 'buyer',

@@ -11,6 +11,7 @@ import { menuDashboard } from '../../../../constants/information.tsx';
 import { registrationCommonSlice } from '../../../../store/reducers/registrationCommon';
 import { Route } from '../../../../routers/route';
 import userIcon from '../../../../assets/icons/user-bar/user.svg';
+import { removeLocalStorageItem } from '../../../../utils/localStorageUtils.ts';
 
 const UserBar: FC = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +27,6 @@ const UserBar: FC = () => {
   const handleOpenRegistration = () => {
     setIsModalOpen(!isModalOpen);
   };
-
   const handleMenuClick: MouseEventHandler<HTMLAnchorElement> = event => {
     if (event.target) {
       setIsModalOpenMenu(false);
@@ -36,6 +36,7 @@ const UserBar: FC = () => {
   function handleButtonLogout(): void {
     setIsModalOpenMenu(false);
     dispatch(setIsLogged(false));
+    removeLocalStorageItem('token');
     navigate(Route.main);
   }
 

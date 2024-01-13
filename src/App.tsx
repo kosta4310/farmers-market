@@ -2,36 +2,31 @@ import { FC, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routers';
 import { useAppDispatch, useAppSelector } from './hooks/redux.ts';
-import { userSlice } from './store/reducers/userSlice.ts';
+import { thunkGetUserByToken, userSlice } from './store/reducers/userSlice.ts';
+import { getLocalStorageItem } from './utils/localStorageUtils.ts';
+import { registrationCommonSlice } from './store/reducers/registrationCommon.ts';
 
 const { SET_LOGGED_USER } = userSlice.actions;
 
-//TODO remove when we have endpoint Get user by token
-const userState = {
-  phoneNumber: '77766655',
-  name: 'Test',
-  lastName: 'Testenko',
-  companyName: 'Fruit & Ko',
-  logo: '',
-  aboutUs: 'We are big develop company',
-  contactPerson: null,
-  address: 'Ukraine,Kyiv',
-  workingHours: '8:30AM-7:30PM',
-  image:
-    'https://res.cloudinary.com/debx785xm/image/upload/v1698740839/xqj2utbevda5n8hfjkxf.jpg',
-  isActive: false,
-  user: {
-    email: 'test@example.com',
-    role: 'seller',
-  },
-};
-
 const App: FC = () => {
+  const { setIsLogged } = registrationCommonSlice.actions;
   const template = useAppSelector(state => state.registrationCommon.template);
 
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    dispatch(SET_LOGGED_USER(userState));
+    const token = getLocalStorageItem('token');
+    token &&
+      dispatch(thunkGetUserByToken(token)).then(res => {
+        if (res.payload.buyer) {
+          dispatch(SET_LOGGED_USER(res.payload.buyer));
+          dispatch(setIsLogged(true));
+        }
+        if (res.payload.seller) {
+          dispatch(SET_LOGGED_USER(res.payload.seller));
+          dispatch(setIsLogged(true));
+        }
+      });
   }, []);
 
   return <RouterProvider router={router(template)} />;

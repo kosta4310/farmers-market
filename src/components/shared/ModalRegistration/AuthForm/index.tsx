@@ -9,6 +9,7 @@ import {
 } from '../../../../store/reducers/registrationCommon';
 import { useAppDispatch } from '../../../../hooks/redux';
 import { userSlice } from '../../../../store/reducers/userSlice.ts';
+import { setLocalStorageItem } from '../../../../utils/localStorageUtils.ts';
 
 interface AuthProps {
   isModalOpen: boolean;
@@ -23,6 +24,7 @@ const AuthForm: FC<AuthProps> = ({ isModalOpen, setIsModalOpen }) => {
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [isKeepUserLogIn, setIsKeepUserLogIn] = useState(false);
 
   function handleOnClick(): void {
     if (login.trim() === '' || password.trim() === '') return;
@@ -31,14 +33,17 @@ const AuthForm: FC<AuthProps> = ({ isModalOpen, setIsModalOpen }) => {
       dispatch(setIsLogged(true));
       if (res.payload.buyer) {
         dispatch(SET_LOGGED_USER(res.payload.buyer));
+        isKeepUserLogIn &&
+          setLocalStorageItem('token', res.payload.buyer.token);
       }
       if (res.payload.seller) {
         dispatch(SET_LOGGED_USER(res.payload.seller));
+        isKeepUserLogIn &&
+          setLocalStorageItem('token', res.payload.seller.token);
       }
     });
     navigate('/');
     setIsModalOpen(!isModalOpen);
-    // TODO add token to local Storage
   }
 
   function handleOnChangeLogin(value: string): void {
@@ -69,7 +74,13 @@ const AuthForm: FC<AuthProps> = ({ isModalOpen, setIsModalOpen }) => {
           onChange={handleOnChangePassword}
         />
         <div className="flex items-center justify-between w-full mb-4">
-          <Checkbox label={`Запам'ятати мене`} inputId="check" />
+          <Checkbox
+            onChange={() => {
+              setIsKeepUserLogIn(!isKeepUserLogIn);
+            }}
+            label={`Запам'ятати мене`}
+            inputId="check"
+          />
           <span className="text-default cursor-pointer">Нагадати пароль</span>
         </div>
       </div>
