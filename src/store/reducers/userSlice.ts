@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fetchGetUser } from '../../api/getUser.ts';
+import { getErrorMessage } from '../../utils/func/getErrorMessage.ts';
 
 export class UserState {
   user: {
@@ -59,3 +61,16 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+
+export const thunkGetUserByToken = createAsyncThunk(
+  'auth/getUser',
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const res = await fetchGetUser(token);
+      return await res.json();
+    } catch (error) {
+      console.log('error', error);
+      return rejectWithValue(getErrorMessage(error));
+    }
+  },
+);
