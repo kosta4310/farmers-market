@@ -12,6 +12,9 @@ export const Route = {
   constitution: '/product/:id/constitution',
   feedback: '/product/:id/feedback',
   questions: '/product/:id/questions',
+  basket: '/basket',
+  checkout: '/basket/checkout',
+  paymant:'/basket/checkout/paymant',
   dashboard: {
     myPage: '/dashboard/myPage',
     addProduct: '/dashboard/add-product',

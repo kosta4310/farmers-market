@@ -10,20 +10,19 @@ interface Props {
 const ProductCardCounter: FC<Props> = ({ prop }) => {
   const [state, setState] = useState<number>(1);
 
-  prop(state);
-
   function decrement(e: MouseEvent<HTMLButtonElement>): void {
     if (state === 1) {
       e.preventDefault();
-
       return;
     }
     setState(state - 1);
+    prop(state-1);
     e.preventDefault();
   }
 
   function increment(e: MouseEvent<HTMLButtonElement>): void {
     setState(state + 1);
+    prop(state+1);
     e.preventDefault();
   }
 

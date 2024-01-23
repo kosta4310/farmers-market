@@ -21,6 +21,9 @@ import MyPage from '../components/pages/MyPage';
 import MyPurchasesPage from '../components/pages/MyPurchases';
 import DashBoardLayout from '../layouts/DashboardLayout';
 import { AddProduct } from '../components/pages/AddProduct';
+import BasketPage from '../components/pages/BasketPage';
+import BasketCheckout from '../components/common/BasketComponent/BasketСheckout';
+import BasketPaymant from '../components/common/BasketComponent/BasketPaymant';
 
 export const router = (template: string) =>
   createBrowserRouter([
@@ -55,6 +58,18 @@ export const router = (template: string) =>
         {
           path: Route.registration,
           element: <RegistrationPage template={template} />,
+        },
+        {
+          path: Route.basket,
+          element: <BasketPage />,
+        },
+        {
+          path: Route.checkout,
+          element: <BasketCheckout />,
+        },
+        {
+          path: Route.paymant,
+          element: <BasketPaymant />,
         },
         {
           element: <DashBoardLayout />,

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { mainCategories } from '../../../../constants/categories.ts';
+import { NavLink } from 'react-router-dom';
 
 const Categories: FC = () => {
   const firstCategories = mainCategories.slice(0, 4);
@@ -16,7 +17,9 @@ const Categories: FC = () => {
               key={id}
               className="hover:opacity-70 cursor-pointer transition duration-300 ease-in-out"
             >
-              {label}
+              <NavLink to={'/product'} state={id}>
+                {label}
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -26,7 +29,9 @@ const Categories: FC = () => {
               key={id}
               className="hover:opacity-70 cursor-pointer transition duration-300 ease-in-out"
             >
-              {label}
+              <NavLink to={'/product'} state={id}>
+                {label}
+              </NavLink>
             </li>
           ))}
         </ul>
