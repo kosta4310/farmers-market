@@ -31,6 +31,9 @@ export default {
         purple: '#7000FF',
         but_backgraund: '#00A9191A',
       },
+      boxShadow: {
+        basket_info: ' 0px 4px 15px 0px rgba(0, 0, 0, 0.25)',
+      },
     },
   },
   plugins: [],

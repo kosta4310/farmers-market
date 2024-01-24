@@ -83,7 +83,9 @@ const UserBar: FC = () => {
           <img src={userIcon} alt="user" onClick={handleOpenRegistration} />
         )}
         <img src={favorites} alt="favorites" />
-        <img src={basket} alt="basket" />
+        <NavLink to={`/basket`}>
+          <img src={basket} alt="basket" />
+        </NavLink>
       </span>
       <ModalRegistration
         isModalOpen={isModalOpen}

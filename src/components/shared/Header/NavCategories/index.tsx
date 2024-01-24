@@ -82,7 +82,7 @@ const NavCategories: FC = () => {
                     <NavLink
                       to={'/product'}
                       onClick={closeSubCategories}
-                      state={item}
+                      state={(item)}
                     >
                       <img
                         src={item.image}

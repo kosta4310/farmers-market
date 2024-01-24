@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, MouseEvent, useEffect, useState } from 'react';
 
 import defaultImg from '../../../assets/img/default-image.jpg';
 import basketW from '../../../assets/icons/prodCard/basketW.svg';
@@ -10,6 +10,7 @@ import basketRed from '../../../assets/icons/prodCard/basketRed.svg';
 import ProductCardCounter from './ProductCardCounter';
 import ProductCardStatus from './ProductCardStatus';
 import ProductCardDeliver from './ProductCardDeliver';
+import { getCurrentDay } from '../../../utils/func/getCurrentDay';
 interface Props {
   prop: {
     id: string;
@@ -22,11 +23,60 @@ interface Props {
 const ProductCard: FC<Props> = ({ prop }) => {
   const [like, setLike] = useState<boolean>(false);
   const [buyIt, setBuyIt] = useState<boolean>(false);
+  const [totalPrice, setTotalPrice] = useState<number>(prop.price);
+  const [amt, setAmt] = useState(1);
 
   const totalCost = (count: number) => {
-    const price = 95;
-    const total = price * count;
-    return total;
+    const total = prop.price * count;
+    setTotalPrice(total);
+    setAmt(count);
+  };
+
+  useEffect(() => {
+    const storedIds = localStorage.getItem('market');
+    const cartItems = storedIds ? JSON.parse(storedIds) : [];
+    const cartItemId = cartItems.map((id: { id: number }) => id.id);
+    const updatedCartItems = cartItemId.find((id: string) => id === prop.id);
+
+    if (updatedCartItems) {
+      setBuyIt(true);
+    }
+  }, [prop.id]);
+
+  function generateOrderNumber() {
+    const timestamp = Date.now();
+    const randomNumber = Math.floor(Math.random() * 1000);
+    return `${timestamp}-${randomNumber}`;
+  }
+
+  const handleSaveToStorage = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setBuyIt(true);
+
+    const cartItemsString = localStorage.getItem('market');
+    const cartItems = cartItemsString ? JSON.parse(cartItemsString) : [];
+    const newCartItem = {
+      id: prop.id,
+      price: totalPrice,
+      time: getCurrentDay(),
+      title: prop.title,
+      quantity: amt,
+      orderNum: generateOrderNumber().substring(6, 13),
+    };
+    cartItems.push(newCartItem);
+    localStorage.setItem('market', JSON.stringify(cartItems));
+  };
+
+  const handleRemoveToStorage = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setBuyIt(false);
+
+    const cartItemsString = localStorage.getItem('market');
+    const cartItems = cartItemsString ? JSON.parse(cartItemsString) : [];
+    const updatedCartItems = cartItems.filter(
+      (item: { id: string }) => item.id !== prop.id,
+    );
+    localStorage.setItem('market', JSON.stringify(updatedCartItems));
   };
 
   return (
@@ -84,9 +134,7 @@ const ProductCard: FC<Props> = ({ prop }) => {
         {buyIt ? (
           <button
             className="w-full h-12  flex justify-center items-center rounded-md border-attention border "
-            onClick={e => {
-              setBuyIt(false), e.preventDefault();
-            }}
+            onClick={handleRemoveToStorage}
           >
             <span className="mr-3 text-base  text-attention">Відмінити</span>
             <img src={basketRed} alt="basket" />
@@ -94,9 +142,7 @@ const ProductCard: FC<Props> = ({ prop }) => {
         ) : (
           <button
             className="w-full h-12 bg-[#00A9191A] flex justify-center items-center rounded-md border-secondary border hover:bg-card_background "
-            onClick={e => {
-              setBuyIt(true), e.preventDefault();
-            }}
+            onClick={handleSaveToStorage}
           >
             <span className="mr-3 text-base  text-secondary">
               Додати в кошик

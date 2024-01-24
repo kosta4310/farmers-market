@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 
-import basketW from '../../../../assets/icons/prodCard/basketW.svg';
+import basketW from '../../../../assets/icons/fullInfoCard/basketW.svg';
 import basketRed from '../../../../assets/icons/prodCard/basketRed.svg';
 import build from '../../../../assets/icons/fullInfoCard/build.svg';
 import hart from '../../../../assets/icons/fullInfoCard/hart.svg';
@@ -99,7 +99,7 @@ const Description: FC = () => {
             className="w-[265px] h-12 bg-secondary flex justify-center items-center rounded-md"
             onClick={() => setBuyIt(true)}
           >
-            <span className="mr-3 text-base  text-white">Додати в кошик</span>
+              <span className="mr-3 text-base  text-white">Додати в кошик</span>
             <img src={basketW} alt="basket" />
           </button>
         )}
