@@ -14,7 +14,11 @@ export class AddProduct {
     value: string;
     label: string;
   };
-  deliveryType: string;
+  deliveryType: string[];
+  deliveryPlaces: {
+    place: string;
+    selected: boolean;
+  };
   phoneNumber: string;
   category: {
     id: string | number;
@@ -43,6 +47,7 @@ export class AddProduct {
     this.category = val.category;
     this.subcategory = val.subcategory;
     this.subsubcategory = val.subsubcategory;
+    this.deliveryPlaces = val.deliveryPlaces;
   }
 }
 
@@ -55,7 +60,7 @@ export interface IProducts {
 const initialState: IProducts = {
   searchResult: [],
   myProducts: [],
-  addProduct: { ...new AddProduct({} as IProducts) },
+  addProduct: { ...new AddProduct({ deliveryType: [] }) },
 };
 
 const slice = createSlice({
@@ -69,6 +74,15 @@ const slice = createSlice({
       state.addProduct = {
         ...state.addProduct,
         ...action.payload,
+      };
+    },
+    SET_DELIVERY_FIELD: (
+      state,
+      action: { payload: { isChecked: boolean; value: string } },
+    ) => {
+      state.addProduct = {
+        ...state.addProduct,
+        deliveryType: [...state.addProduct.deliveryType, action.payload.value],
       };
     },
   },

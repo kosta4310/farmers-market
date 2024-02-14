@@ -26,7 +26,7 @@ export const AddProduct: FC = () => {
   const { user } = useAppSelector(state => state.userState);
   const dispatch = useAppDispatch();
 
-  const { SET_FIELD } = productSlice.actions;
+  const { SET_FIELD, SET_DELIVERY_FIELD } = productSlice.actions;
 
   const subCategoryLocal = useMemo(() => {
     return subCategory.filter(
@@ -205,10 +205,8 @@ export const AddProduct: FC = () => {
           label={'Самовивіз'}
           inputId={'delivery-itself'}
           onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
-            onHandleChangeField(
-              'deliveryType',
-              val.target.checked ? 'itSelf' : '',
-            );
+            console.log('1');
+            dispatch(SET_DELIVERY_FIELD({ isChecked: true, value: 'Pickup' }));
           }}
           classes={'mb-2.5'}
         />
@@ -216,15 +214,15 @@ export const AddProduct: FC = () => {
           label={'Адресна доставка'}
           inputId={'address-delivery'}
           onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
-            onHandleChangeField(
-              'deliveryType',
-              val.target.checked ? 'address-delivery' : '',
-            );
+            console.log('2');
+
+            dispatch(SET_DELIVERY_FIELD({ isChecked: true, value: 'Courier' }));
           }}
         />
       </div>
       <div id={'delivery-place'} className={'mb-6'}>
         <Label label={'Місце доставки'} />
+        {/*dispatch(SET_FIELD({ [field]: value }));*/}
         <Checkbox
           label={'Київ та передмістя'}
           inputId={'delivery-kyiv'}
