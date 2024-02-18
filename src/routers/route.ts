@@ -14,12 +14,14 @@ export const Route = {
   questions: '/product/:id/questions',
   basket: '/basket',
   checkout: '/basket/checkout',
-  paymant:'/basket/checkout/paymant',
+  paymant: '/basket/checkout/paymant',
   dashboard: {
     myPage: '/dashboard/myPage',
     addProduct: '/dashboard/add-product',
     myTemplates: '/dashboard/templates',
     myProducts: '/dashboard/products',
+    productsEdit: '/dashboard/products/edit',
+    
     mySales: '/dashboard/mySales',
     myPurchases: '/dashboard/myPurchases',
     myFavorites: '/dashboard/myFavorites',

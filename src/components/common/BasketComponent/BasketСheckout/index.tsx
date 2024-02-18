@@ -154,7 +154,7 @@ const BasketCheckout: FC = () => {
                   key={item.id}
                   className="h-22 w-full flex justify-between mb-6"
                 >
-                  <p className="text-text_com w-[132px]">{item.title}</p>
+                  <p className="text-text_com w-[132px]">{item.name}</p>
                   <img
                     src={defaultImage}
                     alt="product"
@@ -194,12 +194,9 @@ const BasketCheckout: FC = () => {
             </p>
           </div>
           <div>
-            <NavLink
-              to={'/basket/checkout/paymant'}  onClick={handlePayment}
-            >
+            <NavLink to={'/basket/checkout/paymant'} onClick={handlePayment}>
               <button
                 type="button"
-                // onClick={handlePayment}
                 className={
                   selectedDelivery
                     ? 'w-60 h-12 bg-secondary text-white rounded-md'

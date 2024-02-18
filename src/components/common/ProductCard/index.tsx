@@ -14,7 +14,7 @@ import { getCurrentDay } from '../../../utils/func/getCurrentDay';
 interface Props {
   prop: {
     id: string;
-    title: string;
+    name: string;
     price: number;
     oldPrice?: number;
   };
@@ -59,7 +59,7 @@ const ProductCard: FC<Props> = ({ prop }) => {
       id: prop.id,
       price: totalPrice,
       time: getCurrentDay(),
-      title: prop.title,
+      name: prop.name,
       quantity: amt,
       orderNum: generateOrderNumber().substring(6, 13),
     };
@@ -110,7 +110,7 @@ const ProductCard: FC<Props> = ({ prop }) => {
 
       <div className="px-3 mb-4">
         <h1 className="mb-4 text-xl font-medium  text-text_com">
-          {prop.title}
+          {prop.name}
         </h1>
         <p className="text-sm h-[40px] overflow-ellipsis overflow-hidden text-disabled">
           Власна плантація яблук вирощено без пестецидів

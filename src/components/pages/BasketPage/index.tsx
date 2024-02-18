@@ -7,7 +7,7 @@ export interface Product {
   id: string;
   orderNum: string;
   time: string;
-  title: string;
+  name: string;
   quantity: string;
   price: string;
 }
@@ -62,7 +62,7 @@ const BasketPage: FC = () => {
                 <p className="text-blue">Фірма 'Крона'</p>
               </div>
               <div className="w-[132px]">
-                <p className="text-text_com">{item.title}</p>
+                <p className="text-text_com">{item.name}</p>
               </div>
               <div className="w-[67px]">
                 <p className="text-text_com">{item.quantity} кг</p>

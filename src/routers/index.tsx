@@ -24,6 +24,8 @@ import { AddProduct } from '../components/pages/AddProduct';
 import BasketPage from '../components/pages/BasketPage';
 import BasketCheckout from '../components/common/BasketComponent/BasketСheckout';
 import BasketPaymant from '../components/common/BasketComponent/BasketPaymant';
+import MyTemlates from '../components/pages/MyTemplatesPage';
+import MyProductsPage from '../components/pages/MyProductsPage';
 
 export const router = (template: string) =>
   createBrowserRouter([
@@ -80,6 +82,18 @@ export const router = (template: string) =>
             },
             {
               path: Route.dashboard.addProduct,
+              element: <AddProduct />,
+            },
+            {
+              path: Route.dashboard.myTemplates,
+              element: <MyTemlates />,
+            },
+            {
+              path: Route.dashboard.myProducts,
+              element: <MyProductsPage />,
+            },
+            {
+              path: Route.dashboard.productsEdit,
               element: <AddProduct />,
             },
             {

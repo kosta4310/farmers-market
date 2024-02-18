@@ -1,13 +1,13 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { FC, useState } from 'react';
 import { List } from '../../shared/SearchProduct';
 import arrow from '../../../assets/icons/subProd/arrow.svg';
 
-type ProductSortProps = {
+type TamplateSortProps = {
   prop: List[];
-  sortFn: Dispatch<SetStateAction<List[]>>;
+  sortFn: (sortedList: List[]) => void;
 };
 
-const ProductSort: FC<ProductSortProps> = ({ prop, sortFn }) => {
+const TamplateSort: FC<TamplateSortProps> = ({ prop, sortFn }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [titleName, setTitleName] = useState<string>('За датою додавання');
 
@@ -30,16 +30,12 @@ const ProductSort: FC<ProductSortProps> = ({ prop, sortFn }) => {
               <button
                 className="text-sm text-text_com w-full px-3 py-4 hover:bg-but_backgraund hover:text-secondary"
                 onClick={() => (
-                  sortFn(
-                    prop.sort((a: { name: string }, b: { name: string }) =>
-                      a.name.localeCompare(b.name),
-                    ),
-                  ),
+                  sortFn(prop),
                   setOpen(false),
-                  setTitleName('По назві (від А до Я)')
+                  setTitleName('За датою додавання')
                 )}
               >
-                По назві (від А до Я)
+                За датою додавання
               </button>
             </li>
             <li>
@@ -47,15 +43,17 @@ const ProductSort: FC<ProductSortProps> = ({ prop, sortFn }) => {
                 className="text-sm text-text_com w-full px-3 py-4 hover:bg-but_backgraund hover:text-secondary"
                 onClick={() => (
                   sortFn(
-                    prop.sort((a: { name: string }, b: { name: string }) =>
-                      b.name.localeCompare(a.name),
-                    ),
+                    prop
+                      .slice()
+                      .sort((a: { name: string }, b: { name: string }) =>
+                        b.name.localeCompare(a.name),
+                      ),
                   ),
                   setOpen(false),
-                  setTitleName('По назві (від Я до А)')
+                  setTitleName('За станом оголошення')
                 )}
               >
-                По назві (від Я до А)
+                За станом оголошення
               </button>
             </li>
             <li>
@@ -63,10 +61,12 @@ const ProductSort: FC<ProductSortProps> = ({ prop, sortFn }) => {
                 className="text-sm text-text_com w-full px-3 py-4 hover:bg-but_backgraund hover:text-secondary"
                 onClick={() => (
                   sortFn(
-                    prop.sort(
-                      (a: { price: number }, b: { price: number }) =>
-                        a.price - b.price,
-                    ),
+                    prop
+                      .slice()
+                      .sort(
+                        (a: { price: number }, b: { price: number }) =>
+                          a.price - b.price,
+                      ),
                   ),
                   setOpen(false),
                   setTitleName('Від дешевих до дорогих')
@@ -80,10 +80,12 @@ const ProductSort: FC<ProductSortProps> = ({ prop, sortFn }) => {
                 className="text-sm text-text_com w-full px-3 py-4 hover:bg-but_backgraund hover:text-secondary"
                 onClick={() => (
                   sortFn(
-                    prop.sort(
-                      (a: { price: number }, b: { price: number }) =>
-                        b.price - a.price,
-                    ),
+                    prop
+                      .slice()
+                      .sort(
+                        (a: { price: number }, b: { price: number }) =>
+                          b.price - a.price,
+                      ),
                   ),
                   setOpen(false),
                   setTitleName('Від дорогих до дешевих')
@@ -99,4 +101,4 @@ const ProductSort: FC<ProductSortProps> = ({ prop, sortFn }) => {
   );
 };
 
-export default ProductSort;
+export default TamplateSort;
