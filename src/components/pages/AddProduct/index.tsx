@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux.ts';
 import { productSlice } from '../../../store/reducers/productsSlice.ts';
 import Select from 'react-select';
@@ -11,6 +11,7 @@ import UploadAndDisplayImage from '../../common/FileUpload';
 import Checkbox from '../../common/Checkbox';
 import RegistrationField from '../../common/RegistrationField';
 import Button from '../../common/Button';
+import { useLocation } from 'react-router-dom';
 
 const inputStyle =
   'w-full border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0';
@@ -26,7 +27,18 @@ export const AddProduct: FC = () => {
   const { user } = useAppSelector(state => state.userState);
   const dispatch = useAppDispatch();
 
+  const location = useLocation();
+  const { state } = location;
+
   const { SET_FIELD, SET_DELIVERY_FIELD } = productSlice.actions;
+
+  useEffect(() => {
+    if (state) {
+      Object.entries(state).forEach(([key, value]) => {
+        dispatch(SET_FIELD({ [key]: value }));
+      });
+    }
+  }, [state, SET_FIELD, dispatch]);
 
   const subCategoryLocal = useMemo(() => {
     return subCategory.filter(
@@ -41,7 +53,7 @@ export const AddProduct: FC = () => {
   return (
     <section className={'p-[16px]'}>
       <h1 className={'text-[24px] font-bold text-text_com mb-4'}>
-        Подати оголошення
+        {state ? '  Мої шаблони' : 'Подати оголошення'}
       </h1>
       <div id={'product-name'} className={'w-2/3 mb-6'}>
         <Label label={'Назва товару'} />
@@ -205,7 +217,7 @@ export const AddProduct: FC = () => {
           label={'Самовивіз'}
           inputId={'delivery-itself'}
           onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
-            console.log('1');
+            console.log('1',val.target.checked);
             dispatch(SET_DELIVERY_FIELD({ isChecked: true, value: 'Pickup' }));
           }}
           classes={'mb-2.5'}
@@ -214,7 +226,7 @@ export const AddProduct: FC = () => {
           label={'Адресна доставка'}
           inputId={'address-delivery'}
           onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
-            console.log('2');
+            console.log('2', val.target.checked);
 
             dispatch(SET_DELIVERY_FIELD({ isChecked: true, value: 'Courier' }));
           }}
@@ -266,26 +278,52 @@ export const AddProduct: FC = () => {
       </div>
       <div className={'grid grid-cols-max2 gap-6'}>
         <span className="flex justify-center mb-7">
-          <Button
-            color="green"
-            size="w-max"
-            onClick={() => {
-              console.log('Added');
-            }}
-          >
-            Додати оголошення
-          </Button>
+          {state ? (
+            <Button
+              color="green"
+              size="w-60"
+              onClick={() => {
+                console.log(`save change product id:${state?.id}`);
+              }}
+            >
+              Зберегти оголошення
+            </Button>
+          ) : (
+            <Button
+              color="green"
+              size="w-max"
+              onClick={() => {
+                console.log('Added');
+              }}
+            >
+              Додати оголошення
+            </Button>
+          )}
         </span>
         <span className="flex justify-center mb-7">
-          <Button
-            color="transparent"
-            size="w-max"
-            onClick={() => {
-              console.log('шаблон');
-            }}
-          >
-            Зберегти як шаблон
-          </Button>
+          {state ? (
+            <Button
+              color="transparent"
+              size="w-60"
+              onClick={() => {
+                Object.keys(state).forEach(key => {
+                  dispatch(SET_FIELD({ [key]: '' }));
+                });
+              }}
+            >
+              Скинути зміни
+            </Button>
+          ) : (
+            <Button
+              color="transparent"
+              size="w-max"
+              onClick={() => {
+                console.log('шаблон');
+              }}
+            >
+              Зберегти як шаблон
+            </Button>
+          )}
         </span>
       </div>
     </section>

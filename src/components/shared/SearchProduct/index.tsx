@@ -10,7 +10,7 @@ import { subCategory } from '../../../constants/categories.ts';
 
 export type List = {
   id: string;
-  title: string;
+  name: string;
   price: number;
   oldPrice?: number;
 };
