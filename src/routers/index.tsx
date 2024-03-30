@@ -26,6 +26,7 @@ import BasketCheckout from '../components/common/BasketComponent/BasketСheckout
 import BasketPaymant from '../components/common/BasketComponent/BasketPaymant';
 import MyTemlates from '../components/pages/MyTemplatesPage';
 import MyProductsPage from '../components/pages/MyProductsPage';
+import MySales from '../components/pages/MySalesPage'
 
 export const router = (template: string) =>
   createBrowserRouter([
@@ -99,6 +100,10 @@ export const router = (template: string) =>
             {
               path: Route.dashboard.myPurchases,
               element: <MyPurchasesPage />,
+            },
+            {
+              path: Route.dashboard.mySales,
+              element: <MySales />,
             },
             {
               path: Route.dashboard.myFavorites,

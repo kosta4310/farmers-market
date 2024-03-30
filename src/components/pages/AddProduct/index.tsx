@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux.ts';
 import { productSlice } from '../../../store/reducers/productsSlice.ts';
 import Select from 'react-select';
@@ -12,6 +12,7 @@ import Checkbox from '../../common/Checkbox';
 import RegistrationField from '../../common/RegistrationField';
 import Button from '../../common/Button';
 import { useLocation } from 'react-router-dom';
+import { thunkAddNewProduct } from '../../../store/reducers/addNewProductSlice.ts';
 
 const inputStyle =
   'w-full border border-gray-200 rounded p-3 outline-none focus:bg-none focus:ring-0';
@@ -27,10 +28,12 @@ export const AddProduct: FC = () => {
   const { user } = useAppSelector(state => state.userState);
   const dispatch = useAppDispatch();
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const location = useLocation();
   const { state } = location;
 
-  const { SET_FIELD, SET_DELIVERY_FIELD } = productSlice.actions;
+  const { SET_FIELD,  SET_DELIVERY_FIELD } = productSlice.actions;
 
   useEffect(() => {
     if (state) {
@@ -48,6 +51,41 @@ export const AddProduct: FC = () => {
 
   const onHandleChangeField = (field: string, value: any) => {
     dispatch(SET_FIELD({ [field]: value }));
+  };
+
+  const handleCreateProduct = () => {
+    const formData = new FormData();
+
+    if (addProduct) {
+      Object.entries(addProduct).forEach(([key, value]) => {
+        // if (value === undefined || value.length === '0') {
+        //   return;
+        // }
+        formData.append(key, value);
+      });
+    }
+
+    if (selectedFile !== null) {
+      formData.append('file', selectedFile);
+    }
+    // if (state) {
+    //   dispatch(thunkPatchProduct(formData));
+    //   return
+    // }
+
+    dispatch(thunkAddNewProduct(formData));
+    // dispatch(RESET_FIELD());
+  };
+
+  const deliveryPlaceChoise = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, checked } = e.target;
+    const updatedDeliveryPlaces = checked
+      ? addProduct.deliveryPlaces
+        ? `${addProduct.deliveryPlaces} ${id}`
+        : id
+      : addProduct.deliveryPlaces.replace(id, ' ');
+
+    onHandleChangeField('deliveryPlaces', updatedDeliveryPlaces);
   };
 
   return (
@@ -81,7 +119,11 @@ export const AddProduct: FC = () => {
                 value: val?.value ?? '',
                 label: val?.label ?? '',
                 id: val?.id ?? '',
-              });
+              }),
+                onHandleChangeField(
+                  'categoryId',
+                  '34b47ec9-6f70-4490-a5ea-ed7c21f1c8cd',
+                );
             }}
             options={mainCategories}
           />
@@ -105,12 +147,12 @@ export const AddProduct: FC = () => {
         <Label label={'Фотографія товару'} />
         <UploadAndDisplayImage
           label={''}
-          inputId={'image'}
+          inputId={'file'}
           hint="Зображення має бути не більшим ніж 2 МБ,
           та розміром не більше 1024х1024 пікселей."
-          selectedImage={addProduct.image}
+          selectedImage={addProduct?.image}
           handleChange={(_, value) => {
-            onHandleChangeField('image', value);
+            setSelectedFile(value);
           }}
         />
       </div>
@@ -202,12 +244,28 @@ export const AddProduct: FC = () => {
             value={addProduct.unit}
             placeholder={'Виберіть одиницю'}
             onChange={val => {
-              onHandleChangeField('unit', {
-                value: val?.value ?? '',
-                label: val?.label ?? '',
-              });
+              onHandleChangeField(
+                'unit',
+                val?.value ?? '',
+                // label: val?.label ?? '',
+              );
             }}
             options={unit}
+          />
+        </div>
+        <div id={'quantity'}>
+          <Label label={'Кількість товару'} />
+          <input
+            type={'number'}
+            step={'0.1'}
+            placeholder={'Кількість товару'}
+            className={inputStyle}
+            id={'quantity'}
+            required
+            value={addProduct.quantity}
+            onChange={e => {
+              onHandleChangeField('quantity', e.target.value);
+            }}
           />
         </div>
       </div>
@@ -217,7 +275,7 @@ export const AddProduct: FC = () => {
           label={'Самовивіз'}
           inputId={'delivery-itself'}
           onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
-            console.log('1',val.target.checked);
+            console.log('1', val.target.checked);
             dispatch(SET_DELIVERY_FIELD({ isChecked: true, value: 'Pickup' }));
           }}
           classes={'mb-2.5'}
@@ -234,21 +292,16 @@ export const AddProduct: FC = () => {
       </div>
       <div id={'delivery-place'} className={'mb-6'}>
         <Label label={'Місце доставки'} />
-        {/*dispatch(SET_FIELD({ [field]: value }));*/}
         <Checkbox
           label={'Київ та передмістя'}
-          inputId={'delivery-kyiv'}
-          onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
-            console.log(val.target.checked);
-          }}
+          inputId={'kyiv'}
+          onChange={e => deliveryPlaceChoise(e)}
           classes={'mb-2.5'}
         />
         <Checkbox
           label={'Інші міста за домовленістю'}
-          inputId={'other-delivery'}
-          onChange={(val: React.ChangeEvent<HTMLInputElement>) => {
-            console.log(val.target.checked);
-          }}
+          inputId={'other'}
+          onChange={e => deliveryPlaceChoise(e)}
         />
       </div>
       <div className={'mb-6'}>
@@ -279,51 +332,42 @@ export const AddProduct: FC = () => {
       <div className={'grid grid-cols-max2 gap-6'}>
         <span className="flex justify-center mb-7">
           {state ? (
-            <Button
-              color="green"
-              size="w-60"
-              onClick={() => {
-                console.log(`save change product id:${state?.id}`);
-              }}
-            >
+            <Button color="green" size="w-60" onClick={handleCreateProduct}>
               Зберегти оголошення
             </Button>
           ) : (
-            <Button
-              color="green"
-              size="w-max"
-              onClick={() => {
-                console.log('Added');
-              }}
-            >
+            <Button color="green" size="w-max" onClick={handleCreateProduct}>
               Додати оголошення
             </Button>
           )}
         </span>
         <span className="flex justify-center mb-7">
-          {state ? (
-            <Button
-              color="transparent"
-              size="w-60"
-              onClick={() => {
-                Object.keys(state).forEach(key => {
-                  dispatch(SET_FIELD({ [key]: '' }));
-                });
-              }}
-            >
-              Скинути зміни
-            </Button>
-          ) : (
-            <Button
-              color="transparent"
-              size="w-max"
-              onClick={() => {
-                console.log('шаблон');
-              }}
-            >
-              Зберегти як шаблон
-            </Button>
-          )}
+          {
+            state && (
+              <Button
+                color="transparent"
+                size="w-60"
+                onClick={() => {
+                  Object.keys(state).forEach(key => {
+                    dispatch(SET_FIELD({ [key]: '' }));
+                  });
+                }}
+              >
+                Скинути зміни
+              </Button>
+            )
+            // : (
+            // <Button
+            //   color="transparent"
+            //   size="w-max"
+            //   onClick={() => {
+            //     console.log('шаблон');
+            //   }}
+            // >
+            //   Зберегти як шаблон
+            // </Button>
+            // )
+          }
         </span>
       </div>
     </section>

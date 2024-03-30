@@ -1,7 +1,7 @@
 import RegistrationField from '../../../common/RegistrationField';
 import { useAppSelector } from '../../../../hooks/redux';
 
-const getHoursList = (from: number, to: number) => {
+ const getHoursList = (from: number, to: number) => {
   const minutes = ['00', '30'];
   const res: Array<string> = [];
   for (let index = from; index < to; index++) {
@@ -11,7 +11,7 @@ const getHoursList = (from: number, to: number) => {
   return res;
 };
 
-const getSelectOption = () =>
+export const getSelectOption = () =>
   getHoursList(6, 21).map((hours, idx) => {
     return (
       <option key={idx} value={hours}>

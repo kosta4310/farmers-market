@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
-import { List } from '../../shared/SearchProduct';
 import arrow from '../../../assets/icons/subProd/arrow.svg';
+import { Product } from '../../pages/MyProductsPage';
 
 type TamplateSortProps = {
-  prop: List[];
-  sortFn: (sortedList: List[]) => void;
+  prop: Product[];
+  sortFn: (sortedList: Product[]) => void;
 };
 
 const TamplateSort: FC<TamplateSortProps> = ({ prop, sortFn }) => {

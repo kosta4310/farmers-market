@@ -8,6 +8,10 @@ const SELLER_SIGNUP = `${BASE}/auth/register/seller`;
 const CONFIRM_EMAIL = `${BASE}/auth/verify-email`;
 const AUTH_SIGNIN = `${BASE}/auth/login`;
 
+const ADD_PRODUCT = `${BASE}/product`
+const PATCH_PRODUCT = `${BASE}/product`
+const GET_ALL_PRODUCT=`${BASE}/product`
+
 const GET_USER = `${BASE}/user`;
 
 export {
@@ -17,4 +21,7 @@ export {
   AUTH_SIGNIN,
   SELLER_SIGNUP,
   GET_USER,
+  ADD_PRODUCT,
+  GET_ALL_PRODUCT,
+  PATCH_PRODUCT
 };

@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { thunkGetAllProduct } from '../../api/getAllProduct';
 
 export class AddProduct {
   name: string;
-  image: string;
+  file: null;
   description: string;
   caloricContent: string;
   proteins: string;
@@ -14,12 +15,10 @@ export class AddProduct {
     value: string;
     label: string;
   };
-  deliveryType: string[];
-  deliveryPlaces: {
-    place: string;
-    selected: boolean;
-  };
+  deliveryTypes: string[];
+  deliveryPlaces: string;
   phoneNumber: string;
+  categoryId: string;
   category: {
     id: string | number;
     value: string;
@@ -30,10 +29,11 @@ export class AddProduct {
     label: string;
   };
   subsubcategory?: object;
+  image: string | undefined;
 
   constructor(val: any) {
     this.name = val.name;
-    this.image = val.image;
+    this.file = val.file;
     this.description = val.description;
     this.caloricContent = val.caloricContent;
     this.proteins = val.proteins;
@@ -42,8 +42,9 @@ export class AddProduct {
     this.price = val.price;
     this.quantity = val.quantity;
     this.unit = val.unit;
-    this.deliveryType = val.deliveryType;
+    this.deliveryTypes = val.deliveryType;
     this.phoneNumber = val.phoneNumber;
+    this.categoryId = val.categoryId;
     this.category = val.category;
     this.subcategory = val.subcategory;
     this.subsubcategory = val.subsubcategory;
@@ -76,15 +77,30 @@ const slice = createSlice({
         ...action.payload,
       };
     },
+    // RESET_FIELD: (state) => {
+    //   state.addProduct=initialState
+    // },
     SET_DELIVERY_FIELD: (
       state,
       action: { payload: { isChecked: boolean; value: string } },
     ) => {
       state.addProduct = {
         ...state.addProduct,
-        deliveryType: [...state.addProduct.deliveryType, action.payload.value],
+        deliveryTypes: [
+          ...state.addProduct.deliveryTypes,
+          action.payload.value,
+        ],
+        // deliveryPlaces: action.payload,
       };
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(thunkGetAllProduct.fulfilled, (state, action) => {
+      state.myProducts = action.payload;
+    });
+    // .addCase(thunkGetAllProduct.rejected, (_, action) => {
+    //   setError(action.payload as string);
+    // });
   },
 });
 const actions = {

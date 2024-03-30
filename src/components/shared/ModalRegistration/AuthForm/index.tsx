@@ -33,12 +33,13 @@ const AuthForm: FC<AuthProps> = ({ isModalOpen, setIsModalOpen }) => {
       dispatch(setIsLogged(true));
       if (res.payload.buyer) {
         dispatch(SET_LOGGED_USER(res.payload.buyer));
-        isKeepUserLogIn &&
+        // isKeepUserLogIn &&
           setLocalStorageItem('token', res.payload.buyer.token);
       }
       if (res.payload.seller) {
         dispatch(SET_LOGGED_USER(res.payload.seller));
-        isKeepUserLogIn &&
+        
+        // isKeepUserLogIn &&
           setLocalStorageItem('token', res.payload.seller.token);
       }
     });

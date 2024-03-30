@@ -2,8 +2,8 @@ const colors = {
   main: '#444444',
   secondary: '#0D7211',
 };
-const width = 'inherit';
-const height = 'inherit';
+const width = '24';
+const height = '24';
 
 export interface IColors {
   color: 'main' | 'secondary';

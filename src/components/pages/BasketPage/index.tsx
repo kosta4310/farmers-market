@@ -2,6 +2,7 @@ import { FC, MouseEvent, useEffect, useState } from 'react';
 
 import BasketTitle from '../../common/BasketComponent/BasketTitle';
 import { NavLink } from 'react-router-dom';
+import { getLocalStorageItem, setLocalStorageItem } from '../../../utils/localStorageUtils';
 
 export interface Product {
   id: string;
@@ -16,15 +17,14 @@ const BasketPage: FC = () => {
   const [productList, setProductList] = useState<Product[]>([]);
 
   useEffect(() => {
-    const storedIds = localStorage.getItem('market');
-    const cartItems: Product[] = storedIds ? JSON.parse(storedIds) : [];
+    const cartItems: Product[] = getLocalStorageItem("market");
     setProductList(cartItems);
   }, []);
 
   const removeStorage = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.currentTarget;
     const updatedCartItems = productList.filter(item => item.id !== id);
-    localStorage.setItem('market', JSON.stringify(updatedCartItems));
+    setLocalStorageItem('market', updatedCartItems);
     setProductList(updatedCartItems);
   };
 

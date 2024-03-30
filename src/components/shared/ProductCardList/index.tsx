@@ -9,6 +9,7 @@ import ProductCard from '../../common/ProductCard';
 import arrowLeft from '../../../assets/icons/prodCard/arrow-left.svg';
 import arrowRight from '../../../assets/icons/prodCard/arrow-right.svg';
 import { productCardList } from '../../../constants/productCardList';
+
 interface props {
   prop: boolean;
 }
@@ -48,7 +49,7 @@ const ProductCardList: FC<props> = ({ prop }) => {
           className="mySwiper w-[1250px] "
         >
           <ul>
-            {productCardList?.map(card => (
+            {productCardList.map(card => (
               <li key={card.id}>
                 <SwiperSlide>
                   <NavLink

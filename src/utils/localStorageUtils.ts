@@ -12,7 +12,7 @@ export function getLocalStorageItem(key: string) {
     if (storedValue !== null) {
       return JSON.parse(storedValue);
     } else {
-      return null;
+      return [];
     }
   } catch (error) {
     console.error('Error getting value from local storage:', error);

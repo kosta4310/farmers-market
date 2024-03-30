@@ -11,6 +11,10 @@ import ProductCardCounter from './ProductCardCounter';
 import ProductCardStatus from './ProductCardStatus';
 import ProductCardDeliver from './ProductCardDeliver';
 import { getCurrentDay } from '../../../utils/func/getCurrentDay';
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from '../../../utils/localStorageUtils';
 interface Props {
   prop: {
     id: string;
@@ -33,13 +37,22 @@ const ProductCard: FC<Props> = ({ prop }) => {
   };
 
   useEffect(() => {
-    const storedIds = localStorage.getItem('market');
-    const cartItems = storedIds ? JSON.parse(storedIds) : [];
-    const cartItemId = cartItems.map((id: { id: number }) => id.id);
-    const updatedCartItems = cartItemId.find((id: string) => id === prop.id);
+    const getDataFromStorage = (key: string) => {
+      const items = getLocalStorageItem(key);
+      const itemId = items?.map((id: { id: string }) => id.id);
+      const findItemsId = itemId?.find((id: string) => id === prop.id);
+      return findItemsId;
+    };
 
-    if (updatedCartItems) {
+    const findCartItems = getDataFromStorage('market');
+    const findFavoriteItems = getDataFromStorage('favorite');
+
+    if (findCartItems) {
       setBuyIt(true);
+    }
+
+    if (findFavoriteItems) {
+      setLike(true);
     }
   }, [prop.id]);
 
@@ -49,40 +62,53 @@ const ProductCard: FC<Props> = ({ prop }) => {
     return `${timestamp}-${randomNumber}`;
   }
 
-  const handleSaveToStorage = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleSaveAndRemoveToStorage = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setBuyIt(true);
+    setBuyIt(!buyIt);
+    const cartItems = getLocalStorageItem('market');
 
-    const cartItemsString = localStorage.getItem('market');
-    const cartItems = cartItemsString ? JSON.parse(cartItemsString) : [];
-    const newCartItem = {
-      id: prop.id,
-      price: totalPrice,
-      time: getCurrentDay(),
-      name: prop.name,
-      quantity: amt,
-      orderNum: generateOrderNumber().substring(6, 13),
-    };
-    cartItems.push(newCartItem);
-    localStorage.setItem('market', JSON.stringify(cartItems));
+    if (buyIt) {
+      const updatedCartItems = cartItems.filter(
+        (item: { id: string }) => item.id !== prop.id,
+      );
+      setLocalStorageItem('market', updatedCartItems);
+    } else {
+      const newCartItem = {
+        id: prop.id,
+        price: totalPrice,
+        time: getCurrentDay(),
+        name: prop.name,
+        quantity: amt,
+        orderNum: generateOrderNumber().substring(6, 13),
+      };
+      cartItems.push(newCartItem);
+      setLocalStorageItem('market', cartItems);
+    }
   };
 
-  const handleRemoveToStorage = (e: MouseEvent<HTMLButtonElement>) => {
+  const saveAndRemoveFavorite = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setBuyIt(false);
-
-    const cartItemsString = localStorage.getItem('market');
-    const cartItems = cartItemsString ? JSON.parse(cartItemsString) : [];
-    const updatedCartItems = cartItems.filter(
-      (item: { id: string }) => item.id !== prop.id,
-    );
-    localStorage.setItem('market', JSON.stringify(updatedCartItems));
+    setLike(!like);
+    const favoriteItems = getLocalStorageItem('favorite');
+    if (like) {
+      const updatedFavoriteItems = favoriteItems.filter(
+        (item: { id: string }) => item.id !== prop.id,
+      );
+      setLocalStorageItem('favorite', updatedFavoriteItems);
+    } else {
+      favoriteItems.push(prop);
+      setLocalStorageItem('favorite', favoriteItems);
+    }
   };
 
   return (
     <div className="w-[291px] h-auto pb-3 bg-card_background">
-      <div className="w-[291px] h-[221px] mb-4 relative">
-        <img src={defaultImg} alt="image" />
+      <div className="w-[291px] h-[221px] mb-4 relative object-cover">
+        <img
+          src={defaultImg}
+          alt="image"
+          className="w-[291px] h-[221px] object-cover "
+        />
         <div className="absolute top-3 left-3">
           <ProductCardStatus template={2} />
         </div>
@@ -93,25 +119,14 @@ const ProductCard: FC<Props> = ({ prop }) => {
           <img src={logo} alt="logo" />
         </div>
         <div className="absolute top-3 right-3  ">
-          <button
-            type="button"
-            onClick={e => {
-              setLike(!like), e.preventDefault();
-            }}
-          >
-            {like ? (
-              <img src={hartR} alt="logo" />
-            ) : (
-              <img src={hartW} alt="logo" />
-            )}
+          <button type="button" onClick={saveAndRemoveFavorite}>
+            <img src={like ? hartR : hartW} alt="logo" />
           </button>
         </div>
       </div>
 
       <div className="px-3 mb-4">
-        <h1 className="mb-4 text-xl font-medium  text-text_com">
-          {prop.name}
-        </h1>
+        <h1 className="mb-4 text-xl font-medium  text-text_com">{prop.name}</h1>
         <p className="text-sm h-[40px] overflow-ellipsis overflow-hidden text-disabled">
           Власна плантація яблук вирощено без пестецидів
         </p>
@@ -131,25 +146,25 @@ const ProductCard: FC<Props> = ({ prop }) => {
         </div>
       </div>
       <div className="px-3 ">
-        {buyIt ? (
-          <button
-            className="w-full h-12  flex justify-center items-center rounded-md border-attention border "
-            onClick={handleRemoveToStorage}
+        <button
+          className={
+            buyIt
+              ? 'border-attention w-full h-12  flex justify-center items-center rounded-md border'
+              : 'border-secondary w-full h-12  flex justify-center items-center rounded-md border hover:bg-card_background '
+          }
+          onClick={handleSaveAndRemoveToStorage}
+        >
+          <span
+            className={
+              buyIt
+                ? 'mr-3 text-base  text-attention'
+                : 'mr-3 text-base  text-secondary'
+            }
           >
-            <span className="mr-3 text-base  text-attention">Відмінити</span>
-            <img src={basketRed} alt="basket" />
-          </button>
-        ) : (
-          <button
-            className="w-full h-12 bg-[#00A9191A] flex justify-center items-center rounded-md border-secondary border hover:bg-card_background "
-            onClick={handleSaveToStorage}
-          >
-            <span className="mr-3 text-base  text-secondary">
-              Додати в кошик
-            </span>
-            <img src={basketW} alt="basket" />
-          </button>
-        )}
+            {buyIt ? 'Відмінити' : 'Додати в кошик'}
+          </span>
+          <img src={buyIt ? basketRed : basketW} alt="basket" />
+        </button>
       </div>
     </div>
   );
