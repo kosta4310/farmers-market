@@ -6,9 +6,9 @@ import {
   MyProductsIcon,
   MyPurchasesIcon,
   MySalesIcon,
-  MyTemplatesIcon,
-  PrivateMessagesIcon,
-  PublicMessagesIcon,
+  // MyTemplatesIcon,
+  // PrivateMessagesIcon,
+  // PublicMessagesIcon,
   ReviewsIcon,
   UserIcon,
 } from '../components/shared/Icons/dashBoardIcons.tsx';
@@ -41,12 +41,12 @@ export const menuDashboard: IMenu[] = [
     route: Route.dashboard.addProduct,
     icon: ({ color }) => <AddProductIcon color={color} />,
   },
-  {
-    id: 3,
-    title: 'Мої шаблони',
-    route: Route.dashboard.myTemplates,
-    icon: ({ color }) => <MyTemplatesIcon color={color} />,
-  },
+  // {
+  //   id: 3,
+  //   title: 'Мої шаблони',
+  //   route: Route.dashboard.myTemplates,
+  //   icon: ({ color }) => <MyTemplatesIcon color={color} />,
+  // },
   {
     id: 4,
     title: 'Мої оголошення',
@@ -77,16 +77,16 @@ export const menuDashboard: IMenu[] = [
     route: Route.dashboard.reviews,
     icon: ({ color }) => <ReviewsIcon color={color} />,
   },
-  {
-    id: 9,
-    title: 'Публічні повідомлення',
-    route: Route.dashboard.publicMessages,
-    icon: ({ color }) => <PublicMessagesIcon color={color} />,
-  },
-  {
-    id: 10,
-    title: 'Приватні повідомлення',
-    route: Route.dashboard.privateMessages,
-    icon: ({ color }) => <PrivateMessagesIcon color={color} />,
-  },
+  // {
+  //   id: 9,
+  //   title: 'Публічні повідомлення',
+  //   route: Route.dashboard.publicMessages,
+  //   icon: ({ color }) => <PublicMessagesIcon color={color} />,
+  // },
+  // {
+  //   id: 10,
+  //   title: 'Приватні повідомлення',
+  //   route: Route.dashboard.privateMessages,
+  //   icon: ({ color }) => <PrivateMessagesIcon color={color} />,
+  // },
 ];

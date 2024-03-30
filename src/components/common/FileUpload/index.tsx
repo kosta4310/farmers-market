@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import inputImage from '../../../assets/img/input.svg';
 
 interface FileUploadProps {
@@ -8,7 +8,7 @@ interface FileUploadProps {
   // eslint-disable-next-line no-unused-vars
   handleChange: (field: string, value: any) => void;
   hint?: string;
-  selectedImage: string;
+  selectedImage: string|undefined;
 }
 
 const UploadAndDisplayImage: FC<FileUploadProps> = ({
@@ -20,15 +20,19 @@ const UploadAndDisplayImage: FC<FileUploadProps> = ({
 }) => {
   const hintMessage = <span className="text-xs text-gray-500">{hint}</span>;
 
+  const [selectedFile, setSelectedFile] = useState('');
+
   const filePreview:
     | React.ChangeEventHandler<HTMLInputElement>
     | undefined = event => {
     const file = event.target.files && event.target.files[0];
+
     const reader = new FileReader();
     if (file) {
       reader.readAsDataURL(file);
       reader.addEventListener('load', () => {
-        handleChange(inputId, reader.result as string);
+        handleChange(inputId, file);
+        setSelectedFile(reader.result as string);
       });
     }
   };
@@ -38,13 +42,17 @@ const UploadAndDisplayImage: FC<FileUploadProps> = ({
       <label className="flex gap-1 flex-col cursor-pointer" htmlFor={inputId}>
         {label}
         <div className="rounded-tl rounded-bl p-3 text-gray-400 ">
-          {selectedImage ? (
+          {selectedFile || selectedImage ? (
             <div>
-              <img alt="not found" width={'250px'} src={selectedImage} />
+              <img
+                alt="not found"
+                width={'250px'}
+                src={selectedFile ? selectedFile : selectedImage}
+              />
               <br />
               <button
                 onClick={() => {
-                  handleChange(inputId, '');
+                  setSelectedFile('');
                 }}
               >
                 Remove

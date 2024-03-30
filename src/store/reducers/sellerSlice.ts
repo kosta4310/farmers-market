@@ -41,6 +41,8 @@ export const thunkSellerSignUp = createAsyncThunk(
   ) => {
     try {
       const res = await fetchSellerSignUp(options);
+      console.log("options", options);
+
       if (!res.ok) {
         const err: { message: string; statusCode: number } = await res.json();
 
@@ -60,6 +62,7 @@ export const sellerRegistrationSlice = createSlice({
   initialState,
   reducers: {
     SET_FIELD: (state, action: { payload: { field: string; value: any } }) => {
+      
       return { ...state, [action.payload.field]: action.payload.value };
     },
   },

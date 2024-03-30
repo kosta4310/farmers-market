@@ -12,6 +12,8 @@ import { registrationCommonSlice } from '../../../../store/reducers/registration
 import { Route } from '../../../../routers/route';
 import userIcon from '../../../../assets/icons/user-bar/user.svg';
 import { removeLocalStorageItem } from '../../../../utils/localStorageUtils.ts';
+import { userSlice } from '../../../../store/reducers/userSlice.ts';
+// import userSlice from '../../../../store/reducers/userSlice.ts';
 
 const UserBar: FC = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +25,7 @@ const UserBar: FC = () => {
   const { user } = useAppSelector(state => state.userState);
   const { setIsLogged } = registrationCommonSlice.actions;
   const { isLogged } = useAppSelector(state => state.registrationCommon);
+  const { SET_LOGGED_USER } = userSlice.actions;
 
   const handleOpenRegistration = () => {
     setIsModalOpen(!isModalOpen);
@@ -37,8 +40,20 @@ const UserBar: FC = () => {
     setIsModalOpenMenu(false);
     dispatch(setIsLogged(false));
     removeLocalStorageItem('token');
+    dispatch(SET_LOGGED_USER({ user: {} }));
     navigate(Route.main);
   }
+
+  const userDashboard = () => {
+    switch (user.userConfig?.role) {
+      case 'buyer':
+        return menuDashboard.filter(item => ![2, 4, 5].includes(item.id));
+      case 'seller':
+        return menuDashboard;
+      default:
+        return [];
+    }
+  };
 
   return (
     <div className="flex justify-between items-center px-10 py-1.5 bg-default shadow-md">
@@ -59,7 +74,7 @@ const UserBar: FC = () => {
               }
             >
               <ul className="cursor-auto">
-                {menuDashboard.map(item => {
+                {userDashboard().map(item => {
                   return (
                     <li key={item.id} className="pt-2 flex gap-3">
                       <div className={'w-[20px] h-[20px]'}>

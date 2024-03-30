@@ -67,7 +67,8 @@ export const thunkGetUserByToken = createAsyncThunk(
   async (token: string, { rejectWithValue }) => {
     try {
       const res = await fetchGetUser(token);
-      return await res.json();
+      const data = await res.json();
+      return data
     } catch (error) {
       console.log('error', error);
       return rejectWithValue(getErrorMessage(error));

@@ -2,14 +2,10 @@ import { FC, useState } from 'react';
 
 import defaultProduct from '../../../assets/img/default-image.jpg';
 import { NavLink } from 'react-router-dom';
+import { Product } from '../../pages/MyProductsPage';
 
 export interface Props {
-  prop: {
-    id: string;
-    name: string;
-    price: number;
-    oldPrice?: number;
-  };
+  prop: Product;
 }
 
 const SellerProductTamplate: FC<Props> = ({ prop }) => {
@@ -41,12 +37,23 @@ const SellerProductTamplate: FC<Props> = ({ prop }) => {
     }
   };
 
+  console.log(prop);
+
+  const {
+    image,
+    name,
+    price,
+    category,
+    subcategory,
+    subsubcategory,
+    createdAt,
+  } = prop;
   return (
     <div className="w-full border border-stroke_input rounded-md ">
       <div className="h-[204px] px-4 py-2 flex justify-between">
         <div className="w-[180px] h-[188px] mr-6">
           <img
-            src={defaultProduct}
+            src={image ? image : defaultProduct}
             alt="product"
             width={180}
             className="h-full object-cover "
@@ -57,7 +64,7 @@ const SellerProductTamplate: FC<Props> = ({ prop }) => {
             <p className="text-sm text-disabled mb-2">Найменування товару</p>
           </li>
           <li>
-            <p className="text-text_com mb-4">{prop.name}</p>
+            <p className="text-text_com mb-4">{name}</p>
           </li>
           <li>
             <p className="text-sm text-disabled mb-2">
@@ -66,7 +73,8 @@ const SellerProductTamplate: FC<Props> = ({ prop }) => {
           </li>
           <li>
             <p className="text-text_com mb-4">
-              Фрукти та овочі • Фрукти • Груши
+              {category?.name} • {subcategory?.name} •
+              {subsubcategory ? subsubcategory?.name : ''}
             </p>
           </li>
           <li>
@@ -82,7 +90,7 @@ const SellerProductTamplate: FC<Props> = ({ prop }) => {
             <p className="text-sm text-disabled mb-2">Ціна за одиницю</p>
           </li>
           <li>
-            <p className="text-text_com mb-4"> {prop.price} грн</p>
+            <p className="text-text_com mb-4"> {price} грн</p>
           </li>
           <li>
             <p className="text-sm text-disabled mb-2 ">
@@ -98,7 +106,7 @@ const SellerProductTamplate: FC<Props> = ({ prop }) => {
             </p>
           </li>
           <li>
-            <p className="text-text_com">17.08.2023</p>
+            <p className="text-text_com">{createdAt?.slice(0,10)}</p>
           </li>
         </ul>
       </div>
@@ -116,7 +124,7 @@ const SellerProductTamplate: FC<Props> = ({ prop }) => {
           {isActive ? 'Деактивувати оголошення' : 'Активувати оголошення'}
         </button>
         <NavLink
-          to={('/dashboard/products/edit')}
+          to={'/dashboard/products/edit'}
           state={prop}
           onClick={e => {
             if (isActive || isModeration) {

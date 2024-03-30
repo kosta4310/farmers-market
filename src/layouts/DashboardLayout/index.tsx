@@ -3,10 +3,13 @@ import { FC, useEffect, useMemo, useState } from 'react';
 
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { DeleteIcon } from '../../components/shared/Icons/dashBoardIcons.tsx';
+import { useAppSelector } from '../../hooks/redux.ts';
 
 const DashBoardLayout: FC = () => {
   const location = useLocation();
   const [activeMenu, setActiveMenu] = useState(0);
+
+  const { user } = useAppSelector(state => state.userState);
 
   const activeId = useMemo(
     () => menuDashboard.find(f => f.route === location.pathname)?.id || 0,
@@ -26,11 +29,23 @@ const DashBoardLayout: FC = () => {
   const onMouseEnter = (id: number) => {
     setActiveMenu(id);
   };
+
+  const userDashboard = () => {
+    switch (user.userConfig?.role) {
+      case 'buyer':
+        return menuDashboard.filter(item => ![2, 4, 5].includes(item.id));
+      case 'seller':
+        return menuDashboard;
+      default:
+        return [];
+    }
+  };
+
   return (
     <div className="min-h-screen font-default grid grid-cols-dash">
       <div className={'pt-[32px] pl-[32px] border-r-2'}>
         <ul>
-          {menuDashboard.map(m => (
+          {userDashboard().map(m => (
             <li
               key={m.id}
               onMouseLeave={() => onMouseLeave()}
